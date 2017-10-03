@@ -1,6 +1,6 @@
 FROM ruby:2.3.3
 ENV LANG C.UTF-8
-RUN apt-get update --qq && apt-get install -y build-essential libpq-dev nodejs mysql-client
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs mysql-client
 
 RUN gem install bundler
 
