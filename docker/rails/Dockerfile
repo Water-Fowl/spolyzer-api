@@ -8,7 +8,6 @@ WORKDIR /tmp
 ADD Gemfile Gemfile
 ADD Gemfile.lock Gemfile.lock
 RUN bundle install
-
 ENV APP_HOME /api
 RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
