@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  scores_user_id: 1
+  conceded_user_id: 1
+  action: 1
+  position: 1
+  score_game_id: 1
+
+two:
+  scores_user_id: 1
+  conceded_user_id: 1
+  action: 1
+  position: 1
+  score_game_id: 1
