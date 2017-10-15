@@ -10,6 +10,12 @@ class Api::V1::GamesController < ApplicationController
     #Registor ScoreGame info
     g = ScoreGame.create(game_info)
 
+    #Retate with users table
+    ScoreGameToUser.create(user_id:game_info["left_1"],score_game_id:g.id)
+    ScoreGameToUser.create(user_id:game_info["left_2"],score_game_id:g.id)
+    ScoreGameToUser.create(user_id:game_info["right_1"],score_game_id:g.id)
+    ScoreGameToUser.create(user_id:game_info["right_2"],score_game_id:g.id)
+
     #Registor Scores
     game_score["action"].zip(game_score["position"],game_score["time"],game_score["scores_users"],game_score["conceded_users"]) do |a|
       req = {action:a[0],position:a[1],time:a[2],scores_user_id:a[3],conceded_user_id:a[4],score_game_id:g.id}
