@@ -1,4 +1,5 @@
 class Api::V1::GamesController < ApplicationController
+
   def create
     #Permit Parameters
     user = params.require(:game).permit(:user_id,:token)
@@ -21,6 +22,6 @@ class Api::V1::GamesController < ApplicationController
       req = {action:a[0],position:a[1],time:a[2],scores_user_id:a[3],conceded_user_id:a[4],score_game_id:g.id}
       Score.create(req)
     end
-
+    render json: {status:0,message:"ok"}
   end
 end
