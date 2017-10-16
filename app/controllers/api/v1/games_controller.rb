@@ -13,10 +13,11 @@ class Api::V1::GamesController < ApplicationController
     g = ScoreGame.create(game_info)
 
     #Retate with users table
-    ScoreGameToUser.create(user_id:players["left_user_id_1"],score_game_id:g.id)
-    ScoreGameToUser.create(user_id:players["left_user_id_2"],score_game_id:g.id)
-    ScoreGameToUser.create(user_id:players["right_user_id_1"],score_game_id:g.id)
-    ScoreGameToUser.create(user_id:players["right_user_id_2"],score_game_id:g.id)
+    #もし左サイドなら0右サイドなら1
+    ScoreGameToUser.create(user_id:players["left_user_id_1"],court:0,score_game_id:g.id)
+    ScoreGameToUser.create(user_id:players["left_user_id_2"],court:0,score_game_id:g.id)
+    ScoreGameToUser.create(user_id:players["right_user_id_1"],court:1,score_game_id:g.id)
+    ScoreGameToUser.create(user_id:players["right_user_id_2"],court:1,score_game_id:g.id)
 
     #Registor Scores
     game_score["action"].zip(game_score["position"],game_score["time_to_drop_shuttle"],game_score["scores_users"],game_score["conceded_users"]) do |a|
