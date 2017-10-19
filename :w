@@ -1,0 +1,11 @@
+class Api::V1::ActionsController < ApplicationController
+  def create
+    params = params.require(:actions).permit(:position, :score_game_id, :side)
+    position = parmas["position"]
+    # 該当するscore_gameを取得
+    score_game = ScoreGame.find(params[:score_game_id]).include(:scores)
+    scores_by_position = score_game.scores.find_by(position: position)
+    
+    render :json => score_by_positions
+  end
+end

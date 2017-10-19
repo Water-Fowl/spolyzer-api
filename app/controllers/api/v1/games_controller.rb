@@ -28,7 +28,7 @@ class Api::V1::GamesController < ApplicationController
       req = {action:score_params[0], position:score_params[1], time_to_drop_shuttle:score_params[2], scores_user_id:score_params[3], conceded_user_id:score_params[4], score_game_id:score_game.id}
       Score.create(req)
     end
-    render json: {status:0,message:"ok"}
+    render json: {status:0,message:"ok", score_game_id: score_game.id}
   end
 end
 
