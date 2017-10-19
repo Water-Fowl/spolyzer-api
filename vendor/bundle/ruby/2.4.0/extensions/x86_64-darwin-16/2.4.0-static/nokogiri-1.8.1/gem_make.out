@@ -1,5 +1,5 @@
 current directory: /Users/yf07/Documents/Code/Project/WaterFowl/spolyzer/api/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.1/ext/nokogiri
-/Users/yf07/.rbenv/versions/2.4.2/bin/ruby -r ./siteconf20171019-86096-lgf4lu.rb extconf.rb
+/Users/yf07/.rbenv/versions/2.4.2/bin/ruby -r ./siteconf20171019-98736-1xfy6yt.rb extconf.rb
 checking if the C compiler accepts ... yes
 checking if the C compiler accepts -Wno-error=unused-command-line-argument-hard-error-in-future... no
 Building nokogiri using packaged libraries.
@@ -178,4 +178,4 @@ rm -rf /Users/yf07/Documents/Code/Project/WaterFowl/spolyzer/api/vendor/bundle/r
 
 current directory: /Users/yf07/Documents/Code/Project/WaterFowl/spolyzer/api/vendor/bundle/ruby/2.4.0/gems/nokogiri-1.8.1/ext/nokogiri
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 nokogiri.bundle ./.gem.20171019-86096-woiiis/nokogiri
+/usr/bin/install -c -m 0755 nokogiri.bundle ./.gem.20171019-98736-3s115b/nokogiri

@@ -1,5 +1,5 @@
 current directory: /Users/yf07/Documents/Code/Project/WaterFowl/spolyzer/api/vendor/bundle/ruby/2.4.0/gems/mysql2-0.4.9/ext/mysql2
-/Users/yf07/.rbenv/versions/2.4.2/bin/ruby -r ./siteconf20171019-86096-18dv0vb.rb extconf.rb
+/Users/yf07/.rbenv/versions/2.4.2/bin/ruby -r ./siteconf20171019-98736-piqfpd.rb extconf.rb
 checking for rb_absint_size()... yes
 checking for rb_absint_singlebit_p()... yes
 checking for ruby/thread.h... yes
@@ -49,4 +49,4 @@ linking shared-object mysql2/mysql2.bundle
 
 current directory: /Users/yf07/Documents/Code/Project/WaterFowl/spolyzer/api/vendor/bundle/ruby/2.4.0/gems/mysql2-0.4.9/ext/mysql2
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 mysql2.bundle ./.gem.20171019-86096-3qv9fa/mysql2
+/usr/bin/install -c -m 0755 mysql2.bundle ./.gem.20171019-98736-1x3bshb/mysql2

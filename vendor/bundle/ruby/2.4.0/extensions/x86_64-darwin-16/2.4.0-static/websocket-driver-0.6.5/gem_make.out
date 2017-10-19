@@ -1,5 +1,5 @@
 current directory: /Users/yf07/Documents/Code/Project/WaterFowl/spolyzer/api/vendor/bundle/ruby/2.4.0/gems/websocket-driver-0.6.5/ext/websocket-driver
-/Users/yf07/.rbenv/versions/2.4.2/bin/ruby -r ./siteconf20171019-86096-cx938c.rb extconf.rb
+/Users/yf07/.rbenv/versions/2.4.2/bin/ruby -r ./siteconf20171019-98736-14c6lc.rb extconf.rb
 creating Makefile
 
 current directory: /Users/yf07/Documents/Code/Project/WaterFowl/spolyzer/api/vendor/bundle/ruby/2.4.0/gems/websocket-driver-0.6.5/ext/websocket-driver
@@ -12,4 +12,4 @@ linking shared-object websocket_mask.bundle
 
 current directory: /Users/yf07/Documents/Code/Project/WaterFowl/spolyzer/api/vendor/bundle/ruby/2.4.0/gems/websocket-driver-0.6.5/ext/websocket-driver
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 websocket_mask.bundle ./.gem.20171019-86096-jho0c3
+/usr/bin/install -c -m 0755 websocket_mask.bundle ./.gem.20171019-98736-18rv5xi
