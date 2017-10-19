@@ -1,5 +1,5 @@
 current directory: /Users/yf07/Documents/Code/Project/WaterFowl/spolyzer/api/vendor/bundle/ruby/2.4.0/gems/ffi-1.9.18/ext/ffi_c
-/Users/yf07/.rbenv/versions/2.4.2/bin/ruby -r ./siteconf20171018-71844-19lnrud.rb extconf.rb
+/Users/yf07/.rbenv/versions/2.4.2/bin/ruby -r ./siteconf20171019-86096-wg7hma.rb extconf.rb
 checking for ffi.h... no
 checking for ffi.h in /usr/local/include,/usr/include/ffi... yes
 checking for ffi_call() in -lffi... yes
@@ -58,4 +58,4 @@ linking shared-object ffi_c.bundle
 
 current directory: /Users/yf07/Documents/Code/Project/WaterFowl/spolyzer/api/vendor/bundle/ruby/2.4.0/gems/ffi-1.9.18/ext/ffi_c
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 ffi_c.bundle ./.gem.20171018-71844-11c6e9o
+/usr/bin/install -c -m 0755 ffi_c.bundle ./.gem.20171019-86096-70lsxn

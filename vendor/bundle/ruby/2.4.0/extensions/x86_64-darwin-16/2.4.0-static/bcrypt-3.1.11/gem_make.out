@@ -1,5 +1,5 @@
 current directory: /Users/yf07/Documents/Code/Project/WaterFowl/spolyzer/api/vendor/bundle/ruby/2.4.0/gems/bcrypt-3.1.11/ext/mri
-/Users/yf07/.rbenv/versions/2.4.2/bin/ruby -r ./siteconf20171018-71844-vx8hjn.rb extconf.rb
+/Users/yf07/.rbenv/versions/2.4.2/bin/ruby -r ./siteconf20171019-86096-1rl6zwx.rb extconf.rb
 creating Makefile
 
 current directory: /Users/yf07/Documents/Code/Project/WaterFowl/spolyzer/api/vendor/bundle/ruby/2.4.0/gems/bcrypt-3.1.11/ext/mri
@@ -48,4 +48,4 @@ linking shared-object bcrypt_ext.bundle
 
 current directory: /Users/yf07/Documents/Code/Project/WaterFowl/spolyzer/api/vendor/bundle/ruby/2.4.0/gems/bcrypt-3.1.11/ext/mri
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 bcrypt_ext.bundle ./.gem.20171018-71844-n50pww
+/usr/bin/install -c -m 0755 bcrypt_ext.bundle ./.gem.20171019-86096-njokh8
