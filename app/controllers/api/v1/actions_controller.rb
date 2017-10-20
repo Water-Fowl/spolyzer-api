@@ -4,7 +4,7 @@ class Api::V1::ActionsController < ApplicationController
     position = params_position["position"]
     # 該当するscore_gameを取得
     score_game = ScoreGame.find(params_position[:score_game_id])
-    scores_by_position = score_game.score.find_by(position: position)
+    scores_by_position = score_game.score.where(position: position)
     
     render :json => scores_by_position
   end
