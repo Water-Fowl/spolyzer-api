@@ -1,15 +1,22 @@
 version: '2'
 services:
   db:
-    image: mysql:latest
-    environment:
-    - MYSQL_ROOT_PASSWORD=password
+    image: mysql:5.7.17
+    ports:
+    - 3306:3306
+    volumes:
+    - ./docker/mysql/volumes:/var/lib/mysql
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: ./docker/rails/Dockerfile
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
       - .:/api
     ports:
       - 3000:3000
+    extends:
+      file: ./docker/mysql/password.yml
+      service: password
     depends_on:
       - db
