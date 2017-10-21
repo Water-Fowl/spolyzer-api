@@ -1,8 +1,8 @@
 class Api::V1::GamesController < ApplicationController
   before_action :authenticate_api_v1_user!
+
   def create
-    #Permit Parameters
-    # user = params.require(:game).permit(:user_id,:token)
+    # Permit Parameters
     players = params.require(:game).require(:players).permit(:left_user_id_1,:left_user_id_2,:right_user_id_1,:right_user_id_2)
     score_game_params = params.require(:game).require(:score_game).permit(:left_team_id,:right_team_id,:game_time,:serve_user_id,:match_point,:deuce,:last_score_of_left,:last_score_of_right)
     scores_params = params.require(:game).require(:scores).permit(:action=> [], :position=> [], :time_to_drop_shuttle=> [],:score_users=> [], :conceded_users=> [])
@@ -16,7 +16,7 @@ class Api::V1::GamesController < ApplicationController
     #もし左サイドなら0右サイドなら1
     
     #Userがまだできてないので一旦コメントアウト
-    #create_score_game_to_users(players, score_game)
+    create_score_game_to_users(players, score_game)
 
     action_list = scores_params["action"]
     position_list = scores_params["position"]
