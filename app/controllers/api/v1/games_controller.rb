@@ -1,5 +1,5 @@
 class Api::V1::GamesController < ApplicationController
-
+  before_action :authenticate_api_v1_user!
   def create
     #Permit Parameters
     # user = params.require(:game).permit(:user_id,:token)

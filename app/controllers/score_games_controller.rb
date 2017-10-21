@@ -1,4 +1,5 @@
 class ScoreGamesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_score_game, only: [:show, :update, :destroy]
 
   # GET /score_games

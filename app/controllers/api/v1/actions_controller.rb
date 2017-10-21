@@ -1,4 +1,5 @@
 class Api::V1::ActionsController < ApplicationController
+  before_action :authenticate_api_v1_user!
   def show_by_position
     params_position = params.require(:data).permit(:position, :score_game_id, :side)
     position = params_position["position"]
