@@ -14,3 +14,6 @@
 !/tmp/.keep
 vendor/bundle
 .byebug_history
+
+# Ignore SQL databases for docker
+/docker/mysql/volumes/*
