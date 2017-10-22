@@ -1,0 +1,8 @@
+version: '2'
+services:
+  settings:
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_USERNAME: username
+      MYSQL_DB_NAME: db_name
+      MYSQL_HOST: ~.amazonaws.com

@@ -10,5 +10,5 @@ services:
     ports:
       - 3000:3000
     extends:
-      file: ./docker/mysql/password.yml
-      service: password
+      file: ./docker/mysql/db_config_production.yml
+      service: settings
