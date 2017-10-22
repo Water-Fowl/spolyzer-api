@@ -7,7 +7,7 @@ services:
     volumes:
     - ./docker/mysql/volumes:/var/lib/mysql
     extends:
-      file: ./docker/mysql/password.yml
+      file: ./docker/mysql/db_config_development.yml
       service: password
   web:
     build:
@@ -19,7 +19,7 @@ services:
     ports:
       - 3000:3000
     extends:
-      file: ./docker/mysql/password.yml
+      file: ./docker/mysql/db_config_development.yml
       service: password
     depends_on:
       - db
