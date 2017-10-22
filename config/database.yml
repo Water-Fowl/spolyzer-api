@@ -14,8 +14,7 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password: password
-#  socket: /tmp/mysql.sock
+  password: <%= ENV['MYSQL_ROOT_PASSWORD'] %>
   host: db
 
 development:
@@ -50,6 +49,9 @@ test:
 #
 production:
   <<: *default
-  database: api_production
-  username: api
-  password: <%= ENV['API_DATABASE_PASSWORD'] %>
+  database: <%= ENV['RDS_DB_NAME'] %>
+  encoding: utf8
+  username: <%= ENV['RDS_ROOT_USERNAME'] %>
+  password: <%= ENV['RDS_ROOT_PASSWORD'] %>
+  host: <%= ENV['RDS_HOST'] %>
+  port: <%= ENV['RDS_PORT'] %>

@@ -1,0 +1,9 @@
+version: '2'
+services:
+  settings:
+    environment:
+      RDS_ROOT_PASSWORD: password
+      RDS_ROOT_USERNAME: username
+      RDS_DB_NAME: db_name
+      RDS_HOST: ~.amazonaws.com
+      RDS_PORT: 3000

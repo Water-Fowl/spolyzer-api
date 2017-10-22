@@ -2,4 +2,4 @@ version: '2'
 services:
   password:
     environment:
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: "password"
