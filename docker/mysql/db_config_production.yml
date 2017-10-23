@@ -2,8 +2,8 @@ version: '2'
 services:
   settings:
     environment:
-      RDS_ROOT_PASSWORD: password
-      RDS_ROOT_USERNAME: username
-      RDS_DB_NAME: db_name
-      RDS_HOST: ~.amazonaws.com
-      RDS_PORT: 3000
+      RDS_ROOT_PASSWORD: aL6H57Pp
+      RDS_ROOT_USERNAME: production_root
+      RDS_DB_NAME: api_production
+      RDS_HOST: api-production-db.c2k6gjfix4uk.us-west-2.rds.amazonaws.com
+      RDS_PORT: 3306
