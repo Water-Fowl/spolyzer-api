@@ -2,8 +2,8 @@ version: '2'
 services:
   settings:
     environment:
-      RDS_ROOT_PASSWORD: aL6H57Pp
-      RDS_ROOT_USERNAME: production_root
-      RDS_DB_NAME: api_production
-      RDS_HOST: api-production-db.c2k6gjfix4uk.us-west-2.rds.amazonaws.com
-      RDS_PORT: 3306
+      RDS_ROOT_PASSWORD: production_root
+      RDS_ROOT_USERNAME: root
+      RDS_DB_NAME: db-production
+      RDS_HOST: db-production.ccp6furabgjh.ap-northeast-1.rds.amazonaws.com
+      SECRET_KEY_BASE: 0782ca8ab49950a8067d6554938ab62235f4b64b1a35d49a2fd32b7545120fc0ac63626e8b5a1fd561a7c7d0b0e7d026592fcb093695e3e67b0a9fd4b187d48f
