@@ -1,4 +1,6 @@
 class ScoreGameToUsersController < ApplicationController
+
+  before_action :authenticate_user!
   before_action :set_score_game_to_user, only: [:show, :update, :destroy]
   # GET /score_game_to_users
   def index
