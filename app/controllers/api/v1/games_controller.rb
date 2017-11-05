@@ -5,7 +5,7 @@ class Api::V1::GamesController < ApplicationController
     # Permit Parameters
     players = params.require(:game).require(:players).permit(:left_user_id_1,:left_user_id_2,:right_user_id_1,:right_user_id_2)
     score_game_params = params.require(:game).require(:score_game).permit(:left_team_id,:right_team_id,:game_time,:serve_user_id,:match_point,:deuce,:last_score_of_left,:last_score_of_right)
-    scores_params = params.require(:game).require(:scores).permit(:action=> [], :position=> [], :time_to_drop_shuttle=> [],:score_users=> [], :conceded_users=> [])
+    scores_params = params.require(:game).require(:scores).permit(:action=> [], :position=> [], :time_to_drop_shuttle=> [],:score_users=> [], :conceded_users=> [], :sides=>[])
     #User Authorization
     ##Write Here....
 
@@ -23,9 +23,10 @@ class Api::V1::GamesController < ApplicationController
     time_to_drop_shuttle_list = scores_params["time_to_drop_shuttle"]
     score_user_list = scores_params["score_users"]
     conceded_user_list = scores_params["conceded_users"]
+    side_list = scores_params["sides"]
     #Registor Scores
-    action_list.zip(position_list, time_to_drop_shuttle_list, score_user_list, conceded_user_list) do |score_params| 
-      req = {action:score_params[0], position:score_params[1], time_to_drop_shuttle:score_params[2], scores_user_id:score_params[3], conceded_user_id:score_params[4], score_game_id:score_game.id}
+    action_list.zip(position_list, time_to_drop_shuttle_list, score_user_list, conceded_user_list, side_list) do |score_params| 
+      req = {action:score_params[0], position:score_params[1], time_to_drop_shuttle:score_params[2], scores_user_id:score_params[3], conceded_user_id:score_params[4], side: score_params[5], score_game_id:score_game.id}
       Score.create(req)
     end
     render json: {status:0,message:"ok", score_game_id: score_game.id}
