@@ -1,10 +1,10 @@
 class Api::V1::GamesController < ApplicationController
-  before_action :authenticate_api_v1_user!
+#  before_action :authenticate_api_v1_user!
 
   def create
     # Permit Parameters
     players = params.require(:game).require(:players).permit(:left_user_id_1,:left_user_id_2,:right_user_id_1,:right_user_id_2)
-    score_game_params = params.require(:game).require(:score_game).permit(:left_team_id,:right_team_id,:game_time,:serve_user_id,:match_point,:deuce,:last_score_of_left,:last_score_of_right)
+    score_game_params = params.require(:game).require(:score_game).permit(:game_time,:serve_user_id,:match_point,:deuce)
     scores_params = params.require(:game).require(:scores).permit(:action=> [], :position=> [], :time_to_drop_shuttle=> [],:score_users=> [], :conceded_users=> [], :sides=>[])
     #User Authorization
     ##Write Here....
