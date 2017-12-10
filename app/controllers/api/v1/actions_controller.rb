@@ -24,8 +24,7 @@ class Api::V1::ActionsController < ApplicationController
     actions_list = ["ヘアピン","スマッシュ", "クリアー","ドライブ","プッシュ","ロブ","サービス","ドロップ",'ネットイン(スマッシュ)','ネットイン(ドライブ)','ミス(サービス)']
     column_list = ['lose', 'win', 'all']
     
-    params_status = params.require(:data).permit(:user_id, :opponent_user, :victory, :position)
-    position = params_status["position"]
+    params_status = params.require(:data).permit(:user_id, :opponent_user, :victory)
     user_id = params_status["user_id"]
     opponent_user_id = params_status["opponent_user"]
     victory = params_status["victory"]
