@@ -6,6 +6,8 @@ services:
     - 3306:3306
     volumes:
     - ./docker/mysql/volumes:/var/lib/mysql
+    environment:
+    - MYSQL_ROOT_PASSWORD=password
   web:
     build:
       context: .
@@ -15,8 +17,5 @@ services:
       - .:/api
     ports:
       - 3000:3000
-    extends:
-      file: ./docker/mysql/password.yml
-      service: password
     depends_on:
       - db
