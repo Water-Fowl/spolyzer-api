@@ -4,12 +4,16 @@ class Api::V1::ActionsController < ApplicationController
   def show
 
     actions_list = ["ヘアピン","スマッシュ", "クリアー","ドライブ","プッシュ","ロブ","サービス","ドロップ",'ネットイン(スマッシュ)','ネットイン(ドライブ)','ミス(サービス)']
-    params_position = params.require(:data).permit(:position, :side, :score_game_id=> [])
-    position = params_position["position"]
-    side = params_position["side"]
+#    params_position = params.require(:data).permit(:position, :side, :score_game_id=> [])
+#    position = params_position["position"]
+#    side = params_position["side"]
+    position=params[:position]
+    sie=params[:side]
+
     # 該当するscore_gameを取得
     score_game_ids = params_position[:score_game_id]
     actions_by_position = Score.includes(:score_game).where(score_games: {id: score_game_ids}).where(position: position).where(side: side).select("action").to_a
+
 
     action_list = hash_to_list_by_column("action", actions_by_position)
     action_count_hash_with_index = list_to_count_hash(action_list)
@@ -20,7 +24,7 @@ class Api::V1::ActionsController < ApplicationController
     render json: {status:0,message:"ok", action_count: action_count}
   end
 
-  
+
 
 
 

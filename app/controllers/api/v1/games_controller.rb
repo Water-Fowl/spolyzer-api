@@ -38,9 +38,9 @@ def show_by_status
   column_list = ['lose', 'win', 'all']
 
   params_status = params.require(:data).permit(:user_id, :opponent_user, :victory)
-  user_id = params_status["user_id"]
-  opponent_user_id = params_status["opponent_user"]
-  victory = params_status["victory"]
+  user_id = params[:user_id]
+  opponent_user_id = params:opponent_user]
+  victory = params[:victory]
 
   current_user = User.find(user_id)
   opponent_user = User.find(opponent_user_id)
