@@ -33,7 +33,7 @@ class Api::V1::GamesController < ApplicationController
   end
 end
 
-def show_by_status
+def show
   actions_list = ["ヘアピン","スマッシュ", "クリアー","ドライブ","プッシュ","ロブ","サービス","ドロップ",'ネットイン(スマッシュ)','ネットイン(ドライブ)','ミス(サービス)']
   column_list = ['lose', 'win', 'all']
 
