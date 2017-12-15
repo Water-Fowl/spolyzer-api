@@ -5,8 +5,11 @@ Rails.application.routes.draw do
             registrations: 'api/v1/auth/registrations'
         }
         post 'show_by_position', controller: 'actions'
+        get  'actions/:position/:side/:score_game_id' to 'actions#show'
         post 'show_by_status', controller: 'actions'
+        get  'games/:user_id/:opponent_user/:victory' to 'games#show'
         post 'search_user_by_id', controller: 'users'
+        get  'users/:name' to 'users#search_user_by_id'
         resources :games
         resources :actions
     end
