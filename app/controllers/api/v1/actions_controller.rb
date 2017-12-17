@@ -23,7 +23,6 @@ class Api::V1::ActionsController < ApplicationController
   def show_by_status
     actions_list = ["ヘアピン","スマッシュ", "クリアー","ドライブ","プッシュ","ロブ","サービス","ドロップ",'ネットイン(スマッシュ)','ネットイン(ドライブ)','ミス(サービス)']
     column_list = ['lose', 'win', 'all']
-
     params_status = params.require(:data).permit(:user_id, :opponent_user, :victory)
     user_id = params_status["user_id"]
     opponent_user_id = params_status["opponent_user"]

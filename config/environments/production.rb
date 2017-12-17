@@ -13,7 +13,7 @@ Rails.application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
-
+  config.secret_key = 'c0ba15053b4a7e95a28792b9d388a91483ac32f3fe2605f9f0eb83b403c0f8611f9f7fc3f552de3b8df98d8e1a4873cbc4556ed0be705c3b9766a56f9df31006'
   # Attempt to read encrypted secrets from `config/secrets.yml.enc`.
   # Requires an encryption key in `ENV["RAILS_MASTER_KEY"]` or
   # `config/secrets.yml.key`.
