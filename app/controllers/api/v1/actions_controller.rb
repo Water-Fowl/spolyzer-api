@@ -1,4 +1,4 @@
-class Api::V1::ActionsController < ApplicationController  
+class Api::V1::ActionsController < ApplicationController
 #  before_action :authenticate_api_v1_user!
 
   def show_by_position
@@ -23,13 +23,11 @@ class Api::V1::ActionsController < ApplicationController
   def show_by_status
     actions_list = ["ヘアピン","スマッシュ", "クリアー","ドライブ","プッシュ","ロブ","サービス","ドロップ",'ネットイン(スマッシュ)','ネットイン(ドライブ)','ミス(サービス)']
     column_list = ['lose', 'win', 'all']
-    
-    params_status = params.require(:data).permit(:user_id, :opponent_user, :victory, :position)
-    position = params_status["position"]
+    params_status = params.require(:data).permit(:user_id, :opponent_user, :victory)
     user_id = params_status["user_id"]
     opponent_user_id = params_status["opponent_user"]
     victory = params_status["victory"]
-    
+
     current_user = User.find(user_id)
     opponent_user = User.find(opponent_user_id)
 
@@ -38,7 +36,7 @@ class Api::V1::ActionsController < ApplicationController
     render json: { status:0, message: 'ok', score_game_ids: score_game.ids }
   end
 
-    
+
 
   def actions_hash_to_count_hash(actions, actions_list)
     action_list = hash_to_list_by_column("action", actions)
