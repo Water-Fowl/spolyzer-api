@@ -8,7 +8,7 @@ class Api::V1::ActionsController < ApplicationController
 #    position = params_position["position"]
 #    side = params_position["side"]
     position=params[:position]
-    sie=params[:side]
+    side=params[:side]
 
     # 該当するscore_gameを取得
     score_game_ids = params_position[:score_game_id]

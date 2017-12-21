@@ -39,7 +39,7 @@ def show
 
   params_status = params.require(:data).permit(:user_id, :opponent_user, :victory)
   user_id = params[:user_id]
-  opponent_user_id = params:opponent_user]
+  opponent_user_id = params[:opponent_user]
   victory = params[:victory]
 
   current_user = User.find(user_id)
