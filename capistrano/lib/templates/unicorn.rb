@@ -1,17 +1,13 @@
-# paths
-app_path = "/home/deploy/apps/spolyzer"
-working_directory "#{app_path}/current"
-pid "#{app_path}/current/tmp/pids/unicorn.pid"
+working_directory "<%= current_path %>"
+pid "<%= current_path %>/tmp/pids/unicorn.pid"
+stderr_path "<%= shared_path %>/log/unicorn.log"
+stdout_path "<%= shared_path %>/log/unicorn.log"
 
-# listen
-listen "/tmp/unicorn.sock", :backlog => 64
-
-# logging
-stderr_path "#{app_path}/shared/log/unicorn.stderr.log"
-stdout_path "#{app_path}/shared/log/unicorn.stdout.log"
+listen "/tmp/unicorn.sock", backlog: 64
 
 # workers
 worker_processes 2
+timeout 20
 
 # use correct Gemfile on restarts
 before_exec do |server|
