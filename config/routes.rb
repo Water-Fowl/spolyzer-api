@@ -15,4 +15,8 @@ Rails.application.routes.draw do
   resources :score_game_to_users
   resources :scores
   resources :score_games
+
+  get '/admin', to: 'admin/dashboard#index'
+  namespace :admin do
+  end
 end
