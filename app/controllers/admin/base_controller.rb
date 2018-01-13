@@ -1,4 +1,9 @@
 class Admin::BaseController < ActionController::Base
+
+  protect_from_forgery
+
+  layout 'admin'
+
   if Rails.env.production? || Rails.env.staging?
     http_basic_authenticate_with name: 'waterfowl', password: basic_auth_password
   end
