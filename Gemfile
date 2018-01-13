@@ -21,6 +21,7 @@ gem 'aws-sdk', '2.0.6.pre'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'haml-rails'
+gem 'erb2haml'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
