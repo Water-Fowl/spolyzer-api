@@ -23,6 +23,22 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'haml-rails'
 gem 'erb2haml'
+gem 'uglifier', '>= 1.3.0'
+gem 'turbolinks', '~> 5'
+gem 'jbuilder', '~> 2.5'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-toastr'
+  gem 'rails-assets-flexslider'
+end
+gem 'bootstrap-sass'
+gem "font-awesome-rails"
+gem 'coffee-rails', '~> 4.2'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'sass-rails'
+gem 'fancybox2-rails'
+gem 'sprockets-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
