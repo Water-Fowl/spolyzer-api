@@ -1,0 +1,74 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2 User growth rate
+    %ol.breadcrumb
+      %li.active user addon
+  .col-lg-2
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-md-12
+      .ibox.float-e-margins
+        .ibox-title
+          %span.label.label-info.pull-right
+            %i.fa.fa-clock-o
+            Update on #{ Date.today.strftime("%m/%d %Y") }
+          %h5 Users
+        .ibox-content
+          %h1.no-margins 2
+          .stat-percent.font-bold.text-success
+            20%
+            %i.fa.fa-level-up
+          %small users
+  .row
+    .col-lg-12
+      - if @days
+        .ibox.float-e-margins
+          .ibox-content
+            %div
+              %h3.font-bold.no-margins
+                Followers Weekly Report
+            .m-t-sm
+              .row
+                .col-md-12
+                  %div
+                    %canvas#followerChart{:height => "114"}
+      - else
+        .text-center
+          データを同期中です。しばらくお待ち下さい。
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    %h2 Transaction growth rate
+    %ol.breadcrumb
+      %li.active transaction addon
+  .col-lg-2
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-md-12
+      .ibox.float-e-margins
+        .ibox-title
+          %span.label.label-info.pull-right
+            %i.fa.fa-clock-o
+            Update on #{ Date.today.strftime("%m/%d %Y") }
+          %h5 Users
+        .ibox-content
+          %h1.no-margins= User.count
+          .stat-percent.font-bold.text-success
+            20%
+            %i.fa.fa-level-up
+          %small translations
+  .row
+    .col-lg-12
+      - if @days
+        .ibox.float-e-margins
+          .ibox-content
+            %div
+              %h3.font-bold.no-margins
+                Followers Weekly Report
+            .m-t-sm
+              .row
+                .col-md-12
+                  %div
+                    %canvas#followerChart{:height => "114"}
+      - else
+        .text-center
+          データを同期中です。しばらくお待ち下さい。
