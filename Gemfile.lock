@@ -71,6 +71,7 @@ GEM
     erubi (1.7.0)
     erubis (2.7.0)
     ffi (1.9.18)
+    get_process_mem (0.2.1)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     haml (5.0.4)
@@ -175,6 +176,9 @@ GEM
     unicorn (5.3.1)
       kgio (~> 2.6)
       raindrops (~> 0.7)
+    unicorn-worker-killer (0.4.4)
+      get_process_mem (~> 0)
+      unicorn (>= 4, < 6)
     warden (1.2.7)
       rack (>= 1.0)
     websocket-driver (0.6.5)
@@ -200,6 +204,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
   unicorn
+  unicorn-worker-killer
 
 BUNDLED WITH
-   1.16.0
+   1.16.1

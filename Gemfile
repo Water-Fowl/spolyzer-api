@@ -13,6 +13,7 @@ gem 'devise'
 gem 'omniauth'
 
 gem 'unicorn'
+gem 'unicorn-worker-killer'
 
 gem 'dotenv-rails'
 
