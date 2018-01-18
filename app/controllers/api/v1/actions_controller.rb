@@ -24,10 +24,6 @@ class Api::V1::ActionsController < ApplicationController
     render json: {status:0,message:"ok", action_count: action_count}
   end
 
-
-
-
-
   def actions_hash_to_count_hash(actions, actions_list)
     action_list = hash_to_list_by_column("action", actions)
     action_count_hash_with_index = list_to_count_hash(action_list)

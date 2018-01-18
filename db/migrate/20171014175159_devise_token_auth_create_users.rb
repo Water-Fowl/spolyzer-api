@@ -38,6 +38,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[5.1]
       t.string :nickname
       t.string :email
       t.string :description
+      t.binary :image, :limit => (16*1024*1024 - 1)
       ## Tokens
       t.text :tokens
 

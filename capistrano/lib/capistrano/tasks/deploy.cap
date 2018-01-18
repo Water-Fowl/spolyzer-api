@@ -1,0 +1,18 @@
+namespace :deploy do
+  desc "Init unicorn ,pg config"
+  task :init_config do
+    on roles(:app) do
+      execute :mkdir, "-p #{shared_path}/config"
+      template "unicorn.rb", "#{shared_path}/config/unicorn.rb"
+      template "database.yml", "#{shared_path}/config/database.yml"
+    end
+  end
+
+  desc 'Restart application'
+  task :restart do
+    invoke 'unicorn:restart'
+    # invoke 'sidekiq:restart'
+    # invoke 'whenever:update_crontab'
+  end
+end
+after 'deploy:publishing', 'deploy:restart'
