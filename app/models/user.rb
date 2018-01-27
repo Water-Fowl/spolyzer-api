@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
-  has_many :category_users
-  has_many :categories, through: :category_users
-  has_many :match_users
-  has_many :matches, through: :match_users
+  has_many :sport_users
+  has_many :sports, through: :sport_users
+  has_many :game_users
+  has_many :games, through: :game_users
   has_many :analysis_results
   has_many :scores
 
@@ -12,7 +12,16 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   def latest_result
-    self.analysis_results.order(created_at: :asc).first
+    self.analysis_results.order(created_at: :asc).try(:first)
+  end
+
+  def total_score(game_id)
+    self
+      .games
+      .find_by_id(game_id)
+      .scores
+      .where(user_id: self.id)
+      REXML::Document.new(File.read("path/to/file")).count
   end
 
     # def get_games(column="all")
