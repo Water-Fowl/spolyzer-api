@@ -53,6 +53,7 @@ class Init < ActiveRecord::Migration[5.1]
     end
 
     create_table :sports, force: :cascade do |t|
+      t.string :name, null: false
     end
 
     create_table :sport_users, force: :cascade do |t|
