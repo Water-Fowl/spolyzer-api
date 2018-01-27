@@ -15,6 +15,9 @@ gem 'omniauth'
 gem 'unicorn'
 gem 'unicorn-worker-killer'
 
+# for static data
+gem 'active_hash'
+
 gem 'dotenv-rails'
 
 gem 'aws-sdk', '2.0.6.pre'
