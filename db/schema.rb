@@ -14,6 +14,8 @@ ActiveRecord::Schema.define(version: 20180127030510) do
 
   create_table "analysis_results", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_analysis_results_on_user_id"
   end
 
@@ -25,11 +27,17 @@ ActiveRecord::Schema.define(version: 20180127030510) do
   end
 
   create_table "games", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "positions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "score_id", null: false
+    t.integer "dropped_at"
     t.integer "side"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["score_id"], name: "index_positions_on_score_id"
   end
 
@@ -37,11 +45,15 @@ ActiveRecord::Schema.define(version: 20180127030510) do
     t.integer "game_id", null: false
     t.boolean "is_missed", default: false, null: false
     t.boolean "is_net_in", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_scores_on_game_id"
   end
 
   create_table "shot_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "sport_id", null: false
+    t.string "name_ja", null: false
+    t.string "name_en", null: false
     t.index ["sport_id"], name: "index_shot_types_on_sport_id"
   end
 
