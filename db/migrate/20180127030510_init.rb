@@ -28,9 +28,6 @@ class Init < ActiveRecord::Migration[5.1]
       t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
     end
 
-    create_table :games, force: :cascade do |t|
-    end
-
     create_table :analysis_results, force: :cascade do |t|
       t.integer :user_id, null: false, index: true
     end
@@ -49,11 +46,18 @@ class Init < ActiveRecord::Migration[5.1]
 
     create_table :scores, force: :cascade do |t|
       t.integer :game_id, null: false, index: true
-      t.integer :position, null: false
+      t.boolean :is_missed, default: false, null: false
+      t.boolean :is_net_in, default: false, null: false
+    end
+
+    create_table :positions, force: :cascade do |t|
+      t.integer :score_id, null: false, index: true
+      t.integer :side
     end
 
     create_table :sports, force: :cascade do |t|
-      t.string :name, null: false
+      t.string :name_ja, null: false
+      t.string :name_en, null: false
     end
 
     create_table :sport_users, force: :cascade do |t|

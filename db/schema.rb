@@ -27,9 +27,16 @@ ActiveRecord::Schema.define(version: 20180127030510) do
   create_table "games", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
   end
 
+  create_table "positions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "score_id", null: false
+    t.integer "side"
+    t.index ["score_id"], name: "index_positions_on_score_id"
+  end
+
   create_table "scores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "game_id", null: false
-    t.integer "position", null: false
+    t.boolean "is_missed", default: false, null: false
+    t.boolean "is_net_in", default: false, null: false
     t.index ["game_id"], name: "index_scores_on_game_id"
   end
 
@@ -46,7 +53,8 @@ ActiveRecord::Schema.define(version: 20180127030510) do
   end
 
   create_table "sports", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "name", null: false
+    t.string "name_ja", null: false
+    t.string "name_en", null: false
   end
 
   create_table "team_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
