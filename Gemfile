@@ -27,6 +27,9 @@ gem 'uglifier', '>= 1.3.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
+gem 'exception_notification'
+gem 'slack-notifier'
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-toastr'
   gem 'rails-assets-flexslider'
