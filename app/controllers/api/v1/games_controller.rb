@@ -1,5 +1,4 @@
-class Api::V1::GamesController < ApplicationController
-#  before_action :authenticate_api_v1_user!
+class Api::V1::GamesController < Api::V1::BaseController
 
   def create
     # Permit Parameters

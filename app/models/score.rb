@@ -1,3 +1,6 @@
 class Score < ApplicationRecord
-    belongs_to :score_game
+  has_one :position
+
+  belongs_to :game
+  belongs_to :user
 end

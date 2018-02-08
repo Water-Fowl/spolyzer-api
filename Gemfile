@@ -15,6 +15,9 @@ gem 'omniauth'
 gem 'unicorn'
 gem 'unicorn-worker-killer'
 
+# for static data
+gem 'active_hash'
+
 gem 'dotenv-rails'
 
 gem 'aws-sdk', '2.0.6.pre'
@@ -42,6 +45,18 @@ gem 'jquery-ui-rails'
 gem 'sass-rails'
 gem 'fancybox2-rails'
 gem 'sprockets-rails'
+
+group :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'database_rewinder'
+  gem 'rspec-request_describer'
+  gem 'autodoc'
+  gem 'redcarpet'
+  gem 'rspec-json_matcher'
+  gem 'faker'
+  gem 'timecop'
+end
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

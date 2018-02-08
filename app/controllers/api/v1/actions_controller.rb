@@ -1,12 +1,8 @@
-class Api::V1::ActionsController < ApplicationController
-#  before_action :authenticate_api_v1_user!
+class Api::V1::ActionsController < Api::V1::BaseController
 
   def show
 
     actions_list = ["ヘアピン","スマッシュ", "クリアー","ドライブ","プッシュ","ロブ","サービス","ドロップ",'ネットイン(スマッシュ)','ネットイン(ドライブ)','ミス(サービス)']
-#    params_position = params.require(:data).permit(:position, :side, :score_game_id=> [])
-#    position = params_position["position"]
-#    side = params_position["side"]
     position=params[:position]
     side=params[:side]
 

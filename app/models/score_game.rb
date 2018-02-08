@@ -10,7 +10,7 @@ class ScoreGame < ApplicationRecord
         score_right = scores.where(side: 1).count
         return score_left, score_right
     end
-   
+
 
     def is_win_user(user)
         score_game_to_users = ScoreGameToUser.where(score_game_id: self.id)
@@ -23,7 +23,7 @@ class ScoreGame < ApplicationRecord
         else
             return false
         end
-        
+
         win_user = win_score_game_to_users.where(user_id: user.id)
         if win_user.size > 0 then
             return true
