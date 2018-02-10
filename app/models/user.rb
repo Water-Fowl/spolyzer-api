@@ -23,12 +23,8 @@ class User < ApplicationRecord
       .where(user_id: self.id)
   end
 
+  # TODO: devise token auth でaccess_tokenのupdate
   def generate_access_token!
-    hash = {}
-    begin
-      access_token = SecureRandom.hex
-      hash[:access_token] = access_token
-    end while self.class.exists?(tokens: hash.to_json)
-    self.update_attribute(:tokens, hash.to_json)
+    raise NotImplementedError
   end
 end
