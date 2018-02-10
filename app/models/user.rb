@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
 
   has_many :sport_users
@@ -10,7 +10,6 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :trackable, :validatable
-
 
   def latest_result
     self.analysis_results.order(created_at: :asc).try(:first)
