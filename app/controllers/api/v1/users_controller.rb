@@ -8,6 +8,11 @@ class Api::V1::UsersController < Api::V1::BaseController
   def search
   end
 
+  def update
+    binding.pry
+    current_user =
+  end
+
   private def find_users_by_name
     @users = User.where('name LIKE ?', "%#{params[:name]}%")
   end
