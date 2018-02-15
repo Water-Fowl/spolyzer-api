@@ -51,6 +51,7 @@ class Init < ActiveRecord::Migration[5.1]
     end
 
     create_table :scores, force: :cascade do |t|
+      t.integer :user_id, null: false, index: true
       t.integer :game_id, null: false, index: true
       t.boolean :is_missed, default: false, null: false
       t.boolean :is_net_in, default: false, null: false
