@@ -1,7 +1,7 @@
 class Api::V1::ShotTypesController < Api::V1::BaseController
 
   def show
-    @action = @sport.shot_types
+    @shot_type = @sport.shot_types
   end
 
   private def set_sport
