@@ -7,6 +7,8 @@ Rails.application.routes.draw do
         resources :shot_types
         resources :games
         resources :users
+        resources :analytics
+        resources :analysis_results
     end
   end
 
