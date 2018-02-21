@@ -7,14 +7,15 @@ class GameCreateService
   def execute
     if game = Game.create(name: params[:game_name]) &&
       GameUser.create(game_id: game.id, user_id: @current_user.id) &&
-      GameUser.create(game_id: game.id, user_id: oppnent_user.id)
+      GameUser.create(game_id: game.id, user_id: opponent_user.id)
       true
     else
       false
     end
   end
 
-  def oppnent_user
-    @oppnent_user ||= User.find(params[:oppnent_user_id])
+
+  private def opponent_user
+    @opponent_user ||= User.find(params[:oppnent_user_id])
   end
 end
