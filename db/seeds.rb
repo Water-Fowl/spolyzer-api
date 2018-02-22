@@ -88,4 +88,8 @@ ActiveRecord::Base.transaction do
       Game.second.game_users.create(user_id: user.id)
     end
   end
+
+  AnalysisResult.create(
+    user_id: 1
+  )
 end

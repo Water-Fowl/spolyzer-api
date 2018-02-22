@@ -5,6 +5,6 @@ class Api::V1::AnalysisResultsController < Api::V1::BaseController
   end
 
   def show
-    @analysis_result = current_user.analysis_results.find(param[:id])
+    @analysis_result = current_user.analysis_results.find(params[:id])
   end
 end
