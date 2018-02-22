@@ -35,6 +35,7 @@ class Init < ActiveRecord::Migration[5.1]
     end
 
     create_table :games, force: :cascade do |t|
+      t.integer :sport_id, null: false, index: true
       t.string :name, null: false
       t.timestamps
     end
