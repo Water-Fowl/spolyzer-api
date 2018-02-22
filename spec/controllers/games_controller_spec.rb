@@ -1,4 +1,5 @@
 require 'rails_helper'
 
-Rspec.describe Api::V1::GamesController, type: :controller do
+RSpec.describe Api::V1::GamesController, type: :controller do
+  describe ''
 end

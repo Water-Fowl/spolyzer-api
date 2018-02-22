@@ -27,9 +27,11 @@ ActiveRecord::Schema.define(version: 20180127030510) do
   end
 
   create_table "games", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "sport_id", null: false
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["sport_id"], name: "index_games_on_sport_id"
   end
 
   create_table "positions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -42,12 +44,14 @@ ActiveRecord::Schema.define(version: 20180127030510) do
   end
 
   create_table "scores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "user_id", null: false
     t.integer "game_id", null: false
     t.boolean "is_missed", default: false, null: false
     t.boolean "is_net_in", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_scores_on_game_id"
+    t.index ["user_id"], name: "index_scores_on_user_id"
   end
 
   create_table "shot_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -99,7 +103,7 @@ ActiveRecord::Schema.define(version: 20180127030510) do
     t.string "name"
     t.string "image"
     t.string "email"
-    t.text "access_token"
+    t.text "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

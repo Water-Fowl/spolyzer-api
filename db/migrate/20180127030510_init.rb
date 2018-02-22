@@ -19,7 +19,7 @@ class Init < ActiveRecord::Migration[5.1]
       t.string :name
       t.string :image
       t.string :email
-      t.text :access_token
+      t.text :tokens
       t.datetime :created_at, null: false
       t.datetime :updated_at, null: false
       t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
@@ -35,6 +35,7 @@ class Init < ActiveRecord::Migration[5.1]
     end
 
     create_table :games, force: :cascade do |t|
+      t.integer :sport_id, null: false, index: true
       t.string :name, null: false
       t.timestamps
     end
@@ -51,6 +52,7 @@ class Init < ActiveRecord::Migration[5.1]
     end
 
     create_table :scores, force: :cascade do |t|
+      t.integer :user_id, null: false, index: true
       t.integer :game_id, null: false, index: true
       t.boolean :is_missed, default: false, null: false
       t.boolean :is_net_in, default: false, null: false
