@@ -10,6 +10,14 @@ class User < ApplicationRecord
   has_many :analysis_results
   has_many :scores
 
+  validates :name,
+    presence: true,
+    quniqueness: true
+
+  validates :name,
+    presence: true,
+    quniqueness: true
+
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :trackable, :validatable
 
