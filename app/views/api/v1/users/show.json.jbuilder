@@ -1,2 +1,1 @@
-json.user do
-end
+json.user @user, :name, :email
