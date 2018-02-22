@@ -50,7 +50,12 @@ ActiveRecord::Base.transaction do
     game_id: game.id,
     user_id: loser.id
   )
-
+  winner_single_unit = Unit.create
+  loser_single_unit = Unit.create
+  winner_single_unit.game_units.create(game_id: game.id)
+  loser_single_unit.game_units.create(game_id: game.id)
+  winner_single_unit.user_units.create(user_id: winner.id)
+  winner_single_unit.user_units.create(user_id: loser.id)
   10.times do
     winner.scores.create(
       game_id: game.id
@@ -67,15 +72,20 @@ ActiveRecord::Base.transaction do
   winner_unit = Unit.create
   loser_unit  = Unit.create
   2.times do |i|
-    winner_unit.unit_users.create(
+    winner_unit.user_units.create(
       user_id: i + 1
     )
   end
   2.times do |i|
-    loser_unit.unit_users.create(
+    loser_unit.user_units.create(
       user_id: i + 3
     )
   end
   Game.second.game_units.create(unit_id: winner_unit.id)
   Game.second.game_units.create(unit_id: loser_unit.id)
+  Game.second.units do |unit|
+    unit.users do |user|
+      Game.second.game_users.create(user_id: user.id)
+    end
+  end
 end

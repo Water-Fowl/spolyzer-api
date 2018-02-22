@@ -49,7 +49,7 @@ class Init < ActiveRecord::Migration[5.1]
       t.timestamps
     end
 
-    create_table :unit_users, force: :cascade do |t|
+    create_table :user_units, force: :cascade do |t|
       t.integer :unit_id, null: false, index: true
       t.integer :user_id, null: false, index: true
     end

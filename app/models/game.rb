@@ -14,6 +14,10 @@ class Game < ApplicationRecord
     user_order_by_score.first
   end
 
+  def is_single_game?
+    units.nil?
+  end
+
   private
 
   def user_order_by_score

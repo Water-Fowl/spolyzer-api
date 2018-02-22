@@ -91,16 +91,16 @@ ActiveRecord::Schema.define(version: 20180127030510) do
     t.string "name", null: false
   end
 
-  create_table "unit_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "unit_id", null: false
-    t.integer "user_id", null: false
-    t.index ["unit_id"], name: "index_unit_users_on_unit_id"
-    t.index ["user_id"], name: "index_unit_users_on_user_id"
-  end
-
   create_table "units", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_units", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "unit_id", null: false
+    t.integer "user_id", null: false
+    t.index ["unit_id"], name: "index_user_units_on_unit_id"
+    t.index ["user_id"], name: "index_user_units_on_user_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
