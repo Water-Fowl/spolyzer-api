@@ -2,6 +2,7 @@ ActiveRecord::Base.transaction do
   puts 'creating user....'
   10.times do |i|
     User.create(
+      name: "#{i}",
       email: "#{i}test@test.test",
       password: "#{i}testtest"
     )
