@@ -5,6 +5,6 @@ class Api::V1::ShotTypesController < Api::V1::BaseController
   end
 
   private def set_sport
-    @sport = Sport.find params[:sport_id]
+    @sport = Sport.find params[:id]
   end
 end
