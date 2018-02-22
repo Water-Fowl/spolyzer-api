@@ -45,6 +45,20 @@ class Init < ActiveRecord::Migration[5.1]
       t.integer :game_id, null: false, index: true
     end
 
+    create_table :units, force: :cascade do |t|
+      t.timestamps
+    end
+
+    create_table :unit_users, force: :cascade do |t|
+      t.integer :unit_id, null: false, index: true
+      t.integer :user_id, null: false, index: true
+    end
+
+    create_table :game_units, force: :cascade do |t|
+      t.integer :game_id, null: false, index: true
+      t.integer :unit_id, null: false, index: true
+    end
+
     create_table :shot_types, force: :cascade do |t|
       t.integer :sport_id, null: false, index: true
       t.string :name_ja, null: false

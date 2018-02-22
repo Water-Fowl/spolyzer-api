@@ -5,6 +5,8 @@ class User < ApplicationRecord
   has_many :sports, through: :sport_users
   has_many :game_users
   has_many :games, through: :game_users
+  has_many :unit_users
+  has_many :units, through: :unit_users
   has_many :analysis_results
   has_many :scores
 

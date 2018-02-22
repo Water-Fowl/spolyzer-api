@@ -2,6 +2,8 @@ class Game < ApplicationRecord
   belongs_to :sport
   has_many :game_users
   has_many :users, through: :game_users
+  has_many :game_units
+  has_many :units, through: :game_units
   has_many :scores
 
   def winner

@@ -1,10 +1,13 @@
 ActiveRecord::Base.transaction do
+  puts 'creating user....'
   10.times do |i|
     User.create(
       email: "#{i}test@test.test",
       password: "#{i}testtest"
     )
   end
+
+  puts 'creating sport and shot types....'
   Sport.create(
     name_ja: 'バドミントン',
     name_en: 'badminton'
@@ -28,12 +31,17 @@ ActiveRecord::Base.transaction do
       sport_id: sport.id
     )
   end
+  puts 'creating games....'
   winner = User.first
   loser = User.second
-  game = Game.create(
-    sport_id: sport.id,
-    name: 'test'
-  )
+  2.times do
+    Game.create(
+      sport_id: sport.id,
+      name: 'test'
+    )
+  end
+
+  game = Game.first
   GameUser.create(
     game_id: game.id,
     user_id: winner.id
@@ -53,4 +61,21 @@ ActiveRecord::Base.transaction do
       game_id: game.id
     )
   end
+
+  puts 'creating unit....'
+
+  winner_unit = Unit.create
+  loser_unit  = Unit.create
+  2.times do |i|
+    winner_unit.unit_users.create(
+      user_id: i + 1
+    )
+  end
+  2.times do |i|
+    loser_unit.unit_users.create(
+      user_id: i + 3
+    )
+  end
+  Game.second.game_units.create(unit_id: winner_unit.id)
+  Game.second.game_units.create(unit_id: loser_unit.id)
 end
