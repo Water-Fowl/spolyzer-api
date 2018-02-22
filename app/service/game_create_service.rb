@@ -16,6 +16,6 @@ class GameCreateService
 
 
   private def opponent_user
-    @opponent_user ||= User.find(params[:oppnent_user_id])
+    @opponent_user ||= User.find(params[:opponent_user_id])
   end
 end
