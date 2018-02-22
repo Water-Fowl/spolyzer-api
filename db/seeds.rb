@@ -31,6 +31,7 @@ ActiveRecord::Base.transaction do
   winner = User.first
   loser = User.second
   game = Game.create(
+    sport_id: sport.id,
     name: 'test'
   )
   GameUser.create(
