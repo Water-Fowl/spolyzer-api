@@ -2,6 +2,7 @@ ActiveRecord::Base.transaction do
   puts 'creating user....'
   10.times do |i|
     User.create(
+      name: "#{i}",
       email: "#{i}test@test.test",
       password: "#{i}testtest"
     )
@@ -56,14 +57,24 @@ ActiveRecord::Base.transaction do
   loser_single_unit.game_units.create(game_id: game.id)
   winner_single_unit.user_units.create(user_id: winner.id)
   loser_single_unit.user_units.create(user_id: loser.id)
-  10.times do
-    winner.scores.create(
-      game_id: game.id
+  10.times do |i|
+    score = winner.scores.create(
+      game_id: game.id,
+    )
+    Position.create(
+      dropped_at: i,
+      side: 0,
+      score_id: score.id
     )
   end
-  9.times do
-    loser.scores.create(
+  9.times do |i|
+    score = loser.scores.create(
       game_id: game.id
+    )
+    Position.create(
+      dropped_at: i + 1,
+      side: 0,
+      score_id: score.id
     )
   end
 
@@ -88,4 +99,8 @@ ActiveRecord::Base.transaction do
       Game.second.game_users.create(user_id: user.id)
     end
   end
+
+  AnalysisResult.create(
+    user_id: 1
+  )
 end

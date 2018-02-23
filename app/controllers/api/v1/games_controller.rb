@@ -1,12 +1,10 @@
 class Api::V1::GamesController < Api::V1::BaseController
 
-  skip_before_action :authenticate_api_v1_user!
   def index
     @games = current_user.games
   end
 
   def show
-    binding.pry
     @game = Game.find params[:id]
     @shot_types = @game.sport.shot_types
     @winner_scores = @game.winner.scores.count

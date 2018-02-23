@@ -13,6 +13,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :trackable, :validatable
 
+  validates :name,
+    presence: true,
+    uniqueness: true
+
+  validates :email,
+     presence: true,
+     uniqueness: true
+
+
   def latest_result
     self.analysis_results.order(created_at: :asc).try(:first)
   end
