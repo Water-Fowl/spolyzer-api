@@ -1,13 +1,10 @@
 class Api::V1::PositionsController < ApplicationController
   def show
-    @game = Game
-      .includes(:scores)
-      .includes(:units)
-      .includes(:users)
+    @counts ||= Score
+      .includes(:user)
       .where(users: {name: params[:name]})
-    @counts = @game.scores
       .joins(:position)
-      .group('positions.id')
+      .group('positions.dropped_at', 'positions.side')
       .count
   end
 end
