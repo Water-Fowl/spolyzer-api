@@ -5,7 +5,9 @@ Rails.application.routes.draw do
         mount_devise_token_auth_for 'User', at: 'auth', controllers: {
           registrations: 'api/v1/auth/registrations'
         }
-        get 'positions/counts', to: 'positions#show'
+        namespace :positions do
+          get 'counts', to: 'counts#show'
+        end
         resources :shot_types
         resources :games
         resources :users
