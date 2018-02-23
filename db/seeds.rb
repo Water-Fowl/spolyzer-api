@@ -67,9 +67,14 @@ ActiveRecord::Base.transaction do
       score_id: score.id
     )
   end
-  9.times do
-    loser.scores.create(
+  9.times do |i|
+    score = loser.scores.create(
       game_id: game.id
+    )
+    Position.create(
+      dropped_at: i + 1,
+      side: 0,
+      score_id: score.id
     )
   end
 
