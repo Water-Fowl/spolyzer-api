@@ -1,4 +1,4 @@
-class Api::V1::PositionsController < ApplicationController
+class Api::V1::Positions::CountsController < ApplicationController
   def show
     @counts ||= Score
       .includes(:user)
