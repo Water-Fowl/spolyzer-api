@@ -3,6 +3,7 @@ class Api::V1::UsersController < Api::V1::BaseController
   before_action :find_users_by_name, only: [:search]
 
   def show
+    @user = User.find(params[:id])
   end
 
   def search
@@ -10,9 +11,7 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def update
     if current_user.update(user_params)
-      render :show, status: :success
-    else
-      render json: { err_msg: current_user.errors.full_messages.join("\n") }, status: :bad_request
+      @user = current_user
     end
   end
 
@@ -22,7 +21,8 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   private def user_params
     params.permit(
-     :name
+     :name,
+     :email
    )
   end
 end
