@@ -10,9 +10,13 @@ Rails.application.routes.draw do
             get :counts
           end
         end
+        resources :users do
+          collection do
+            get :search
+          end
+        end
         resources :shot_types
         resources :games
-        resources :users
         resources :analytics
         resources :analysis_results
     end

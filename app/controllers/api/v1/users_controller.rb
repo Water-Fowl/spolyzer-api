@@ -5,6 +5,9 @@ class Api::V1::UsersController < Api::V1::BaseController
   def show
   end
 
+  def name
+  end
+
   def search
   end
 
