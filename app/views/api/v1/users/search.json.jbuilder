@@ -1,3 +1,3 @@
 json.users @users do |user|
-  json.user user, :name, :email, :image
+  json.user user, :id, :name, :email, :image
 end
