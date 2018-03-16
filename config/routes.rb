@@ -15,8 +15,16 @@ Rails.application.routes.draw do
             get :search
           end
         end
-        resources :shot_types
-        resources :games
+        resources :games do
+          collection do
+            get :recently
+          end
+        end
+        resources :shot_types do
+          collection do
+            get :counts
+          end
+        end
         resources :analytics
         resources :analysis_results
     end
