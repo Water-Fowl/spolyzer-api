@@ -1,17 +1,52 @@
 class GameCreateService
-  def initialize(params, current_user)
+  def initialize(params)
     @params = params
-    @current_user = current_user
   end
 
   def execute
-    if game = Game.create(name: params[:game_name]) &&
-      GameUser.create(game_id: game.id, user_id: @current_user.id) &&
-      GameUser.create(game_id: game.id, user_id: opponent_user.id)
-      true
-    else
-      false
+    left_side = 0
+    right_side = 1
+
+    #TODO Sport ID
+    sport = Sport.find_by(name_ja: @params[:game][:sport_name])
+    game = Game.create(name: @params[:game][:name], sport_id: sport.id)
+    left_user_count = @params[:users][left_side.to_s][:count]
+    left_unit = Unit.create(side: left_side, user_count: left_user_count, game_id: game.id)
+
+    left_user_count.times do |i|
+      left_user = @params[:users][left_side.to_s][i]
+      if left_user
+        left_user_id = left_user[:id]
+        left_unit.user_units.create(
+          user_id: left_user_id,
+        )
+      end
     end
+
+    right_user_count = @params[:users][right_side.to_s][:count]
+    right_unit = Unit.create(side: right_side, user_count: right_user_count, game_id: game.id)
+
+    right_user_count.times do |i|
+      right_user = @params[:users][right_side.to_s][i]
+      if right_user
+        right_user_id = right_user[:id]
+        right_unit.user_units.create(
+          user_id: right_user_id,
+        )
+      end
+    end
+
+    @params[:scores].each do |score|
+      # 落ちたsideの反対sideのUnitが、得点したUnit
+      @score = Score.create(unit_id: score[:side] == 1 ? left_unit.id : right_unit.id,
+                            miss_type: score[:miss_type],
+                            shot_type_id: score[:shot_type],
+                            game_id: game.id)
+      Position.create(score_id: @score.id,
+                      dropped_at: score[:dropped_at],
+                      side: score[:side])
+    end
+    game
   end
 
 
