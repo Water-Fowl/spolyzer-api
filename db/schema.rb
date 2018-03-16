@@ -10,27 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180127030510) do
+ActiveRecord::Schema.define(version: 20180314095944) do
 
   create_table "analysis_results", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_analysis_results_on_user_id"
-  end
-
-  create_table "game_units", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "game_id", null: false
-    t.integer "unit_id", null: false
-    t.index ["game_id"], name: "index_game_units_on_game_id"
-    t.index ["unit_id"], name: "index_game_units_on_unit_id"
-  end
-
-  create_table "game_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "user_id", null: false
-    t.integer "game_id", null: false
-    t.index ["game_id"], name: "index_game_users_on_game_id"
-    t.index ["user_id"], name: "index_game_users_on_user_id"
   end
 
   create_table "games", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -51,14 +37,23 @@ ActiveRecord::Schema.define(version: 20180127030510) do
   end
 
   create_table "scores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "user_id", null: false
     t.integer "game_id", null: false
-    t.boolean "is_missed", default: false, null: false
-    t.boolean "is_net_in", default: false, null: false
+    t.integer "shot_type_id", null: false
+    t.integer "miss_type", null: false
+    t.integer "unit_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_scores_on_game_id"
-    t.index ["user_id"], name: "index_scores_on_user_id"
+    t.index ["shot_type_id"], name: "index_scores_on_shot_type_id"
+  end
+
+  create_table "sessions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "session_id", null: false
+    t.text "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
+    t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
   create_table "shot_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -92,6 +87,9 @@ ActiveRecord::Schema.define(version: 20180127030510) do
   end
 
   create_table "units", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "game_id", null: false
+    t.integer "side", null: false
+    t.integer "user_count", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
