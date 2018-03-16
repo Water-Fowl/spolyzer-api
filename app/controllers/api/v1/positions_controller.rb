@@ -1,10 +1,9 @@
-class Api::V1::PositionsController < ApplicationController
+class Api::V1::PositionsController < Api::V1::BaseController
+
   def counts
-    @counts ||= Score
-      .includes(:user)
-      .where(users: {name: params[:name]})
-      .joins(:position)
-      .group('positions.dropped_at', 'positions.side')
-      .count
+    count_runs_scored, count_runs_against = CountPositionsService.new(params, current_api_v1_user).execute
+    @counts = {}
+    @counts[0] = count_runs_against
+    @counts[1] = count_runs_scored
   end
 end
