@@ -3,12 +3,11 @@ class User < ApplicationRecord
 
   has_many :sport_users
   has_many :sports, through: :sport_users
-  has_many :game_users
-  has_many :games, through: :game_users
   has_many :user_units
   has_many :units, through: :user_units
+  has_many :games, through: :units
+  has_many :scores, through: :units
   has_many :analysis_results
-  has_many :scores
 
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :trackable, :validatable

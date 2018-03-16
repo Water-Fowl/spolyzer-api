@@ -1,7 +1,6 @@
 class Unit < ApplicationRecord
-  has_many :game_units
-  has_many :games, through: :game_units
-
+  belongs_to :game
   has_many :user_units
   has_many :users, through: :user_units
+  has_many :scores
 end

@@ -1,9 +1,7 @@
 class Game < ApplicationRecord
   belongs_to :sport
-  has_many :game_users
-  has_many :users, through: :game_users
-  has_many :game_units
-  has_many :units, through: :game_units
+  has_many :units
+  has_many :users, through: :units
   has_many :scores
 
   def winner
@@ -12,10 +10,6 @@ class Game < ApplicationRecord
 
   def loser
     user_order_by_score.first
-  end
-
-  def is_single_game?
-    units.nil?
   end
 
   private
