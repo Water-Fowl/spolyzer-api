@@ -5,35 +5,44 @@ class Score < ApplicationRecord
   belongs_to :unit
   has_many :users, through: :unit
 
-  scope :of_users_games, -> (user_ids){
-    includes(:users)
-    .includes(:unit)
-    .where(
+  scope :of_user_games, -> (user_id){
+    where(
       game_id: Game
-      .includes(:users)
-      .where(users: {id: user_ids})
+      .of_user(user_id)
+      .pluck(:id)
+    )
+  }
+
+  scope :of_doubles_users_games, -> (users_id){
+    where(
+      game_id: Game
+      .of_doubles_users(users_id)
+      .pluck(:id)
+    )
+  }
+
+  scope :of_singles_opponent_user_games, -> (user_id, opponent_user_id){
+    where(
+      game_id: Game
+      .of_singles_opponent_user(user_id, opponent_user_id)
       .pluck(:id)
     )
   }
 
   scope :of_user_units, ->(user_id){
-    where(
-      units: {
-        id: Unit
-        .includes(:users)
-        .where(users: {id: user_id})
-        .pluck(:id)
+    joins(:users)
+    .where(
+      users: {
+        id: user_id
       }
     )
   }
 
   scope :of_not_user_units, ->(user_id){
-    where.not(
-      units: {
-        id: Unit
-        .includes(:users)
-        .where(users: {id: user_id})
-        .pluck(:id)
+    joins(:users)
+      .where.not(
+      users: {
+        id: user_id
       }
     )
   }
