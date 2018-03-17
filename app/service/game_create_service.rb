@@ -10,11 +10,12 @@ class GameCreateService
     #TODO Sport ID
     sport = Sport.find_by(name_ja: @params[:game][:sport_name])
     game = Game.create(name: @params[:game][:name], sport_id: sport.id)
-    left_user_count = @params[:users][left_side.to_s][:count]
+
+    left_user_count = @params[:units][left_side.to_s][:count]
     left_unit = Unit.create(side: left_side, user_count: left_user_count, game_id: game.id)
 
     left_user_count.times do |i|
-      left_user = @params[:users][left_side.to_s][i]
+      left_user = @params[:units][left_side.to_s][:users][i]
       if left_user
         left_user_id = left_user[:id]
         left_unit.user_units.create(
@@ -23,11 +24,11 @@ class GameCreateService
       end
     end
 
-    right_user_count = @params[:users][right_side.to_s][:count]
+    right_user_count = @params[:units][right_side.to_s][:count]
     right_unit = Unit.create(side: right_side, user_count: right_user_count, game_id: game.id)
 
     right_user_count.times do |i|
-      right_user = @params[:users][right_side.to_s][i]
+      right_user = @params[:units][right_side.to_s][:users][i]
       if right_user
         right_user_id = right_user[:id]
         right_unit.user_units.create(

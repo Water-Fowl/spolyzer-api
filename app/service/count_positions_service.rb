@@ -6,17 +6,27 @@ class CountPositionsService
 
   def execute
     user_ids = @params[:user_ids].split(",").map{|id| id.to_i }
-    scores = Score
-      .of_users_games(user_ids)
-      .includes(:position)
+
+    if user_ids.length == 2
+      scores = Score
+        .of_user_games(@user_to_analyze.id)
+        .of_doubles_users_games(user_ids)
+
+    elsif user_ids.length == 1
+      scores = Score
+        .of_singles_opponent_user_games(@user_to_analyze.id, user_ids)
+    end
 
     runs_scored = scores
-      .of_user_units(user_to_analyze.id)
+      .of_user_units(@user_to_analyze.id)
       .where(miss_type: 0)
+      .includes(:position)
 
     runs_against = scores
-      .of_not_user_units(user_to_analyze.id)
+      .of_not_user_units(@user_to_analyze.id)
       .where(miss_type: 0)
+      .includes(:position)
+
     return self.reshape(runs_scored), self.reshape(runs_against)
   end
 
