@@ -5,6 +5,7 @@ class Api::V1::Auth::RegistrationsController < DeviseTokenAuth::RegistrationsCon
 
   def create
     @user = User.new(sign_up_params)
+    @user.skip_confirmation!
     if @user.save
     end
   end
