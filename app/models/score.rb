@@ -21,10 +21,10 @@ class Score < ApplicationRecord
     )
   }
 
-  scope :of_singles_opponent_user_games, -> (user_id, opponent_user_id){
+  scope :of_opponent_user_games, -> (user_id, opponent_user_id, user_count){
     where(
       game_id: Game
-      .of_singles_opponent_user(user_id, opponent_user_id)
+      .of_opponent_user(user_id, opponent_user_id, user_count)
       .pluck(:id)
     )
   }

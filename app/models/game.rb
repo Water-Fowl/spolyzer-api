@@ -35,11 +35,12 @@ class Game < ApplicationRecord
     })
   }
 
-  scope :of_singles_opponent_user, -> (user_id, opponent_user_id){
+  scope :of_opponent_user, -> (user_id, opponent_user_id, user_count){
     joins(:units)
       .where(units: {id: Unit
       .of_user(opponent_user_id)
       .where.not(id: user_id)
+      .where(user_count: user_count)
       .pluck(:id)
     })
     .of_user(user_id)

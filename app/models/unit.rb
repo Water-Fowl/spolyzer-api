@@ -6,7 +6,7 @@ class Unit < ApplicationRecord
 
   scope :of_doubles_users, -> (user_ids){
     joins(:users)
-      .where(id: Unit.joins(:users).where(users: {id: user_ids[0]}).pluck(:id))
+      .where(id: Unit.of_user(user_ids[0]).pluck(:id))
       .where(users: {id: user_ids[1]})
   }
 
