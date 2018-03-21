@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :scores, through: :units
   has_many :analysis_results
 
-  mount_base64_uploader :image, PhotoUploader
+  mount_uploader :image, PhotoUploader
 
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :trackable, :validatable
