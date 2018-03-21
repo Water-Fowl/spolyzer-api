@@ -22,5 +22,6 @@ module Api
     config.middleware.use ActionDispatch::Flash
     config.middleware.use ActionDispatch::Cookies
     config.api_only = false
+    config.time_zone = 'Tokyo'
   end
 end
