@@ -1,4 +1,6 @@
 class CountPositionsService
+  include TermConst
+
   def initialize(params, user_to_analyze)
     @params = params
     @user_to_analyze = user_to_analyze
@@ -13,10 +15,12 @@ class CountPositionsService
       scores = Score
         .of_user_games(@user_to_analyze.id)
         .of_doubles_users_games(user_ids)
+        .where(created_at: [term(@params[:term].to_i).ago..Time.now])
 
     elsif user_ids.length == 1
       scores = Score
         .of_opponent_user_games(@user_to_analyze.id, user_ids, game_user_count)
+        .where(created_at: [term(@params[:term].to_i).ago..Time.now])
     end
 
     runs_scored = scores
