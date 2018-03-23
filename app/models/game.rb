@@ -27,7 +27,8 @@ class Game < ApplicationRecord
       .where(users: {id: user.id})
   }
 
-  # userのゲームの中で、opponent_usersのUnitでかつuserのUnitではない(対戦相手であるため)Unitを持ったGameを探す
+  # user vs opponent_usersの試合のうち、opponent_usersのUnitの人数をuser_countで指定して検索する
+  # userのGameの中で、opponent_usersのUnitであり、userのUnitではない (対戦相手であるため) Unitを持ったGameを探す
   scope :of_opponent_users, -> (user, opponent_users, user_count){
     joins(:units)
       .where(units: {id: Unit

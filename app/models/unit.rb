@@ -11,6 +11,7 @@ class Unit < ApplicationRecord
   }
 
 
+  # opponent_usersをもつUnitを検索。opponent_usersが2つあった場合はダブルスとして検索。
   def self.of_users(opponent_users)
     case opponent_users.length
     when 2
