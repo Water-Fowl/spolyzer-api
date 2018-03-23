@@ -1,9 +1,9 @@
 class CountPositionsService
   include Const
 
-  def initialize(params, user_to_analyze)
+  def initialize(params, user)
     @params = params
-    @user_to_analyze = user_to_analyze
+    @user = user
   end
 
   def execute
@@ -13,17 +13,17 @@ class CountPositionsService
     analyze_term = [term_const(@params[:term].to_i).ago..Time.now]
 
     scores = Score
-      .of_opponent_users_games(@user_to_analyze, opponent_users, game_user_count)
+      .of_opponent_users_games(@user, opponent_users, game_user_count)
       .where(created_at: analyze_term)
 
     runs_scored = scores
-      .of_user_units(@user_to_analyze)
+      .of_user_units(@user)
       .where(shot_type_id: @params[:shot_type_id])
       .where(miss_type: 0)
       .joins(:position)
 
     runs_against = scores
-      .of_not_user_units(@user_to_analyze)
+      .of_not_user_units(@user)
       .where(shot_type_id: @params[:shot_type_id])
       .where(miss_type: 0)
       .joins(:position)
