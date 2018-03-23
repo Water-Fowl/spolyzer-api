@@ -4,14 +4,20 @@ class Unit < ApplicationRecord
   has_many :users, through: :user_units
   has_many :scores
 
-  scope :of_doubles_users, -> (user_ids){
+  scope :of_doubles_users, -> (users){
     joins(:users)
-      .where(id: Unit.of_user(user_ids[0]).pluck(:id))
-      .where(users: {id: user_ids[1]})
+      .where(id: users[0].units.pluck(:id))
+      .where(users: {id: users[1].id})
   }
 
-  scope :of_user, -> (user_id){
-    joins(:users)
-      .where(users: {id: user_id})
-  }
+
+  def self.of_users(opponent_users)
+    case opponent_users.length
+    when 2
+      self.of_doubles_users(opponent_users)
+    when 1
+      opponent_users[0].units
+    end
+  end
+
 end

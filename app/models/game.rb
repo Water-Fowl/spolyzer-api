@@ -22,28 +22,23 @@ class Game < ApplicationRecord
       end
   end
 
-  scope :of_user, -> (user_id){
+  scope :of_user, -> (user){
     joins(:users)
-    .where(users: {id: user_id})
+      .where(users: {id: user.id})
   }
 
-  scope :of_doubles_users, -> (user_ids){
+  # userのゲームの中で、opponent_usersのUnitでかつuserのUnitではない(対戦相手であるため)Unitを持ったGameを探す
+  scope :of_opponent_users, -> (user, opponent_users, user_count){
     joins(:units)
       .where(units: {id: Unit
-      .of_doubles_users(user_ids)
-      .pluck(:id)
-    })
-  }
-
-  scope :of_opponent_user, -> (user_id, opponent_user_id, user_count){
-    joins(:units)
-      .where(units: {id: Unit
-      .of_user(opponent_user_id)
-      .where.not(id: user_id)
+      .of_users(opponent_users)
+      .joins(:users)
+      .where
+      .not(users: {id: user.id})
       .where(user_count: user_count)
       .pluck(:id)
     })
-    .of_user(user_id)
+      .of_user(user)
   }
 
 end

@@ -1,6 +1,6 @@
-module TermConst
+module Const
   extend ActiveSupport::Concern
-  def term(id)
+  def term_const(id)
     case id
     when 0
       1.day
