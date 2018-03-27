@@ -7,7 +7,7 @@ CarrierWave.configure do |config|
   }
 
   if Rails.env.development?
-    config.asset_host = 'http://localhost:3000'
+    config.asset_host = Settings[:url]
   end
   if Rails.env.production?
     config.fog_directory  = 'spolyzer-user'
