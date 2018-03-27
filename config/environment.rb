@@ -12,6 +12,6 @@ ActionMailer::Base.smtp_settings = {
   address: ENV['MAIL_ADDRESS'],
   port: 587,
   authentication: :plain,
-  enable_starttls_auto: true
+  enable_starttls_auto: false
 }
 ActionMailer::Base.raise_delivery_errors = true

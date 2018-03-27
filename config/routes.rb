@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   end
 
   get '/admin', to: 'admin/dashboard#index'
+  get '/redirect/confirmation', to: 'redirect/confirmation#index'
   namespace :admin do
   end
 end
