@@ -13,6 +13,13 @@ class Score < ApplicationRecord
       .pluck(:id)
     )
   }
+  scope :of_user_games, -> (user, user_count){
+    where(
+      game_id: Game.joins(:units)
+      .where(units: { id: user.units.where(user_count: user_count).pluck(:id)})
+      .pluck(:id)
+    )
+  }
 
   scope :of_user_units, ->(user){
     joins(:users)
