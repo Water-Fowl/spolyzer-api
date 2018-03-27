@@ -1,5 +1,4 @@
 class CountPositionsService
-  include Const
 
   def initialize(params, user)
     @params = params
@@ -10,7 +9,7 @@ class CountPositionsService
     opponent_user_ids = @params[:user_ids].split(",").map{|id| id.to_i }
     opponent_users = User.find(opponent_user_ids)
     game_user_count = @params[:game_user_count]
-    analyze_term = [term_const(@params[:term].to_i).ago..Time.now]
+    analyze_term = [term(@params[:term].to_i).ago..Time.now]
 
     if not opponent_user_ids.empty?
       scores = Score
@@ -48,6 +47,17 @@ class CountPositionsService
       end
     else
       scores
+    end
+  end
+
+  def term(id)
+    case id
+    when 0
+      1.day
+    when 1
+      1.week
+    when 2
+      1.month
     end
   end
 end
