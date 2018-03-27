@@ -11,15 +11,21 @@ class Api::V1::GamesController < Api::V1::BaseController
     @loser_scores  = @game.loser.scores.count
   end
 
+  def recently
+    @games = Game.order(created_at: :desc).take(5)
+  end
+
   def create
-    opponent_user = User.find(params[:opponent_user_id])
     service = GameCreateService.new(params)
-    result = service.execute
-    if result
+    @game = service.execute
+    if @game
       # TODO: message
       @message = 'message'
     else
       @message = 'failed'
     end
+  end
+  def game_params
+    params.require(:users, :scores, :game)
   end
 end

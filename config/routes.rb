@@ -10,15 +10,28 @@ Rails.application.routes.draw do
             get :counts
           end
         end
-        resources :shot_types
-        resources :games
-        resources :users
+        resources :users do
+          collection do
+            get :search
+          end
+        end
+        resources :games do
+          collection do
+            get :recently
+          end
+        end
+        resources :shot_types do
+          collection do
+            get :counts
+          end
+        end
         resources :analytics
         resources :analysis_results
     end
   end
 
   get '/admin', to: 'admin/dashboard#index'
+  get '/redirect/confirmation', to: 'redirect/confirmation#index'
   namespace :admin do
   end
 end

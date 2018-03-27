@@ -1,9 +1,7 @@
 class Game < ApplicationRecord
   belongs_to :sport
-  has_many :game_users
-  has_many :users, through: :game_users
-  has_many :game_units
-  has_many :units, through: :game_units
+  has_many :units
+  has_many :users, through: :units
   has_many :scores
 
   def winner
@@ -12,10 +10,6 @@ class Game < ApplicationRecord
 
   def loser
     user_order_by_score.first
-  end
-
-  def is_single_game?
-    units.nil?
   end
 
   private
@@ -27,4 +21,25 @@ class Game < ApplicationRecord
         user.scores.where(game_id: self.id).count
       end
   end
+
+  scope :of_user, -> (user){
+    joins(:users)
+      .where(users: {id: user.id})
+  }
+
+  # user vs opponent_usersの試合のうち、opponent_usersのUnitの人数をuser_countで指定して検索する
+  # userのGameの中で、opponent_usersのUnitであり、userのUnitではない (対戦相手であるため) Unitを持ったGameを探す
+  scope :of_opponent_users, -> (user, opponent_users, user_count){
+    joins(:units)
+      .where(units: {id: Unit
+      .of_users(opponent_users)
+      .joins(:users)
+      .where
+      .not(users: {id: user.id})
+      .where(user_count: user_count)
+      .pluck(:id)
+    })
+      .of_user(user)
+  }
+
 end

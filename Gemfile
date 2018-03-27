@@ -32,6 +32,10 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'exception_notification'
 gem 'slack-notifier'
+gem 'activerecord-session_store'
+gem 'carrierwave'
+gem 'fog'
+gem 'config'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-toastr'
