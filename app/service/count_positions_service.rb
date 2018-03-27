@@ -12,9 +12,13 @@ class CountPositionsService
     game_user_count = @params[:game_user_count]
     analyze_term = [term_const(@params[:term].to_i).ago..Time.now]
 
-    scores = Score
-      .of_opponent_users_games(@user, opponent_users, game_user_count)
-      .where(created_at: analyze_term)
+    if not opponent_user_ids.empty?
+      scores = Score
+        .of_opponent_users_games(@user, opponent_users, game_user_count)
+        .where(created_at: analyze_term)
+    else
+      scores = Score.of_user_games(@user, game_user_count)
+    end
 
     runs_scored = scores
       .of_user_units(@user)
@@ -28,10 +32,10 @@ class CountPositionsService
       .where(miss_type: 0)
       .joins(:position)
 
-    return self.reshape(runs_scored), self.reshape(runs_against)
+    return reshape(runs_scored), reshape(runs_against)
   end
 
-  private_class_method
+  private
   def reshape(scores)
     if not scores.empty?
       count_positions = scores
