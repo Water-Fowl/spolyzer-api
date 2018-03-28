@@ -5,7 +5,7 @@ class Admin::BaseController < ActionController::Base
   layout 'admin'
 
   if Rails.env.production? || Rails.env.staging?
-    http_basic_authenticate_with name: 'waterfowl', password: basic_auth_password
+    http_basic_authenticate_with name: 'waterfowl', password: 'password'
   end
 
   def basic_auth_password
