@@ -3,6 +3,7 @@ class Score < ApplicationRecord
 
   belongs_to :game
   belongs_to :unit
+  has_one :shot_type
   has_many :users, through: :unit
 
   # user vs opponent_users の試合におけるスコアの検索
