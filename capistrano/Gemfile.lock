@@ -20,10 +20,13 @@ GEM
     capistrano-bundler (1.3.0)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
+    capistrano-dotenv-tasks (0.1.4)
+      capistrano (~> 3.0)
     capistrano-rails (1.3.0)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
     coderay (1.1.2)
+    dotenv (2.2.1)
     i18n (0.8.6)
     method_source (0.9.0)
     net-scp (1.2.1)
@@ -47,8 +50,10 @@ PLATFORMS
 DEPENDENCIES
   capistrano (= 3.9.1)
   capistrano-bundler
+  capistrano-dotenv-tasks
   capistrano-rails
   capistrano3-unicorn!
+  dotenv
   pry
   sitemap_generator
   slackistrano
