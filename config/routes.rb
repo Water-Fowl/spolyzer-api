@@ -20,9 +20,10 @@ Rails.application.routes.draw do
             get :recently
           end
         end
-        resources :shot_types do
-          collection do
-            get :counts
+        resources :shot_types, module: 'shot_types' do
+          resources :counts, only: [:index]
+          namespace :counts do
+            resources :opponent_users, only: [:index]
           end
         end
         resources :analytics
