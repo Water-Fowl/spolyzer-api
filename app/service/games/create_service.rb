@@ -7,7 +7,6 @@ class GameCreateService
     left_side = 0
     right_side = 1
 
-    #TODO Sport ID
     sport = Sport.find_by(name_ja: @params[:game][:sport_name])
     game = Game.create(name: @params[:game][:name], sport_id: sport.id)
 
