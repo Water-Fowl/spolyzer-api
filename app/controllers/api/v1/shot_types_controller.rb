@@ -7,10 +7,6 @@ class Api::V1::ShotTypesController < Api::V1::BaseController
     @shot_type = @sport.shot_types
   end
 
-  def counts
-    @count = CountShotTypeService.new(params).execute
-  end
-
   private def set_sport
     @sport = Sport.find params[:id]
   end

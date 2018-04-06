@@ -11,10 +11,6 @@ class Api::V1::GamesController < Api::V1::BaseController
     @loser_scores  = @game.loser.scores.count
   end
 
-  def recently
-    @games = Game.order(created_at: :desc).take(5)
-  end
-
   def create
     service = GameCreateService.new(params)
     @game = service.execute
