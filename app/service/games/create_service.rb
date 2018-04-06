@@ -11,33 +11,29 @@ class GameCreateService
     sport = Sport.find_by(name_ja: @params[:game][:sport_name])
     game = Game.create(name: @params[:game][:name], sport_id: sport.id)
 
-    left_user_count = @params[:units][left_side.to_s][:count]
-    left_unit = Unit.create(side: left_side, user_count: left_user_count, game_id: game.id)
+    left_unit = create_units(@params[:units], left_side)
+    right_unit = create_units(@params[:units], right_side)
+    create_scores(@params[:scores])
+    game
+  end
 
-    left_user_count.times do |i|
-      left_user = @params[:units][left_side.to_s][:users][i]
-      if left_user
-        left_user_id = left_user[:id]
-        left_unit.user_units.create(
-          user_id: left_user_id,
+  private def create_units(units, side)
+    user_count = unit[side.to_s][:count]
+    unit = Unit.create(side: side, user_count: user_count, game_id: game.id)
+    user_count.times do |i|
+      user = unit[side.to_s][:users][i]
+      if user
+        user_id = user[:id]
+        unit.user_units.create(
+          user_id: user_id,
         )
       end
     end
+    unit
+  end
 
-    right_user_count = @params[:units][right_side.to_s][:count]
-    right_unit = Unit.create(side: right_side, user_count: right_user_count, game_id: game.id)
-
-    right_user_count.times do |i|
-      right_user = @params[:units][right_side.to_s][:users][i]
-      if right_user
-        right_user_id = right_user[:id]
-        right_unit.user_units.create(
-          user_id: right_user_id,
-        )
-      end
-    end
-
-    @params[:scores].each do |score|
+  private def create_scores(scores)
+    scores.each do |score|
       # 落ちたsideの反対sideのUnitが、得点したUnit
       @score = Score.create(unit_id: score[:side] == 1 ? left_unit.id : right_unit.id,
                             miss_type: score[:miss_type],
@@ -47,11 +43,5 @@ class GameCreateService
                       dropped_at: score[:dropped_at],
                       side: score[:side])
     end
-    game
-  end
-
-
-  private def opponent_user
-    @opponent_user ||= User.find(params[:opponent_user_id])
   end
 end

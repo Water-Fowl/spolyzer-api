@@ -1,12 +1,7 @@
 module ShotTypes
-  class CountService
-    def initialize(params, user)
-      @params = params
-      @user = user
-    end
-
+  class CountService < ShotTypes::BaseService
     def execute
-      scores = Score.of_user_games(@user)
+      scores = Score.of_user_games(@user, @params[:game_user_count])
         .where(shot_type_id: @params[:shot_type_id])
         .where(miss_type: 0)
       counts = {}
@@ -14,3 +9,4 @@ module ShotTypes
       counts[1] = reshape(scores.of_not_user_units(@user))
     end
   end
+end
