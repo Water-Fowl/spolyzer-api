@@ -1,4 +1,4 @@
-class CategoryUser < ApplicationRecord
+class SportUser < ApplicationRecord
   belongs_to :user
   belongs_to :category
 

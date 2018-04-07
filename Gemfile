@@ -32,6 +32,10 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'exception_notification'
 gem 'slack-notifier'
+gem 'activerecord-session_store'
+gem 'carrierwave'
+gem 'fog'
+gem 'config'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-toastr'
@@ -60,6 +64,9 @@ end
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry'
+  gem 'pry-rails'
+  gem 'pry-byebug'
 end
 
 group :development do

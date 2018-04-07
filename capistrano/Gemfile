@@ -2,6 +2,9 @@ source "https://rubygems.org"
 gem 'capistrano', '3.9.1'
 gem 'capistrano-rails'
 gem 'capistrano-bundler'
+gem 'dotenv'
+gem 'capistrano-dotenv-tasks', require: false
+
 # gem 'capistrano-sidekiq'
 gem 'capistrano3-unicorn', git: 'https://github.com/tablexi/capistrano3-unicorn.git', branch: "master"
 # gem 'whenever', require: false
