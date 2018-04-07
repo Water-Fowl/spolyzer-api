@@ -14,5 +14,6 @@ namespace :deploy do
     # invoke 'sidekiq:restart'
     # invoke 'whenever:update_crontab'
   end
+end
 
 after 'deploy:publishing', 'deploy:restart'
