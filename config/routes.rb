@@ -19,7 +19,7 @@ Rails.application.routes.draw do
           resources :counts, only: [:index], module: 'games'
         end
         resources :shot_types do
-          resources :counts, only: [:index]
+          resources :counts, only: [:index], module: 'shot_types'
           namespace :counts, module: 'shot_types' do
             resources :opponent_users, only: [:show], param: :ids, module: 'counts'
           end
