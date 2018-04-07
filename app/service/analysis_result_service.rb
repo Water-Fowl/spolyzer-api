@@ -7,6 +7,5 @@ class AnalysisResultService
   end
 
   private def opponent_user
-    binding.pry
   end
 end
