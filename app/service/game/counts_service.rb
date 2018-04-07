@@ -1,5 +1,4 @@
 module Game
-
   class CountService < ::BaseService
 
     def execute

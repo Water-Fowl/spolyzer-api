@@ -1,4 +1,4 @@
-module ShotTypes
+module Analytics
   class BaseService < ::BaseService
 
     def initialize(params, user)

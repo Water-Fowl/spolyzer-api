@@ -1,7 +1,4 @@
-class GameCreateService
-  def initialize(params)
-    @params = params
-  end
+class GameCreateService < BaseService
 
   def execute
     left_side = 0
@@ -10,17 +7,17 @@ class GameCreateService
     sport = Sport.find_by(name_ja: @params[:game][:sport_name])
     game = Game.create(name: @params[:game][:name], sport_id: sport.id)
 
-    left_unit = create_units(@params[:units], left_side)
-    right_unit = create_units(@params[:units], right_side)
-    create_scores(@params[:scores])
+    left_unit = create_units(@params[:units], left_side, game)
+    right_unit = create_units(@params[:units], right_side, game)
+    create_scores(@params[:scores], game, left_unit, right_unit)
     game
   end
 
-  private def create_units(units, side)
-    user_count = unit[side.to_s][:count]
+  private def create_units(units, side, game)
+    user_count = units[side.to_s][:count]
     unit = Unit.create(side: side, user_count: user_count, game_id: game.id)
     user_count.times do |i|
-      user = unit[side.to_s][:users][i]
+      user = units[side.to_s][:users][i]
       if user
         user_id = user[:id]
         unit.user_units.create(
@@ -31,7 +28,7 @@ class GameCreateService
     unit
   end
 
-  private def create_scores(scores)
+  private def create_scores(scores, game, left_unit, right_unit)
     scores.each do |score|
       # 落ちたsideの反対sideのUnitが、得点したUnit
       @score = Score.create(unit_id: score[:side] == 1 ? left_unit.id : right_unit.id,

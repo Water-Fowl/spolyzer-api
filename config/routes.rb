@@ -16,14 +16,12 @@ Rails.application.routes.draw do
           end
         end
         resources :games do
-          collection do
-            get :recently
-          end
+          resources :counts, only: [:index], module: 'games'
         end
         resources :shot_types, module: 'shot_types' do
           resources :counts, only: [:index]
           namespace :counts do
-            resources :opponent_users, only: [:index]
+            resources :opponent_users, only: [:show], param: :ids
           end
         end
         resources :analytics
