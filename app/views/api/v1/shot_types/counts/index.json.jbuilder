@@ -1,1 +1,1 @@
-json.counts @count
+json.counts @counts
