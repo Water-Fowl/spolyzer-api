@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
 
+  post 'user_token' => 'user_token#create'
   namespace :api, format: 'json' do
     namespace :v1 do
-        mount_devise_token_auth_for 'User', at: 'auth', controllers: {
-          registrations: 'api/v1/auth/registrations'
-        }
         resources :positions do
           collection do
             get :counts
