@@ -20,16 +20,13 @@ GEM
     capistrano-bundler (1.3.0)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
+    capistrano-dotenv-tasks (0.1.4)
+      capistrano (~> 3.0)
     capistrano-rails (1.3.0)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
-    capistrano-sidekiq (0.20.0)
-      capistrano (>= 3.9.0)
-      sidekiq (>= 3.4)
-    chronic (0.10.2)
     coderay (1.1.2)
-    concurrent-ruby (1.0.5)
-    connection_pool (2.2.1)
+    dotenv (2.2.1)
     i18n (0.8.6)
     method_source (0.9.0)
     net-scp (1.2.1)
@@ -38,16 +35,7 @@ GEM
     pry (0.11.1)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
-    rack (2.0.3)
-    rack-protection (2.0.0)
-      rack
     rake (12.1.0)
-    redis (4.0.1)
-    sidekiq (5.0.5)
-      concurrent-ruby (~> 1.0)
-      connection_pool (~> 2.2, >= 2.2.0)
-      rack-protection (>= 1.5.0)
-      redis (>= 3.3.4, < 5)
     sitemap_generator (5.3.1)
       builder (~> 3.0)
     slackistrano (3.8.2)
@@ -55,8 +43,6 @@ GEM
     sshkit (1.14.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
-    whenever (0.9.7)
-      chronic (>= 0.6.3)
 
 PLATFORMS
   ruby
@@ -64,13 +50,13 @@ PLATFORMS
 DEPENDENCIES
   capistrano (= 3.9.1)
   capistrano-bundler
+  capistrano-dotenv-tasks
   capistrano-rails
-  capistrano-sidekiq
   capistrano3-unicorn!
+  dotenv
   pry
   sitemap_generator
   slackistrano
-  whenever
 
 BUNDLED WITH
-   1.16.0.pre.3
+   1.16.1

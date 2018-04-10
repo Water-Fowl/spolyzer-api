@@ -8,8 +8,6 @@ end
 gem 'rails', '~> 5.1.4'
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 
-gem 'devise_token_auth'
-gem 'devise'
 gem 'omniauth'
 
 gem 'unicorn'
@@ -32,6 +30,15 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'exception_notification'
 gem 'slack-notifier'
+gem 'activerecord-session_store'
+gem 'carrierwave'
+gem 'fog'
+gem 'config'
+
+gem "faker"
+gem "bcrypt"
+gem "jsonapi-resources"
+gem "knock"
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-toastr'
@@ -60,6 +67,10 @@ end
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry'
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  gem 'rails-erd'
 end
 
 group :development do

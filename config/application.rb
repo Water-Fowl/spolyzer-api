@@ -20,6 +20,8 @@ module Api
   class Application < Rails::Application
     config.load_defaults 5.1
     config.middleware.use ActionDispatch::Flash
+    config.middleware.use ActionDispatch::Cookies
     config.api_only = false
+    config.time_zone = 'Tokyo'
   end
 end

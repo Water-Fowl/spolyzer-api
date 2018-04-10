@@ -15,4 +15,5 @@ namespace :deploy do
     # invoke 'whenever:update_crontab'
   end
 end
+
 after 'deploy:publishing', 'deploy:restart'

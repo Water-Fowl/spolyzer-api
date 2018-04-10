@@ -1,6 +1,7 @@
 ########## Update me ##########
 set :application, 'spolyzer'
-set :repo_url, 'git@github.com:Water-Fowl/api.git'
+append :linked_files, '.env'
+set :repo_url, "https://username:password@github.com/Water-Fowl/api.git"
 set :user, "deploy"
 
 ###############################
