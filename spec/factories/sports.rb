@@ -1,6 +1,6 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :sport do
     name_ja 'バドミントン'
-    name_em 'badminton'
+    name_en 'badminton'
   end
 end
