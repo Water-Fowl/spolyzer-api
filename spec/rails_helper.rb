@@ -12,7 +12,7 @@ Autodoc.configuration.suppressed_response_header = ['Cache-Control', 'Content-Le
 Autodoc.configuration.suppressed_request_header = %w[Accept Content-Length Content-Type Host]
 
 RSpec.configure do |config|
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
@@ -23,7 +23,7 @@ RSpec.configure do |config|
   config.include RequestMacros, type: :request
 
   config.before :all do
-    FactoryGirl.reload
+    FactoryBot.reload
   end
 
   config.before :suite do
