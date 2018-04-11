@@ -49,24 +49,18 @@ ActiveRecord::Base.transaction do
     score = winner_single_unit.scores.create(
       game_id: game.id,
       shot_type_id: i,
-      miss_type: 0
-    )
-    Position.create(
+      miss_type: 0,
       dropped_at: i,
-      side: 1,
-      score_id: score.id
+      dropped_side: 1,
     )
   end
   9.times do |i|
     score = loser_single_unit.scores.create(
       game_id: game.id,
       shot_type_id: i + 1,
-      miss_type: 0
-    )
-    Position.create(
+      miss_type: 0,
       dropped_at: i + 1,
-      side: 0,
-      score_id: score.id
+      dropped_side: 0,
     )
   end
 
@@ -88,24 +82,18 @@ ActiveRecord::Base.transaction do
     score = winner_unit.scores.create(
       game_id: game.id,
       shot_type_id: i,
-      miss_type: 0
-    )
-    Position.create(
+      miss_type: 0,
       dropped_at: i,
-      side: 1,
-      score_id: score.id
+      dropped_side: 1,
     )
   end
   9.times do |i|
     score = loser_unit.scores.create(
       game_id: game.id,
       shot_type_id: i + 1,
-      miss_type: 0
-    )
-    Position.create(
+      miss_type: 0,
       dropped_at: i + 1,
-      side: 0,
-      score_id: score.id
+      dropped_side: 0,
     )
   end
 

@@ -27,19 +27,12 @@ ActiveRecord::Schema.define(version: 20180314095944) do
     t.index ["sport_id"], name: "index_games_on_sport_id"
   end
 
-  create_table "positions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "score_id", null: false
-    t.integer "dropped_at"
-    t.integer "side"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["score_id"], name: "index_positions_on_score_id"
-  end
-
   create_table "scores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "game_id", null: false
     t.integer "shot_type_id", null: false
     t.integer "miss_type", null: false
+    t.integer "dropped_at", null: false
+    t.integer "dropped_side", null: false
     t.integer "unit_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
