@@ -1,5 +1,5 @@
 module Analytics
-  class CountService < BaseService
+  class CountService < Analytics::BaseService
     def execute
       scores = Score.of_user_games(@user, @params[:game_user_count])
         .where(shot_type_id: @params[:shot_type_id])

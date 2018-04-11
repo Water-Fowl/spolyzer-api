@@ -34,10 +34,9 @@ class GameCreateService < BaseService
       @score = Score.create(unit_id: score[:side] == 1 ? left_unit.id : right_unit.id,
                             miss_type: score[:miss_type],
                             shot_type_id: score[:shot_type],
+                            dropped_at: score[:dropped_at],
+                            dropped_side: score[:side],
                             game_id: game.id)
-      Position.create(score_id: @score.id,
-                      dropped_at: score[:dropped_at],
-                      side: score[:side])
     end
   end
 end

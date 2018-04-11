@@ -1,5 +1,5 @@
 module Analytics
-  class CountWithOpponentUserService < BaseService
+  class CountWithOpponentUserService < Analytics::BaseService
     def execute
       opponent_user_ids = @params[:ids].split(",").map{|id| id.to_i }
       opponent_users = User.find(opponent_user_ids)
