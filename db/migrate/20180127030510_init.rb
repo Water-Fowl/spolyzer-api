@@ -62,14 +62,9 @@ class Init < ActiveRecord::Migration[5.1]
       t.integer :game_id, null: false, index: true
       t.integer :shot_type_id, null: false, index: true
       t.integer :miss_type, null: false
+      t.integer :dropped_at, null: false
+      t.integer :dropped_side, null: false
       t.integer :unit_id, null: false
-      t.timestamps null: false
-    end
-
-    create_table :positions, force: :cascade do |t|
-      t.integer :score_id, null: false, index: true
-      t.integer :dropped_at
-      t.integer :side
       t.timestamps null: false
     end
 
