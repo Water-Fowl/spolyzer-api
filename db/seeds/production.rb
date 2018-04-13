@@ -20,4 +20,26 @@ ActiveRecord::Base.transaction do
       sport_id: sport.id
     )
   end
+  Sport.create(
+    name_ja: 'テニス',
+    name_en: 'tennis'
+  )
+  sport = Sport.second
+  [
+    ['スマッシュ', 'smash'],
+    ['ボレー', 'volley'],
+    ['トップスピン', 'top spin'],
+    ['スライス', 'slice'],
+    ['ロブ', 'rob'],
+    ['フラットサーブ', 'flat serve'],
+    ['スライスサーブ', 'slice serve'],
+    ['スピンサーブ', 'spin serve'],
+    ['ドロップ', 'drop'],
+  ].each do |type|
+    ShotType.create(
+      name_ja: type.first,
+      name_en: type.second,
+      sport_id: sport.id
+    )
+  end
 end
