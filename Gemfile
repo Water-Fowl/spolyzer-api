@@ -51,6 +51,7 @@ gem 'fancybox2-rails'
 gem 'sprockets-rails'
 
 group :test do
+  gem 'rails-controller-testing'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'database_rewinder'
