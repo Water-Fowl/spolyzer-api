@@ -51,10 +51,11 @@ gem 'fancybox2-rails'
 gem 'sprockets-rails'
 
 group :test do
-  gem 'rails-controller-testing'
   gem 'rspec-rails'
+  gem 'rails-controller-testing'
   gem 'factory_bot_rails'
   gem 'database_rewinder'
+  gem 'database_cleaner'
   gem 'rspec-request_describer'
   gem 'autodoc'
   gem 'redcarpet'
