@@ -7,6 +7,11 @@ ActiveRecord::Base.transaction do
       password: "#{i}testtest"
     )
   end
+  13.times do |i|
+    Position.create(
+      is_in: i < 6 ? true : false
+    )
+  end
 
   puts 'creating sport and shot types....'
   Sport.create(
