@@ -32,11 +32,12 @@ class GameCreateService < BaseService
     scores.each do |score|
       # 落ちたsideの反対sideのUnitが、得点したUnit
       @score = Score.create(unit_id: score[:side] == 1 ? left_unit.id : right_unit.id,
-                            miss_type: score[:miss_type],
+                            is_net_miss: score[:is_net_miss],
                             shot_type_id: score[:shot_type],
-                            dropped_at: score[:dropped_at],
+                            position_id: score[:dropped_at],
                             dropped_side: score[:side],
-                            game_id: game.id)
+                            game_id: game.id
+                           )
     end
   end
 end

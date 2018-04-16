@@ -10,7 +10,7 @@ module Analytics
     def reshape(scores)
       if not scores.empty?
         count_positions = scores
-          .group('scores.dropped_at')
+          .group('scores.position_id')
           .count.reduce({}) do |count, (key, value)|
           dropped_at = key
           count ||= {}

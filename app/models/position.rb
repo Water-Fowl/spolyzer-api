@@ -1,3 +1,3 @@
 class Position < ApplicationRecord
-  belongs_to :score
+  has_many :score
 end
