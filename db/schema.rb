@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180416014450) do
+ActiveRecord::Schema.define(version: 20180416022122) do
 
   create_table "analysis_results", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", null: false
@@ -36,12 +36,12 @@ ActiveRecord::Schema.define(version: 20180416014450) do
   create_table "scores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "game_id", null: false
     t.integer "shot_type_id", null: false
-    t.integer "miss_type", null: false
     t.integer "dropped_side", null: false
     t.integer "unit_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "position_id"
+    t.boolean "is_net_miss", default: false
     t.index ["game_id"], name: "index_scores_on_game_id"
     t.index ["shot_type_id"], name: "index_scores_on_shot_type_id"
   end

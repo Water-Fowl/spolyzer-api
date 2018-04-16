@@ -5,7 +5,7 @@ module Analytics
       game = Game.find(@params[:game_id])
       count = game
         .scores
-        .group('scores.dropped_side', 'scores.dropped_at', 'scores.shot_type_id', 'scores.miss_type')
+        .group('scores.dropped_side', 'scores.position_id', 'scores.shot_type_id', 'scores.is_net_miss')
         .count
       count = reshape(count)
 

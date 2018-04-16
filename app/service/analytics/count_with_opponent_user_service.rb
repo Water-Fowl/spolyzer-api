@@ -7,7 +7,7 @@ module Analytics
       scores = Score
         .of_opponent_users_games(@user, opponent_users, game_user_count)
         .where(shot_type_id: @params[:shot_type_id])
-        .where(miss_type: 0)
+        .where(is_net_miss: false)
       counts = {}
       counts[0] = reshape(scores.of_not_user_units(@user))
       counts[1] = reshape(scores.of_user_units(@user))
