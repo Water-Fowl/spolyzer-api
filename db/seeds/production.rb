@@ -42,4 +42,9 @@ ActiveRecord::Base.transaction do
       sport_id: sport.id
     )
   end
+  13.times do |i|
+    Position.create(
+      is_in: i < 6 ? true : false
+    )
+  end
 end
