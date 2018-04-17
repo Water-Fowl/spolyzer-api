@@ -16,14 +16,17 @@ Rails.application.routes.draw do
           end
         end
         resources :games do
-          resources :counts, only: [:index], module: 'games'
+          resources :aggregated_scores, only: [:index], module: 'games'
         end
-        resources :shot_types do
-          resources :counts, only: [:index], module: 'shot_types'
-          namespace :counts, module: 'shot_types' do
-            resources :opponent_users, only: [:show], param: :ids, module: 'counts'
+
+        resources :shot_types
+        namespace :aggregated_scores do
+          resources :shot_types do
+            resources :opponent_users, only: [:show], params: :ids, module: 'shot_types' do
+            end
           end
         end
+
         resources :analytics
         resources :analysis_results
     end

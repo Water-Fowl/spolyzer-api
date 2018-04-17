@@ -1,7 +1,7 @@
 module Analytics
   class CountWithOpponentUserService < Analytics::BaseService
     def execute
-      opponent_user_ids = @params[:ids].split(",").map{|id| id.to_i }
+      opponent_user_ids = @params[:id].split(",").map{|id| id.to_i }
       opponent_users = User.find(opponent_user_ids)
       game_user_count = @params[:game_user_count]
       scores = Score

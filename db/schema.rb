@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20180416022122) do
     t.integer "unit_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "position_id"
+    t.integer "position_id", null: false
     t.boolean "is_net_miss", default: false
     t.index ["game_id"], name: "index_scores_on_game_id"
     t.index ["shot_type_id"], name: "index_scores_on_shot_type_id"

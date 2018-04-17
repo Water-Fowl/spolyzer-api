@@ -18,6 +18,13 @@ Bundler.require(*Rails.groups)
 
 module Api
   class Application < Rails::Application
+    config.generators do |g|
+      g.javascripts false
+      g.template false
+      g.helper false
+      g.test_framework :rspec
+      g.assets false
+    end
     config.load_defaults 5.1
     config.middleware.use ActionDispatch::Flash
     config.middleware.use ActionDispatch::Cookies

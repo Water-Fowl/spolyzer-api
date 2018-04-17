@@ -3,11 +3,9 @@ module Analytics
 
     def execute
       game = Game.find(@params[:game_id])
-      count = game
+      scores = game
         .scores
-        .group('scores.dropped_side', 'scores.position_id', 'scores.shot_type_id', 'scores.is_net_miss')
-        .count
-      count = reshape(count)
+      count = reshape(scores)
 
     end
 
