@@ -6,6 +6,8 @@ RSpec.describe "Games", type: :request do
     before(:each) do
       @game = create(:game, :with_sport, :with_units, :with_scores)
       @user = create(:user)
+
+      #TODO 共通処理として切り出す
       @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
       auth_header = @user.create_new_auth_token
       @headers.merge! auth_header
