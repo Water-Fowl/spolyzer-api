@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
+# Base Controller requires authentication
 class Api::V1::BaseController < ApplicationController
   include DeviseTokenAuth::Concerns::SetUserByToken
-
-  protect_from_forgery with: :null_session
+  before_action :authenticate_api_v1_user!
 end

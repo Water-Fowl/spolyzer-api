@@ -1,57 +1,66 @@
+# frozen_string_literal: true
+
 class Api::V1::GamesController < Api::V1::BaseController
-
+  before_action :set_sport, :set_scores, :set_units
   def create
-    # Permit Parameters
-    players = params.require(:game).require(:players).permit(:left_user_id_1,:left_user_id_2,:right_user_id_1,:right_user_id_2)
-    score_game_params = params.require(:game).require(:score_game).permit(:game_time,:serve_user_id,:match_point,:deuce)
-    scores_params = params.require(:game).require(:scores).permit(:action=> [], :position=> [], :time_to_drop_shuttle=> [],:score_users=> [], :conceded_users=> [], :sides=>[])
-    #User Authorization
-    ##Write Here....
+    left_side = 0
+    right_side = 1
 
-    #Registor ScoreGame info
-    score_game = ScoreGame.create(score_game_params)
-
-    #Retate with users table
-    #もし左サイドなら0右サイドなら1
-
-    #Userがまだできてないので一旦コメントアウト
-    create_score_game_to_users(players, score_game)
-
-    action_list = scores_params["action"]
-    position_list = scores_params["position"]
-    time_to_drop_shuttle_list = scores_params["time_to_drop_shuttle"]
-    score_user_list = scores_params["score_users"]
-    conceded_user_list = scores_params["conceded_users"]
-    side_list = scores_params["sides"]
-    #Registor Scores
-    action_list.zip(position_list, time_to_drop_shuttle_list, score_user_list, conceded_user_list, side_list) do |score_params|
-      req = {action:score_params[0], position:score_params[1], time_to_drop_shuttle:score_params[2], scores_user_id:score_params[3], conceded_user_id:score_params[4], side: score_params[5], score_game_id:score_game.id}
-      Score.create(req)
-    end
-    render json: {status:0,message:"ok", score_game_id: score_game.id}
+    create_game
+    left_unit = create_units(@units, left_side, @game)
+    right_unit = create_units(@units, right_side, @game)
+    create_scores(@scores, @game, left_unit, right_unit)
   end
-end
 
-def show
-  actions_list = ["ヘアピン","スマッシュ", "クリアー","ドライブ","プッシュ","ロブ","サービス","ドロップ",'ネットイン(スマッシュ)','ネットイン(ドライブ)','ミス(サービス)']
-  column_list = ['lose', 'win', 'all']
+  private
 
-  params_status = params.require(:data).permit(:user_id, :opponent_user, :victory)
-  user_id = params[:user_id]
-  opponent_user_id = params[:opponent_user]
-  victory = params[:victory]
+  def create_game
+    @game = Game.create(name: params[:game][:name], sport_id: @sport.id)
+  end
 
-  current_user = User.find(user_id)
-  opponent_user = User.find(opponent_user_id)
+  def create_units(units, side, game)
+    user_count = units[side.to_s][:count]
 
-  score_game = current_user.get_games(column=column_list[2])
-  score_game = current_user.get_games_with(score_game, user=opponent_user)
-  render json: { status:0, message: 'ok', score_game_ids: score_game.ids }
-end
+    unit = Unit.create(
+      side: side,
+      user_count: user_count,
+      game_id: game.id
+    )
 
-def create_score_game_to_users(players, score_game)
-    ScoreGameToUser.create(user_id:players["left_user_id_1"],court:0,score_game_id:score_game.id)
-    ScoreGameToUser.create(user_id:players["left_user_id_2"],court:0,score_game_id:score_game.id)
-    ScoreGameToUser.create(user_id:players["right_user_id_1"],court:1,score_game_id:score_game.id)
-    ScoreGameToUser.create(user_id:players["right_user_id_2"],court:1,score_game_id:score_game.id)
+    user_count.times do |i|
+      user = units[side.to_s][:users][i]
+      unit.user_units.create(user_id: user[:id])
+    end
+
+    unit
+  end
+
+  def create_scores(scores, game, left_unit, right_unit)
+    scores.each do |score|
+      @score = Score.create(
+        unit_id: score[:side] == 1 ? left_unit.id : right_unit.id,
+        is_net_miss: score[:is_net_miss],
+        shot_type_id: score[:shot_type],
+        position_id: score[:dropped_at],
+        dropped_side: score[:side],
+        game_id: game.id
+      )
+    end
+  end
+
+  def game_params
+    params.require(:users, :scores, :game)
+  end
+
+  def set_scores
+    @scores = params[:scores]
+  end
+
+  def set_sport
+    @sport = Sport.find params[:sport_id]
+  end
+
+  def set_units
+    @units = params[:units]
+  end
 end

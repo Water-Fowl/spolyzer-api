@@ -19,7 +19,7 @@ class Init < ActiveRecord::Migration[5.1]
       t.string :name
       t.string :image
       t.string :email
-      t.text :access_token
+      t.text :tokens
       t.datetime :created_at, null: false
       t.datetime :updated_at, null: false
       t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
@@ -35,13 +35,21 @@ class Init < ActiveRecord::Migration[5.1]
     end
 
     create_table :games, force: :cascade do |t|
+      t.integer :sport_id, null: false, index: true
       t.string :name, null: false
       t.timestamps
     end
 
-    create_table :game_users, force: :cascade do |t|
+    create_table :units, force: :cascade do |t|
+      t.integer :game_id, null: false
+      t.integer :side, null: false
+      t.integer :user_count, null: false
+      t.timestamps
+    end
+
+    create_table :user_units, force: :cascade do |t|
+      t.integer :unit_id, null: false, index: true
       t.integer :user_id, null: false, index: true
-      t.integer :game_id, null: false, index: true
     end
 
     create_table :shot_types, force: :cascade do |t|
@@ -52,15 +60,11 @@ class Init < ActiveRecord::Migration[5.1]
 
     create_table :scores, force: :cascade do |t|
       t.integer :game_id, null: false, index: true
-      t.boolean :is_missed, default: false, null: false
-      t.boolean :is_net_in, default: false, null: false
-      t.timestamps null: false
-    end
-
-    create_table :positions, force: :cascade do |t|
-      t.integer :score_id, null: false, index: true
-      t.integer :dropped_at
-      t.integer :side
+      t.integer :shot_type_id, null: false, index: true
+      t.integer :miss_type, null: false
+      t.integer :dropped_at, null: false
+      t.integer :dropped_side, null: false
+      t.integer :unit_id, null: false
       t.timestamps null: false
     end
 

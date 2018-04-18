@@ -1,0 +1,1 @@
+url: <%= ENV["PRODUCTION_HOST"] %>
