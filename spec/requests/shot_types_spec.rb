@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'request_helper'
 
 RSpec.describe "ShotTypes", type: :request do
   describe "GET /aggregated_scores/shot_types/:shot_type_id" do
@@ -20,11 +19,9 @@ RSpec.describe "ShotTypes", type: :request do
     subject do
       get "/api/v1/aggregated_scores/shot_types/1", params: params, as: :json, headers: @headers
     end
-
     it "should return 200 status" do
       subject
       expect(response).to have_http_status(200)
     end
-
   end
 end
