@@ -1,23 +1,35 @@
 require 'rails_helper'
+require 'request_helper'
 
 RSpec.describe "Games", type: :request do
   describe "GET /games/:game_id/counts" do
     before(:each) do
       @game = create(:game, :with_sport, :with_units, :with_scores)
       @user = create(:user)
+      @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
+      auth_header = @user.create_new_auth_token
+      @headers.merge! auth_header
     end
+
     subject do
-      get "/api/v1/games/#{@game.id}/counts", headers
+      get "/api/v1/games/#{@game.id}/aggregated_scores", headers: @headers
     end
+
     it "return 200" do
       subject
       expect(response).to have_http_status(200)
     end
+
   end
 
   describe 'POST #create' do
     before do
       create(:sport)
+      @user = create(:user)
+
+      @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
+      auth_header = @user.create_new_auth_token
+      @headers.merge! auth_header
     end
     let(:params) do
       {
@@ -33,11 +45,12 @@ RSpec.describe "Games", type: :request do
           {unit: 1, dropped_at: 4, shot_type: 4, miss_type: 0, side: 1},
           {unit: 1, dropped_at: 5, shot_type: 5, miss_type: 0, side: 1}
         ],
-        game: {name: "トレーニングマッチ", sport_name: "バドミントン"}
+        game: {name: "トレーニングマッチ"} ,
+        sport_id: 1
       }
     end
     subject do
-      post "/api/v1/games", params: params, as: :json, headers: headers
+      post "/api/v1/games", params: params, as: :json, headers: @headers
     end
     it 'return 200' do
       subject
