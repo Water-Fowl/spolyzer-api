@@ -1,0 +1,17 @@
+AllCops:
+
+  Exclude:
+    - bin/*
+    - db/schema.rb
+    - db/migrate/*
+    - vendor/**/*
+
+ClassAndModuleChildren:
+  EnforcedStyle: compact
+LineLength:
+  Max: 100
+Style/Documentation:
+  Enabled: false
+Metrix/MethodLength:
+  Max: 20
+

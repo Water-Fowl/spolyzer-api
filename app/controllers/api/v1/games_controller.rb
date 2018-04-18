@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 class Api::V1::GamesController < Api::V1::BaseController
   before_action :set_sport, :set_scores, :set_units
-
   def create
     left_side = 0
     right_side = 1
@@ -9,7 +10,6 @@ class Api::V1::GamesController < Api::V1::BaseController
     left_unit = create_units(@units, left_side, @game)
     right_unit = create_units(@units, right_side, @game)
     create_scores(@scores, @game, left_unit, right_unit)
-    @game
   end
 
   private
@@ -63,5 +63,4 @@ class Api::V1::GamesController < Api::V1::BaseController
   def set_units
     @units = params[:units]
   end
-
 end
