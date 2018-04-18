@@ -2,7 +2,7 @@
 
 class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
-
+  has_many :aim
   has_many :sport_users
   has_many :sports, through: :sport_users
   has_many :user_units

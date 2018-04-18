@@ -1,0 +1,2 @@
+class AimShotType < ApplicationRecord
+end

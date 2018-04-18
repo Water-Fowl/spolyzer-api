@@ -15,6 +15,7 @@ class Score < ApplicationRecord
       .pluck(:id)
     )
   }
+
   scope :of_user_games, ->(user, user_count) {
     where(
       game_id: Game.joins(:units)
@@ -40,4 +41,15 @@ class Score < ApplicationRecord
         }
       )
   }
+
+
+  scope :in_cort, (in_cort?) -> {
+    joins(:positions)
+      .where(
+        positions: {
+          is_in: in_cort
+        }
+    )
+  }
+
 end

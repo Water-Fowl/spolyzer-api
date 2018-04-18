@@ -1,0 +1,2 @@
+class AimPosition < ApplicationRecord
+end
