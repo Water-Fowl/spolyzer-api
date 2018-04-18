@@ -1,9 +1,11 @@
-class Api::V1::AggregatedScores::BaseController < Api::V1::BaseController
+# frozen_string_literal: true
 
+class Api::V1::AggregatedScores::BaseController < Api::V1::BaseController
   private
-  def aggregated_by_position(scores)
-    if not scores.empty?
-      count_positions = scores
+
+  def aggregate_position(scores)
+    if !scores.empty?
+      scores
         .group('scores.position_id')
         .count.reduce({}) do |count, (key, value)|
         dropped_at = key
@@ -15,5 +17,4 @@ class Api::V1::AggregatedScores::BaseController < Api::V1::BaseController
       scores
     end
   end
-
 end

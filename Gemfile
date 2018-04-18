@@ -68,6 +68,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'rails-erd'
+  gem 'rubocop', require: false
 end
 
 group :development do
