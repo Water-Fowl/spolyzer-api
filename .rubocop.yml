@@ -1,11 +1,10 @@
 AllCops:
-
   Exclude:
-    - bin/*
-    - db/schema.rb
-    - db/migrate/*
-    - vendor/**/*
-
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'vendor/**/*'
+    - 'capistrano/**/*'
 ClassAndModuleChildren:
   EnforcedStyle: compact
 LineLength:

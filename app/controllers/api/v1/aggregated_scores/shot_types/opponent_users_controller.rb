@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-class Api::V1::AggregatedScores::ShotTypes::OpponentUsersController < Api::V1::AggregatedScores::BaseController
+class Api::V1::AggregatedScores::ShotTypes::OpponentUsersController <
+  Api::V1::AggregatedScores::BaseController
   before_action :set_opponent_users, :set_game_user_count, :set_shot_type_id, :set_scores
 
   def show

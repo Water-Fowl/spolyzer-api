@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
 
@@ -12,27 +14,25 @@ class User < ApplicationRecord
   mount_uploader :image, PhotoUploader
 
   devise :database_authenticatable, :registerable, :confirmable,
-        :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable
 
   validates :name,
-    presence: true,
-    uniqueness: true
+            presence: true,
+            uniqueness: true
 
   validates :email,
-     presence: true,
-     uniqueness: true
-
+            presence: true,
+            uniqueness: true
 
   def latest_result
-    self.analysis_results.order(created_at: :asc).try(:first)
+    analysis_results.order(created_at: :asc).try(:first)
   end
 
   def total_score(game_id)
-    self
-      .games
+    games
       .find_by_id(game_id)
       .scores
-      .where(user_id: self.id)
+      .where(user_id: id)
   end
 
   # TODO: devise token auth でaccess_tokenのupdate

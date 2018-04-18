@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 source 'http://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 5.1.4'
 gem 'mysql2', '>= 0.3.18', '< 0.5'
+gem 'rails', '~> 5.1.4'
 
-gem 'devise_token_auth'
 gem 'devise'
+gem 'devise_token_auth'
 gem 'omniauth'
 
 gem 'unicorn'
@@ -22,51 +24,51 @@ gem 'dotenv-rails'
 
 gem 'aws-sdk', '2.0.6.pre'
 
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-gem 'haml-rails'
 gem 'erb2haml'
-gem 'uglifier', '>= 1.3.0'
-gem 'turbolinks', '~> 5'
+gem 'haml-rails'
 gem 'jbuilder', '~> 2.5'
+gem 'turbolinks', '~> 5'
+gem 'uglifier', '>= 1.3.0'
 
-gem 'exception_notification'
-gem 'slack-notifier'
 gem 'activerecord-session_store'
 gem 'carrierwave'
-gem 'fog'
 gem 'config'
+gem 'exception_notification'
+gem 'fog'
+gem 'slack-notifier'
 
 source 'https://rails-assets.org' do
-  gem 'rails-assets-toastr'
   gem 'rails-assets-flexslider'
+  gem 'rails-assets-toastr'
 end
 gem 'bootstrap-sass'
-gem "font-awesome-rails"
 gem 'coffee-rails', '~> 4.2'
+gem 'fancybox2-rails'
+gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'sass-rails'
-gem 'fancybox2-rails'
 gem 'sprockets-rails'
 
 group :test do
-  gem 'rspec-rails'
-  gem 'factory_girl_rails'
-  gem 'database_rewinder'
-  gem 'rspec-request_describer'
   gem 'autodoc'
+  gem 'database_rewinder'
+  gem 'factory_girl_rails'
+  gem 'faker'
   gem 'redcarpet'
   gem 'rspec-json_matcher'
-  gem 'faker'
+  gem 'rspec-rails'
+  gem 'rspec-request_describer'
   gem 'timecop'
 end
 
 group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry'
-  gem 'pry-rails'
   gem 'pry-byebug'
+  gem 'pry-rails'
   gem 'rails-erd'
   gem 'rubocop', require: false
 end

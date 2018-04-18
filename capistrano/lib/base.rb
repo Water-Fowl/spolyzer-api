@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def template(src_file, dist_file)
   if src_file_path = template_file(src_file)
     src_file_string = StringIO.new(ERB.new(File.read(src_file_path)).result(binding))

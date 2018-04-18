@@ -1,5 +1,6 @@
-class Admin::BaseController < ActionController::Base
+# frozen_string_literal: true
 
+class Admin::BaseController < ActionController::Base
   protect_from_forgery
 
   layout 'admin'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Load DSL and set up stages
 require 'capistrano/setup'
 
@@ -16,9 +18,9 @@ require 'capistrano/deploy'
 #   https://github.com/capistrano/passenger
 #
 # require 'capistrano/rvm'
-  require 'capistrano/rbenv'
-  require 'capistrano/rails'
-  require 'capistrano3/unicorn'
+require 'capistrano/rbenv'
+require 'capistrano/rails'
+require 'capistrano3/unicorn'
 # require 'capistrano/chruby'
 # require 'capistrano/bundler'
 # require 'capistrano/rails/assets'
