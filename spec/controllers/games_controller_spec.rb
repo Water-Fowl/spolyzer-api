@@ -1,5 +1,22 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::GamesController, type: :controller do
-  describe ''
+  describe 'GamesControllerのcreateアクション' do
+    before :each do
+      @scores = [
+        attributes_for(:score),
+        attributes_for(:score),
+        attributes_for(:score)
+      ]
+
+      @sport = attributes_for(:sport)
+
+      @units = attributes_for(:units)
+    end
+
+
+
+
+    it "新たなGameを作成し、保存する" do
+      @scores.nil?
+    end
 end

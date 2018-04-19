@@ -14,4 +14,5 @@ RSpec.configure do |config|
   config.profile_examples = 10
   config.order = :random
   Kernel.srand config.seed
+  config.expose_dsl_globally = true
 end
