@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :api do
-    namespace :v1 do
-      get 'aims/create'
-    end
-  end
-
   namespace :api, format: 'json' do
     namespace :v1 do
         mount_devise_token_auth_for 'User', at: 'auth', controllers: {
@@ -33,8 +27,12 @@ Rails.application.routes.draw do
           end
         end
 
-        resources :analytics
-        resources :analysis_results
+        resources :aims do
+          resources :aggregated_scores, only: [:index], module: 'aims'
+          resources :games, only: [:index], module: 'aims' do
+            resources :scores, only: [:index], module: 'games'
+          end
+        end
     end
   end
 
