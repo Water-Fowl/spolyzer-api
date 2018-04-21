@@ -25,14 +25,9 @@ class Api::V1::AimsController < Api::V1::BaseController
   end
 
   def create_aim
-    @aim = Aim.create(
-      user_id: current_api_v1_user.id,
-      achieve_count: aim_params[:achieve_count],
-      is_my_score: aim_params[:is_my_score],
-      is_net_miss: aim_params[:is_net_miss],
-      is_in: aim_params[:is_in],
-      user_count: aim_params[:user_count],
-    )
+    @aim = Aim.new(aim_params)
+    @aim.user = current_api_v1_user
+    @aim.save
   end
 
   def create_aim_shot_types
