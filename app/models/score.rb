@@ -43,11 +43,11 @@ class Score < ApplicationRecord
   }
 
 
-  scope :in_cort, (in_cort?) -> {
-    joins(:positions)
+  scope :in_cort, ->(is_in) {
+    joins(:position)
       .where(
         positions: {
-          is_in: in_cort
+          is_in: is_in
         }
     )
   }
