@@ -1,0 +1,1 @@
+json.aggregated_scores @aggregated_scores
