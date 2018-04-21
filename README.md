@@ -3,7 +3,7 @@
 ## Set up
 
 ```
-git clone git@github.com:Water-Fowl/api.git
+git clone https://github.com/Water-Fowl/api.git
 cp yamadからもらった.env path/to/project
 cd path/to/project
 bundle exec rails db:create db:migrate db:seed
