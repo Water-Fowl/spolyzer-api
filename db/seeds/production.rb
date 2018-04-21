@@ -44,7 +44,7 @@ ActiveRecord::Base.transaction do
   end
   13.times do |i|
     Position.create(
-      is_in: i < 6 ? true : false
+      is_in: i < 6 ? false : true
     )
   end
 end

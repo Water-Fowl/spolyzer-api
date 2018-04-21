@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 20180418155129) do
 
   create_table "aim_opponent_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "user_id"
+    t.integer "opponent_user_id"
     t.integer "aim_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -35,11 +35,11 @@ ActiveRecord::Schema.define(version: 20180418155129) do
 
   create_table "aims", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", null: false
+    t.integer "user_count", null: false
     t.boolean "is_in", null: false
     t.boolean "is_net_miss", null: false
     t.boolean "is_my_score", null: false
     t.boolean "is_achieve", default: false
-    t.string "title", null: false
     t.integer "achieve_count", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -61,9 +61,9 @@ ActiveRecord::Schema.define(version: 20180418155129) do
   end
 
   create_table "positions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.boolean "is_in"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "is_in"
   end
 
   create_table "scores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
