@@ -45,6 +45,10 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+staging:
+  <<: *default
+  database: api_staging
+
 production:
   <<: *default
   database: <%= ENV['RDS_NAME'] %>

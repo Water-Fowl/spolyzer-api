@@ -5,6 +5,7 @@ gem 'capistrano', '3.9.1'
 gem 'capistrano-bundler'
 gem 'capistrano-dotenv-tasks', require: false
 gem 'capistrano-rails'
+gem 'capistrano-rbenv'
 gem 'dotenv'
 
 # gem 'capistrano-sidekiq'

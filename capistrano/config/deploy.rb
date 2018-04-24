@@ -3,8 +3,10 @@
 ########## Update me ##########
 set :application, 'spolyzer'
 append :linked_files, '.env'
-set :repo_url, 'https://username:password@github.com/Water-Fowl/api.git'
-set :user, 'deploy'
+set :repo_url, "https://yamad07:#{ENV["GITHUB_PERSONAL_TOKEN"]}@github.com/Water-Fowl/api.git"
+set :user, 'admin'
+set :rbenv_type, :user
+set :rbenv_ruby, '2.4.3'
 
 ###############################
 
@@ -19,3 +21,4 @@ set :unicorn_config_path, 'config/unicorn.rb'
 # common
 set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
 set :linked_dirs, %w[log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/shared public/uploads]
+append :linked_dirs, '.bundle'

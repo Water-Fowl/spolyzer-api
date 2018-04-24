@@ -3,6 +3,7 @@ namespace :deploy do
   task :init_config do
     on roles(:app) do
       execute :mkdir, "-p #{shared_path}/config"
+      execute :mkdir, "-p #{shared_path}/bundle"
       template "unicorn.rb", "#{shared_path}/config/unicorn.rb"
       template "database.yml", "#{shared_path}/config/database.yml"
     end
