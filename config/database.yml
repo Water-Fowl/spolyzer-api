@@ -51,7 +51,4 @@ staging:
 
 production:
   <<: *default
-  database: <%= ENV['RDS_NAME'] %>
-  host: <%= ENV['RDS_HOST'] %>
-  username: <%= ENV['RDS_USERNAME'] %>
-  password: <%= ENV['RDS_PASSWORD'] %>
+  database: api_production
