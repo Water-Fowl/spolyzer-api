@@ -20,5 +20,4 @@ jobs:
         - after_script: ./scripts/production_deploy.sh
 stages:
   - test
-  - name: production
-    if: branch = master
+  - production
