@@ -14,6 +14,14 @@ class Game < ApplicationRecord
     user_order_by_score.first
   end
 
+  def score_count
+    left_scores = self.units[0].scores.joins(:position)
+    right_scores = self.units[1].scores.joins(:position)
+    left_score_count = left_scores.where(positions: {is_in: true}).count + right_scores.where(positions: {is_in: false}).count
+    right_score_count = right_scores.where(positions: {is_in: true}).count + left_scores.where(positions: {is_in: false}).count
+    scores = {left: left_score_count, right: right_score_count}
+  end
+
   private
 
   def user_order_by_score
@@ -23,6 +31,8 @@ class Game < ApplicationRecord
         user.scores.where(game_id: id).count
       end
   end
+
+
 
   scope :of_user, ->(user) {
     joins(:users)
