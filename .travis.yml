@@ -3,12 +3,13 @@ rvm: 2.4.3
 services: mysql2
 jobs:
   include:
-    - bundler_args: "--without development --deployment -j4"
-    - cache: bundler
-    - before_script:
-      - cp config/database.travis.yml config/database.yml
-      - bundle exec rails db:setup
-    - script: bundle exec rails test
+    - stage: test
+      - bundler_args: "--without development --deployment -j4"
+      - cache: bundler
+      - before_script:
+        - cp config/database.travis.yml config/database.yml
+        - bundle exec rails db:setup
+      - script: bundle exec rails test
     - stage: production
         - bundler_args: "--without development --deployment -j4"
         - cache: bundler
