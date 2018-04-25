@@ -10,9 +10,6 @@ Rails.application.routes.draw do
             get :counts
           end
         end
-        namespace :users do
-          resources :games, only: [:index]
-        end
 
         resources :users  do
           collection do
@@ -20,7 +17,7 @@ Rails.application.routes.draw do
           end
         end
 
-        resources :games, only: [:create]  do
+        resources :games, only: [:index, :create]  do
           resources :aggregated_scores, only: [:index], module: 'games'
         end
 
