@@ -20,4 +20,4 @@ stages:
   - name: production_deploy
     if: branch = master
   - name: staging_deploy
-    if: branch = development
+    if: branch = /^development/*$/
