@@ -19,5 +19,5 @@ stages:
   - test
   - name: production_deploy
     if: branch = master
-  - name: production_deploy
+  - name: staging_deploy
     if: branch = development
