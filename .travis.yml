@@ -11,7 +11,4 @@ jobs:
     - stage: test
       - script: bundle exec rails test
     - stage: deploy
-        - script: ./scripts/production_deploy.sh
-stages:
-  - test
-  - deploy
+      - script: ./scripts/production_deploy.sh
