@@ -1,1 +1,0 @@
-curl -X POST "http://ec2-52-198-150-98.ap-northeast-1.compute.amazonaws.com/api/v1/auth/" -H "Content-Type: application/json" -d '{"name":"takumimuggle", "email":"takumimuggle@gmail.com", "password":"takumimuggle", "password_confirmation":"takumimuggle", "confirm_success_url":"api.water-fowl.co.jp"}'
