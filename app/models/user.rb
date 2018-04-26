@@ -32,7 +32,7 @@ class User < ApplicationRecord
       .games
       .find_by_id(game_id)
       .scores
-      .where(user_id: self.id)
+      .where(unit_id: self.units.find_by(game_id: game_id).id)
   end
 
   # TODO: devise token auth でaccess_tokenのupdate
