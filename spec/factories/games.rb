@@ -3,6 +3,8 @@ FactoryBot.define do
     game.name '練習試合'
   end
 
+
+
   trait :with_sport do
     association :sport, factory: :sport
   end

@@ -5,18 +5,18 @@ class Game < ApplicationRecord
   has_many :scores
 
   def winner
-    user_order_by_score.last
+    unit_order_by_score.last
   end
 
   def loser
-    user_order_by_score.first
+    unit_order_by_score.first
   end
 
   private
 
-  def user_order_by_score
+  def unit_order_by_score
     @order ||= self
-      .users
+      .units
       .sort do |user|
         user.scores.where(game_id: self.id).count
       end
