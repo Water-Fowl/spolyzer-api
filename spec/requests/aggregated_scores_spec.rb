@@ -36,13 +36,12 @@ RSpec.describe "AggregatedScore", type: :request do
       let(:current_api_v1_user){@user}
 
       subject do
-        params[:sport_id] = 1
-        get "/api/v1/games/#{@game.id}", headers: @headers
+        get "/api/v1/games/#{@game.id}/aggregated_scores", headers: @headers
       end
 
       it "return 200" do
         subject
-        expect(response).to have_http_status(401)
+        expect(response).to have_http_status(200)
       end
     end
   end
