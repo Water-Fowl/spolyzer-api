@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "Games", type: :request do
   describe "GET /games/:game_id/counts" do
     before(:each) do
+      create(:sport)
       @game = create(:game, :with_sport, :with_units, :with_scores)
       @user = create(:user)
 

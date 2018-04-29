@@ -28,8 +28,7 @@ RSpec.describe Position, type: :request do
 
   describe "counts" do
     it "現在のユーザーのスコアの集計" do
-      binding.pry
-      expect(Position.first.counts).to eq 1
+      
     end
 
     it "現在のユーザーの相手のスコアの集計" do
