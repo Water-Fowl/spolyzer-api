@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe "AggregatedScore", type: :request do
-  before do
+RSpec.describe Position, type: :request do
+  before(:each) do
     @game = create(:game, :with_sport, :with_units, :with_scores)
     @user = create(:user)
   end
@@ -26,11 +26,14 @@ RSpec.describe "AggregatedScore", type: :request do
 
   let(:current_api_v1_user){@user}
 
-  describe "GET games/:game_id/show" do
-    describe "index" do
-      it "そのGameのスコアの集計" do
+  describe "counts" do
+    it "現在のユーザーのスコアの集計" do
+      binding.pry
+      expect(Position.first.counts).to eq 1
+    end
 
-      end
+    it "現在のユーザーの相手のスコアの集計" do
+
     end
   end
 end

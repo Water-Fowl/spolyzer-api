@@ -15,10 +15,4 @@ RSpec.describe User, :type => :model do
       end
     end
 
-    describe "total_score" do
-      it "指定したuserのgameの合計点数を返す" do
-        expect(@user1.total_score(@game.id)).to eq @game.scores.where(unit_id: Unit.first.id)
-      end
-    end
-
 end

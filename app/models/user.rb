@@ -27,13 +27,6 @@ class User < ApplicationRecord
     self.analysis_results.order(created_at: :asc).try(:first)
   end
 
-  def total_score(game_id)
-    self
-      .games
-      .find_by_id(game_id)
-      .scores
-      .where(unit_id: self.units.find_by(game_id: game_id).id)
-  end
 
   # TODO: devise token auth でaccess_tokenのupdate
   def generate_access_token!
