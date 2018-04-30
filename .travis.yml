@@ -5,9 +5,6 @@ bundler_args: "--without development --deployment -j4"
 cache: bundler
 before_script:
   - cp config/database.travis.yml config/database.yml
-  - cd capistrano
-  - pwd
-  - bundle install
   - bundle exec rails db:setup
 
 jobs:
@@ -21,8 +18,6 @@ jobs:
         - bundle exec cap production deploy
     - stage: staging_deploy
       script:
-        - cd /home/travis/build/Water-Fowl/spolyzer-api/capistrano
-        - bundle install
         - bundle exec cap staging deploy
 
 stages:
