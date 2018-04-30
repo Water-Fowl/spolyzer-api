@@ -1,1 +1,1 @@
-cd capistrano && bundle exec cap staging deploy
+cd capistrano && bundle install && bundle exec cap staging deploy
