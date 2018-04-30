@@ -1,3 +1,1 @@
-cd capistrano
-bundle install
-bundle exec cap staging deploy
+cd capistrano && pwd && bundle exec cap staging deploy
