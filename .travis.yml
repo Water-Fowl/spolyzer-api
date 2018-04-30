@@ -12,7 +12,7 @@ jobs:
     - stage: test
       script: bundle exec rails test
     - stage: production_deploy
-      script:
+      script: bash ./scripts/deploy_production.sh
     - stage: staging_deploy
       script: bash ./scripts/deploy_staging.sh
 
