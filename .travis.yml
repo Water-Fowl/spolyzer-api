@@ -13,12 +13,8 @@ jobs:
       script: bundle exec rails test
     - stage: production_deploy
       script:
-        - cd capistrano
-        - bundle install
-        - bundle exec cap production deploy
     - stage: staging_deploy
-      script:
-        - bundle exec cap staging deploy
+      script: bash ./scripts/deploy_staging.sh
 
 stages:
   - test
