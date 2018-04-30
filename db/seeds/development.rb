@@ -69,8 +69,10 @@ ActiveRecord::Base.transaction do
   end
 
   game = Game.first
-  winner_single_unit = Unit.create(side: 0, user_count: 1, game_id: game.id)
-  loser_single_unit = Unit.create(side: 1, user_count: 1, game_id: game.id)
+  winner_single_unit = Unit.create(user_count: 1)
+  loser_single_unit = Unit.create(user_count: 1)
+  winner_single_unit.game_units.create(game_id: game.id, side:0)
+  loser_single_unit.game_units.create(game_id: game.id, side:1)
   winner_single_unit.user_units.create(user_id: winner.id)
   loser_single_unit.user_units.create(user_id: loser.id)
   10.times do |i|
@@ -94,8 +96,10 @@ ActiveRecord::Base.transaction do
 
   puts 'creating unit....'
   game = Game.second
-  winner_unit = Unit.create(side: 0, user_count: 2, game_id: game.id)
-  loser_unit  = Unit.create(side: 1, user_count: 2, game_id: game.id)
+  winner_unit = Unit.create(user_count: 2)
+  loser_unit  = Unit.create(user_count: 2)
+  winner_unit.game_units.create(game_id: game.id, side:0)
+  loser_unit.game_units.create(game_id: game.id, side:1)
   2.times do |i|
     winner_unit.user_units.create(
       user_id: i + 1

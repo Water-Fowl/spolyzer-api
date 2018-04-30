@@ -2,7 +2,8 @@
 
 class Game < ApplicationRecord
   belongs_to :sport
-  has_many :units
+  has_many :game_units
+  has_many :units, through: :game_units
   has_many :users, through: :units
   has_many :scores
 
