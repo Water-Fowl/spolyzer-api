@@ -5,11 +5,13 @@ RSpec.describe Unit, :type => :model do
   before(:each) do
     create(:game, :with_sport, :with_units, :with_scores)
     create(:game,:with_sport, :with_units, :with_scores)
-    Unit.first.users << FactoryBot.create(:user, name: "test1", email: "test1@test.com")
-    Unit.first.users << FactoryBot.create(:user, name: "test2", email: "test2@test.com")
-    Unit.second.users << FactoryBot.create(:user, name: "test3", email: "test3@test.com")
-    Unit.second.users << FactoryBot.create(:user, name: "test4", email: "test4@test.com")
+    Unit.first.users << create(:user, name: "test1", email: "test1@test.com")
+    Unit.first.users << create(:user, name: "test2", email: "test2@test.com")
+    Unit.second.users << create(:user, name: "test3", email: "test3@test.com")
+    Unit.second.users << create(:user, name: "test4", email: "test4@test.com")
     @users = User.first, User.second
+    Unit.find(3).users << create(:user, name: "test5", email: "test5@test.com")
+    @user = [Unit.find(3).users.first]
   end
 
   describe "scopes" do
@@ -26,9 +28,7 @@ RSpec.describe Unit, :type => :model do
       end
 
       it "opponent_usersをもつUnitを検索。opponent_usersが１つの場合"  do
-        Unit.find(3).users << FactoryBot.create(:user, name: "test5", email: "test5@test.com")
-        @users = [Unit.find(3).users.first]
-        expect(Unit.of_users(@users).ids).to eq Unit.where(id: Unit.find(3).id).ids
+        expect(Unit.of_users(@user).ids).to eq Unit.where(id: Unit.find(3).id).ids
       end
     end
 
