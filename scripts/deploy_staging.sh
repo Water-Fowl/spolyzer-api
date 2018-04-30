@@ -1,1 +1,3 @@
-cd capistrano && bundle install && bundle exec cap staging deploy
+cd capistrano
+bundle install --path ./vendor/bundle
+bundle exec cap staging deploy
