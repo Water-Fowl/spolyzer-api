@@ -21,7 +21,7 @@ jobs:
         - bundle exec cap production deploy
     - stage: staging_deploy
       script:
-        - cd capistrano
+        - cd /home/travis/build/Water-Fowl/spolyzer-api/capistrano
         - bundle install
         - bundle exec cap staging deploy
 
