@@ -39,6 +39,21 @@ gem 'exception_notification'
 gem 'fog'
 gem 'slack-notifier'
 
+# capistrano
+gem 'capistrano', '3.9.1'
+gem 'capistrano-bundler'
+gem 'capistrano-dotenv-tasks', require: false
+gem 'capistrano-rails'
+gem 'capistrano-rbenv'
+gem 'dotenv'
+
+# gem 'capistrano-sidekiq'
+gem 'capistrano3-unicorn', git: 'https://github.com/tablexi/capistrano3-unicorn.git', branch: 'master'
+# gem 'whenever', require: false
+
+gem 'sitemap_generator'
+gem 'slackistrano'
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-flexslider'
   gem 'rails-assets-toastr'
