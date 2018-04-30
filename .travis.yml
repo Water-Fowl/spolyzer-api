@@ -5,6 +5,9 @@ bundler_args: "--without development --deployment -j4"
 cache: bundler
 before_script:
   - cp config/database.travis.yml config/database.yml
+  - cd capistrano
+  - bundle install
+  - cd ..
   - bundle exec rails db:setup
 
 jobs:
