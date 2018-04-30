@@ -6,8 +6,8 @@ cache: bundler
 before_script:
   - cp config/database.travis.yml config/database.yml
   - cd capistrano
+  - pwd
   - bundle install
-  - cd ..
   - bundle exec rails db:setup
 
 jobs:
