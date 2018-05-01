@@ -29,17 +29,14 @@ class Api::V1::GamesController < Api::V1::BaseController
 
     user_count = @units[side][:count]
 
-    unit = Unit.create(
-      user_count: user_count,
-    )
-
-    unit.game_units.create(game_id: @game.id)
-
+    users = []
     user_count.times do |i|
       user = @units[side][:users][i]
-      unit.user_units.create(user_id: user[:id])
+      users.push(User.find(user[:id]))
     end
 
+    unit = Unit.find_or_create_with_users(users)
+    unit.game_units.create(game_id: @game.id)
     unit
   end
 
