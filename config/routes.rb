@@ -21,12 +21,8 @@ Rails.application.routes.draw do
           resources :aggregated_scores, only: [:index], module: 'games'
         end
 
-        resources :shot_types
-        namespace :aggregated_scores do
-          resources :shot_types do
-            resources :opponent_users, only: [:show], params: :ids, module: 'shot_types' do
-            end
-          end
+        resources :shot_types do
+          resources :aggregated_scores, only: [:index], module: 'shot_types'
         end
 
         resources :analytics
