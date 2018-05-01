@@ -11,12 +11,11 @@ class Api::V1::GamesController < Api::V1::BaseController
     @sport = Sport.find params[:sport_id]
     @units = params[:units]
 
-    left_side = 0
-    right_side = 1
-
     create_game
+
     @left_unit = create_units(:left)
     @right_unit = create_units(:right)
+
     create_scores
   end
 
@@ -27,6 +26,7 @@ class Api::V1::GamesController < Api::V1::BaseController
   end
 
   def create_units(side)
+
     user_count = @units[side][:count]
 
     unit = Unit.create(
