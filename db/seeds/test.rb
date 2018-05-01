@@ -48,3 +48,4 @@ ActiveRecord::Base.transaction do
     )
   end
 end
+

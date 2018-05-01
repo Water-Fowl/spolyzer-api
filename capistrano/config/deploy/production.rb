@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-server '128.199.68.200:57854', user: fetch(:user), roles: %w[web app db worker cron], primary: true
-set :branch, 'v1.0.0'
+server '54.249.94.110', user: fetch(:user), roles: %w[web app db worker cron], primary: true
+set :branch, 'master'
 set :stage, :production
 set :rails_env, :production
 set :ssh_keys, ['~/.ssh/id_rsa']

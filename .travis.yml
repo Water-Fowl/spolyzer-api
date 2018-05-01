@@ -1,0 +1,23 @@
+language: ruby
+rvm: 2.4.3
+services: mysql2
+bundler_args: "--without development --deployment -j4"
+cache: bundler
+before_script:
+  - cp config/database.travis.yml config/database.yml
+  - bundle exec rails db:setup
+jobs:
+  include:
+    - stage: test
+      script: bundle exec rails test
+    - stage: production_deploy
+      script: bash ./scripts/deploy_production.sh
+    - stage: staging_deploy
+      script: bash ./scripts/deploy_staging.sh
+
+stages:
+  - test
+  - name: production_deploy
+    if: branch = master
+  - name: staging_deploy
+    if: branch = /^development/*$/
