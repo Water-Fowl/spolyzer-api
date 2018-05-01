@@ -6,6 +6,7 @@ cache: bundler
 before_script:
   - cp config/database.travis.yml config/database.yml
   - bundle exec rails db:setup
+
 jobs:
   include:
     - stage: test
