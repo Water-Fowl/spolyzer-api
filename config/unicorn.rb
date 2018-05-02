@@ -1,5 +1,5 @@
 # paths
-app_path = "/home/deploy/apps/spolyzer"
+app_path = "/home/admin/apps/spolyzer"
 working_directory "#{app_path}/current"
 pid "#{app_path}/current/tmp/pids/unicorn.pid"
 

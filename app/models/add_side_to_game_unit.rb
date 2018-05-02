@@ -1,0 +1,2 @@
+class AddSideToGameUnit < ApplicationRecord
+end

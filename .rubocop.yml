@@ -1,0 +1,16 @@
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'vendor/**/*'
+    - 'capistrano/**/*'
+ClassAndModuleChildren:
+  EnforcedStyle: compact
+LineLength:
+  Max: 100
+Style/Documentation:
+  Enabled: false
+Metrix/MethodLength:
+  Max: 20
+
