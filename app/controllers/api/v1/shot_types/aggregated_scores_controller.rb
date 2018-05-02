@@ -28,6 +28,7 @@ class Api::V1::ShotTypes::AggregatedScoresController < Api::V1::BaseController
               )
               .where(shot_type_id: params[:shot_type_id])
               .where(is_net_miss: false)
+
   end
 
   def set_opponent_users
