@@ -1,1 +1,1 @@
-url: 'http://54.249.94.110'
+url: <%= ENV["PRODUCTION_HOST"] %>
