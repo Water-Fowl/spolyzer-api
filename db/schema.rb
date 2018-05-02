@@ -12,12 +12,6 @@
 
 ActiveRecord::Schema.define(version: 20180426071420) do
 
-  create_table "add_side_to_game_units", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "side"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "analysis_results", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
