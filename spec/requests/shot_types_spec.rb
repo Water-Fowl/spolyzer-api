@@ -15,7 +15,7 @@ RSpec.describe "ShotTypes", type: :request do
     @headers.merge! auth_header
   end
 
-  describe "GET /aggregated_scores/shot_types/:shot_type_id" do
+  describe "GET /api/v1/shot_types" do
 
 
       subject do
@@ -26,24 +26,6 @@ RSpec.describe "ShotTypes", type: :request do
         subject
         expect(response).to have_http_status(200)
       end
-
-  end
-
-
-  describe "GET /aggregated_scores/shot_types/:shot_type_id" do
-
-    let(:params) { {id: 1} }
-    let(:sport) { Sport.first }
-
-
-    subject do
-      get "/api/v1/shot_types/:id", params: params, as: :json, headers: @headers
-    end
-
-    it "should return 200 status" do
-      subject
-      expect(response).to have_http_status(200)
-    end
 
   end
 end
