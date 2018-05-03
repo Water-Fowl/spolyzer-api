@@ -2,7 +2,11 @@ require 'rails_helper'
 
 RSpec.describe "Score", :type => :model do
   before(:each) do
-    @game = create(:game, :with_sport, :with_units, :with_scores)
+    @unit = create(:unit)
+    @game = create(:game)
+    @unit.games << @game
+    @game.units << create(:unit)
+    @user = create(:user)
     Unit.first.users << FactoryBot.create(:user, name: "test1", email: "test4@test.com")
     Unit.second.users << FactoryBot.create(:user, name: "test2", email: "test5@test.com")
   end

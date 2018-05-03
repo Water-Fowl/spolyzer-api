@@ -3,13 +3,20 @@ require 'rails_helper'
 RSpec.describe Unit, :type => :model do
 
   before(:each) do
-    create(:game, :with_sport, :with_units, :with_scores)
-    create(:game,:with_sport, :with_units, :with_scores)
+    create(:unit, user_count: 2)
+    create(:unit, user_count: 2)
+    create(:unit)
+    @game = create(:game)
+    Unit.first.games << @game
+    Unit.second.games << @game
     Unit.first.users << create(:user, name: "test1", email: "test1@test.com")
     Unit.first.users << create(:user, name: "test2", email: "test2@test.com")
     Unit.second.users << create(:user, name: "test3", email: "test3@test.com")
     Unit.second.users << create(:user, name: "test4", email: "test4@test.com")
     @users = User.first, User.second
+
+    @game = create(:game)
+    Unit.find(3).games << @game
     Unit.find(3).users << create(:user, name: "test5", email: "test5@test.com")
     @user = [Unit.find(3).users.first]
   end

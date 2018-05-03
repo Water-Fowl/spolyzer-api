@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "AggregatedScore", type: :request do
   before do
-    @sport = create(:sport)
-    @game = create(:game, :with_sport, :with_units, :with_scores)
+    @unit = create(:unit)
+    @game = create(:game)
+    @unit.games << @game
     @user = create(:user)
 
     #TODO 共通処理として切り出す

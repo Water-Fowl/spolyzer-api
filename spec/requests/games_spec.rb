@@ -1,10 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "Games", type: :request do
+
   describe "GET /games/:game_id/counts" do
-    before(:each) do
-      create(:sport)
-      @game = create(:game, :with_sport, :with_units, :with_scores)
+    before do
+      @unit = create(:unit)
+      @game = create(:game)
+      @unit.games << @game
       @user = create(:user)
 
       #TODO 共通処理として切り出す
@@ -27,6 +29,7 @@ RSpec.describe "Games", type: :request do
     before do
       create(:sport)
       @user = create(:user)
+      create(:user, name: "test2", email: "test2@test.com")
 
       @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
       auth_header = @user.create_new_auth_token
@@ -35,8 +38,8 @@ RSpec.describe "Games", type: :request do
     let(:params) do
       {
         units: {
-          "0": {users: [{id: 1}], count: 1},
-          "1": {users: [{id: 2}], count: 1},
+          left: {users: [{id: 1}], count: 1},
+          right: {users: [{id: 2}], count: 1},
           ids: [1, 2]
         },
         scores: [
