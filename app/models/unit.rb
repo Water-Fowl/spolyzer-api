@@ -22,4 +22,17 @@ class Unit < ApplicationRecord
       users[0].units
     end
   end
+
+  def self.find_or_create_with_users(users)
+    unit = self.of_users(users).first
+
+    if not unit
+      unit = Unit.create(user_count: users.count)
+      users.each do |user|
+        unit.user_units.create(user_id: user[:id])
+      end
+    end
+    unit
+  end
+
 end

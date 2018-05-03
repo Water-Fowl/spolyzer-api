@@ -3,7 +3,7 @@ class Api::V1::ShotTypes::AggregatedScoresController < Api::V1::BaseController
   before_action :set_opponent_users
 
   def index
-    if @opponent_users
+    if @opponent_users.present?
       set_scores_with_opponent_users
     else
       set_scores
@@ -28,6 +28,7 @@ class Api::V1::ShotTypes::AggregatedScoresController < Api::V1::BaseController
               )
               .where(shot_type_id: params[:shot_type_id])
               .where(is_net_miss: false)
+
   end
 
   def set_opponent_users

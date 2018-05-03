@@ -13,8 +13,8 @@ class Api::V1::GamesController < Api::V1::BaseController
 
     create_game
 
-    @left_unit = create_units(:left)
-    @right_unit = create_units(:right)
+    @left_unit = find_or_create_units(:left)
+    @right_unit = find_or_create_units(:right)
 
     create_scores
   end
@@ -25,21 +25,18 @@ class Api::V1::GamesController < Api::V1::BaseController
     @game = Game.create(name: params[:game][:name], sport_id: @sport.id)
   end
 
-  def create_units(side)
+  def find_or_create_units(side)
 
     user_count = @units[side][:count]
 
-    unit = Unit.create(
-      user_count: user_count,
-    )
-
-    unit.game_units.create(game_id: @game.id)
-
+    users = []
     user_count.times do |i|
       user = @units[side][:users][i]
-      unit.user_units.create(user_id: user[:id])
+      users.push(User.find(user[:id]))
     end
 
+    unit = Unit.find_or_create_with_users(users)
+    unit.game_units.create(game_id: @game.id, side: side)
     unit
   end
 
