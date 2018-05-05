@@ -28,13 +28,6 @@ class User < ApplicationRecord
     analysis_results.order(created_at: :asc).try(:first)
   end
 
-  def total_score(game_id)
-    games
-      .find_by_id(game_id)
-      .scores
-      .where(user_id: id)
-  end
-
   # TODO: devise token auth でaccess_tokenのupdate
   def generate_access_token!
     raise NotImplementedError

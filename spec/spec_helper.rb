@@ -7,6 +7,18 @@ RSpec.configure do |config|
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
   end
+  config.before(:suite) do
+    Rails.application.load_seed
+    DatabaseCleaner.strategy = :truncation
+  end
+  config.before(:each) do
+    Rails.application.load_seed
+    DatabaseCleaner.start
+  end
+  config.after(:each) do
+    Rails.application.load_seed
+    DatabaseCleaner.clean
+  end
   config.shared_context_metadata_behavior = :apply_to_host_groups
   config.filter_run_when_matching :focus
   config.disable_monkey_patching!
@@ -15,3 +27,4 @@ RSpec.configure do |config|
   config.order = :random
   Kernel.srand config.seed
 end
+

@@ -8,11 +8,11 @@ class Game < ApplicationRecord
   has_many :scores
 
   def winner
-    user_order_by_score.last
+    unit_order_by_score.last
   end
 
   def loser
-    user_order_by_score.first
+    unit_order_by_score.first
   end
 
   def score_count
@@ -25,9 +25,9 @@ class Game < ApplicationRecord
 
   private
 
-  def user_order_by_score
-    @order ||=
-      users
+  def unit_order_by_score
+    @order ||= self
+      .units
       .sort do |user|
         user.scores.where(game_id: id).count
       end
