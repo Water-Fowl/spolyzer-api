@@ -8,4 +8,5 @@ FactoryBot.define do
     is_net_miss true
     dropped_side 0
   end
+
 end

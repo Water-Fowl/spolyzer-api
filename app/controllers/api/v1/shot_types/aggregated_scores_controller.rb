@@ -17,6 +17,7 @@ class Api::V1::ShotTypes::AggregatedScoresController < Api::V1::BaseController
     @scores = Score.of_user_games(current_api_v1_user, params[:game_user_count])
                   .where(shot_type_id: params[:shot_type_id])
                   .where(is_net_miss: false)
+                  binding.pry
   end
 
   def set_scores_with_opponent_users
@@ -28,7 +29,6 @@ class Api::V1::ShotTypes::AggregatedScoresController < Api::V1::BaseController
               )
               .where(shot_type_id: params[:shot_type_id])
               .where(is_net_miss: false)
-
   end
 
   def set_opponent_users
