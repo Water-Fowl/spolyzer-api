@@ -5,6 +5,7 @@ Devise.setup do |config|
   # TODO: envにまとめる
   config.mailer_sender = ENV["MAIL_USER_NAME"]
   config.secret_key = '4295bdc7f545fdfb21c49d93216f683045f9daf7f454ef46d8e60523821d96902b830b01c0320c2ead71c39a92729098647fe8aa77b0af4f7ae65da722437362'
+  config.mailer = 'Api::V1::Users::Mailer'
   # If using rails-api, you may want to tell devise to not use ActionDispatch::Flash
   # middleware b/c rails-api does not include it.
   # See: http://stackoverflow.com/q/19600905/806956
