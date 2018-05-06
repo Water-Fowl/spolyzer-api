@@ -11,6 +11,8 @@ Rails.application.routes.draw do
           end
         end
 
+        resources :sports, only: [:index, :show]
+
         resources :users  do
           collection do
             get :search
