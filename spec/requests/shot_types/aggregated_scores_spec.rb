@@ -10,7 +10,7 @@ RSpec.describe "shot_types/AggregatedScore", type: :request do
     @opponent_unit.games << @game
 
     @user = create(:user)
-    @opponent_user = create(:user, name: "test2", email: "test2@test.com")
+    @opponent_user = create(:user)
 
     @unit.users << @user
     @opponent_unit.users << @opponent_user
@@ -25,14 +25,11 @@ RSpec.describe "shot_types/AggregatedScore", type: :request do
 
   describe "GET /api/v1/shot_types/:shot_type_id/aggregated_scores" do
     describe "index" do
-      let(:params) do
-        {
+      let(:params){{
           game_user_count: 2,
           shot_type_id: 1,
           opponent_users_ids: "2"
-
-        }
-      end
+        }}
 
       let(:current_api_v1_user){@user}
 

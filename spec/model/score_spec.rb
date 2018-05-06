@@ -7,8 +7,8 @@ RSpec.describe "Score", :type => :model do
     @unit.games << @game
     @game.units << create(:unit)
     @user = create(:user)
-    Unit.first.users << FactoryBot.create(:user, name: "test1", email: "test4@test.com")
-    Unit.second.users << FactoryBot.create(:user, name: "test2", email: "test5@test.com")
+    Unit.first.users << create(:user)
+    Unit.second.users << create(:user)
   end
   describe "scopes" do
 

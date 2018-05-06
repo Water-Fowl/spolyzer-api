@@ -9,15 +9,15 @@ RSpec.describe Unit, :type => :model do
     @game = create(:game)
     Unit.first.games << @game
     Unit.second.games << @game
-    Unit.first.users << create(:user, name: "test1", email: "test1@test.com")
-    Unit.first.users << create(:user, name: "test2", email: "test2@test.com")
-    Unit.second.users << create(:user, name: "test3", email: "test3@test.com")
-    Unit.second.users << create(:user, name: "test4", email: "test4@test.com")
+    Unit.first.users << create(:user)
+    Unit.first.users << create(:user)
+    Unit.second.users << create(:user)
+    Unit.second.users << create(:user)
     @users = User.first, User.second
 
     @game = create(:game)
     Unit.find(3).games << @game
-    Unit.find(3).users << create(:user, name: "test5", email: "test5@test.com")
+    Unit.find(3).users << create(:user)
     @user = [Unit.find(3).users.first]
   end
 

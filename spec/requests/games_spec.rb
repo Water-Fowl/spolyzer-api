@@ -29,7 +29,7 @@ RSpec.describe "Games", type: :request do
     before do
       create(:sport)
       @user = create(:user)
-      create(:user, name: "test2", email: "test2@test.com")
+      create(:user)
 
       @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
       auth_header = @user.create_new_auth_token
