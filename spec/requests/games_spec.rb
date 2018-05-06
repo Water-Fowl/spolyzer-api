@@ -2,12 +2,23 @@ require 'rails_helper'
 
 RSpec.describe "Games", type: :request do
 
-  describe "GET /games/:game_id/counts" do
+  describe "GET /games" do
     before do
       @unit = create(:unit)
       @game = create(:game)
       @unit.games << @game
+
+      @opponent_unit = create(:unit)
+      @opponent_unit.games << @game
+
       @user = create(:user)
+      @opponent_user = create(:user)
+
+      @unit.users << @user
+      @opponent_unit.users << @opponent_user
+
+      @score =  Score.create(game_id: @game.id, shot_type_id: 1, dropped_side: 1, unit_id: @unit.id, position_id: 1)
+      @game.scores << @score
 
       #TODO 共通処理として切り出す
       @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
@@ -15,13 +26,20 @@ RSpec.describe "Games", type: :request do
       @headers.merge! auth_header
     end
 
-    subject do
-      get "/api/v1/games/#{@game.id}/aggregated_scores", headers: @headers
+    let(:current_api_v1_user) { @user }
+
+    subject(:index_action) do
+      get "/api/v1/games", headers: @headers
     end
 
     it "return 200" do
-      subject
+      index_action
       expect(response).to have_http_status(200)
+    end
+
+    it "現在のユーザから取れるgameの情報を送る" do
+      index_action
+      expect(json['games'].length).to eq 1
     end
   end
 
@@ -53,13 +71,15 @@ RSpec.describe "Games", type: :request do
         sport_id: 1
       }
     end
-    subject do
+
+    subject(:create_action) do
       post "/api/v1/games", params: params, as: :json, headers: @headers
     end
     it 'return 200' do
-      subject
+      create_action
       expect(response.status).to eq 200
     end
+
     it 'Gameが1つ作成される' do
       expect{ subject }.to change(Game, :count).by(1)
     end

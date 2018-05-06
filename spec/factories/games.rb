@@ -4,11 +4,6 @@ FactoryBot.define do
     association :sport, factory: :sport
   end
 
-
-  trait :with_sport do
-    association :sport, factory: :sport
-  end
-
   trait :with_scores do
 
     transient do

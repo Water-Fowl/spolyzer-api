@@ -18,12 +18,12 @@ RSpec.describe "ShotTypes", type: :request do
   describe "GET /api/v1/shot_types" do
 
 
-      subject do
+      subject(:index_action) do
         get "/api/v1/shot_types", params: params, as: :json, headers: @headers
       end
 
       it "should return 200 status" do
-        subject
+        index_action
         expect(response).to have_http_status(200)
       end
 

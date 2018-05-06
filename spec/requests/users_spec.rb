@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
-  describe "GET /games/:game_id/counts" do
-    before(:each) do
+  describe "GET /users/:user_id #show" do
+    before do
       create(:sport)
       @user = create(:user)
 
@@ -12,18 +12,18 @@ RSpec.describe "Users", type: :request do
       @headers.merge! auth_header
     end
 
-    subject do
+    subject(:show_action) do
       get "/api/v1/users/#{@user.id}", headers: @headers
     end
 
     it "return 200" do
-      subject
+      show_action
       expect(response).to have_http_status(200)
     end
   end
 
   describe 'PUT #update' do
-    before(:each) do
+    before do
       create(:sport)
       @user = create(:user)
 
@@ -32,11 +32,11 @@ RSpec.describe "Users", type: :request do
       @headers.merge! auth_header
     end
 
-    subject do
+    subject(:update_action) do
       put "/api/v1/users/#{@user.id}s", params: params, as: :json, headers: @headers
     end
     it 'return 200' do
-      subject
+      update_action
       expect(response.status).to eq 200
     end
   end

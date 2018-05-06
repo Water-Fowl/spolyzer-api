@@ -12,12 +12,12 @@ RSpec.describe "UserSport", type: :request do
   end
 
   describe "PUT #update" do
-    subject do
+    subject(:update_action) do
       put "/api/v1/users/sports/#{@user.id}", params: params, as: :json, headers: @headers
     end
 
     it 'return 200' do
-      subject
+      update_action
       expect(response.status).to eq 200
     end
 
