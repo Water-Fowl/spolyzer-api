@@ -13,10 +13,6 @@ Rails.application.routes.draw do
 
         resources :sports, only: [:index, :show]
 
-        namespace :users do
-          resources :sports, only: [:update]
-        end
-
         resources :users  do
           collection do
             get :search
