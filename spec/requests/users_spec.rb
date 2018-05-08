@@ -24,7 +24,7 @@ RSpec.describe "Users", type: :request do
 
   describe 'PUT #update' do
     before do
-      create(:sport)
+      create(:sport, name_ja: 'テニス', name_en: 'tennis')
       @user = create(:user)
 
       @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
@@ -32,12 +32,28 @@ RSpec.describe "Users", type: :request do
       @headers.merge! auth_header
     end
 
-    subject(:update_action) do
-      put "/api/v1/users/#{@user.id}s", params: params, as: :json, headers: @headers
+    let(:params) do
+      {
+        name: 'changed_name',
+        email: 'changed_email@test.com',
+        image: @user.image,
+        sport_id: 2
+      }
     end
+
+    subject(:update_action) do
+      put "/api/v1/users/#{@user.id}", params: params, as: :json, headers: @headers
+    end
+
     it 'return 200' do
       update_action
       expect(response.status).to eq 200
+    end
+
+    it '更新されたユーザー情報を返す' do
+      update_action
+      expect(json['user']['name']).to eq(params[:name])
+      expect(json['user']['sport_id']).to eq(params[:sport_id])
     end
   end
 end
