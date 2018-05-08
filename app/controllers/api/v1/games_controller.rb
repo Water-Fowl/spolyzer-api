@@ -17,6 +17,10 @@ class Api::V1::GamesController < Api::V1::BaseController
     @right_unit = find_or_create_units(:right)
 
     create_scores
+    score_count = @game.score_count
+
+    create_outcome
+
   end
 
   private
@@ -42,8 +46,13 @@ class Api::V1::GamesController < Api::V1::BaseController
 
   def create_scores
     @scores.each do |score|
+      if score[:is_net_miss]
+        unit_id = score[:side] == 1 ? @right_unit.id : @left_unit.id
+      else
+        unit_id = score[:side] == 1 ? @left_unit.id : @right_unit.id
+      end
       @score = Score.create(
-        unit_id: score[:side] == 1 ? @left_unit.id : @right_unit.id,
+        unit_id: unit_id,
         is_net_miss: score[:is_net_miss],
         shot_type_id: score[:shot_type],
         position_id: score[:dropped_at],
@@ -57,4 +66,17 @@ class Api::V1::GamesController < Api::V1::BaseController
     params.require(:users, :scores, :game)
   end
 
+  def create_outcome
+
+    if score_count[:left] > score_count[:right]
+      @game.game_units.find_by(side: :right).update(outcome: :lose)
+      @game.game_units.find_by(side: :left).update(outcome: :win)
+    elsif score_count[:left] < score_count[:right]
+      @game.game_units.find_by(side: :right).update(outcome: :win)
+      @game.game_units.find_by(side: :left).update(outcome: :lose)
+    else
+      @game.game_units.find_by(side: :right).update(outcome: :draw)
+      @game.game_units.find_by(side: :left).update(outcome: :draw)
+    end
+  end
 end
