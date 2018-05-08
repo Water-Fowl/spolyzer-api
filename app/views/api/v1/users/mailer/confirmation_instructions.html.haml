@@ -1,0 +1,9 @@
+!!!
+%html
+  %body
+    %p
+      この度はSpolyzerをご利用いただきありがとうございます。
+    %p
+      まだユーザー登録は完了していません。
+    %p
+      = link_to "このリンクをタップして、登録を完了させてください。", confirmation_url(@resource, {confirmation_token: @token, config: message['client-config'].to_s, redirect_url: message['redirect-url']}).html_safe

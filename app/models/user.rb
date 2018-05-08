@@ -3,8 +3,7 @@
 class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
 
-  has_many :sport_users
-  has_many :sports, through: :sport_users
+  belongs_to :sport
   has_many :user_units
   has_many :units, through: :user_units
   has_many :games, through: :units
@@ -26,13 +25,6 @@ class User < ApplicationRecord
 
   def latest_result
     analysis_results.order(created_at: :asc).try(:first)
-  end
-
-  def total_score(game_id)
-    games
-      .find_by_id(game_id)
-      .scores
-      .where(user_id: id)
   end
 
   # TODO: devise token auth でaccess_tokenのupdate
