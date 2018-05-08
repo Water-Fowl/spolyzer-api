@@ -17,7 +17,6 @@ class Api::V1::GamesController < Api::V1::BaseController
     @right_unit = find_or_create_units(:right)
 
     create_scores
-    score_count = @game.score_count
 
     create_outcome
 
@@ -26,7 +25,7 @@ class Api::V1::GamesController < Api::V1::BaseController
   private
 
   def create_game
-    @game = Game.create(name: params[:game][:name], sport_id: @sport.id)
+    @game = Game.create(name: game_params[:name], sport_id: @sport.id)
   end
 
   def find_or_create_units(side)
@@ -51,6 +50,7 @@ class Api::V1::GamesController < Api::V1::BaseController
       else
         unit_id = score[:side] == 1 ? @left_unit.id : @right_unit.id
       end
+
       @score = Score.create(
         unit_id: unit_id,
         is_net_miss: score[:is_net_miss],
@@ -63,20 +63,33 @@ class Api::V1::GamesController < Api::V1::BaseController
   end
 
   def game_params
-    params.require(:users, :scores, :game)
+    params.require(:game).permit(:name)
+  end
+
+  def score_params
+    params.require(:scores).permit(
+      :is_net_miss,
+      :shot_type_id,
+      :position_id,
+      :dropped_side)
   end
 
   def create_outcome
 
+    score_count = @game.score_count
+    right_game_unit = @game.game_units.find_by(side: :right)
+    left_game_unit = @game.game_units.find_by(side: :left)
+
     if score_count[:left] > score_count[:right]
-      @game.game_units.find_by(side: :right).update(outcome: :lose)
-      @game.game_units.find_by(side: :left).update(outcome: :win)
+      right_game_unit.update(outcome: :lose)
+      left_game_unit.update(outcome: :win)
     elsif score_count[:left] < score_count[:right]
-      @game.game_units.find_by(side: :right).update(outcome: :win)
-      @game.game_units.find_by(side: :left).update(outcome: :lose)
+      right_game_unit.update(outcome: :win)
+      left_game_unit.update(outcome: :lose)
     else
-      @game.game_units.find_by(side: :right).update(outcome: :draw)
-      @game.game_units.find_by(side: :left).update(outcome: :draw)
+      right_game_unit.update(outcome: :draw)
+      left_game_unit.update(outcome: :draw)
     end
+
   end
 end
