@@ -28,17 +28,17 @@ RSpec.describe "Games", type: :request do
 
     let(:current_api_v1_user) { @user }
 
-    subject(:index_action) do
+    subject do
       get "/api/v1/games", headers: @headers
     end
 
     it "return 200" do
-      index_action
+      subject
       expect(response).to have_http_status(200)
     end
 
     it "現在のユーザから取れるgameの情報を送る" do
-      index_action
+      subject
       expect(json['games'].length).to eq 1
     end
   end
@@ -72,11 +72,12 @@ RSpec.describe "Games", type: :request do
       }
     end
 
-    subject(:create_action) do
+    subject do
       post "/api/v1/games", params: params, as: :json, headers: @headers
     end
+
     it 'return 200' do
-      create_action
+      subject
       expect(response.status).to eq 200
     end
 

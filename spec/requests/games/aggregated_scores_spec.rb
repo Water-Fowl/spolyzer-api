@@ -27,17 +27,17 @@ RSpec.describe "games/AggregatedScore", type: :request do
 
       let(:current_api_v1_user){@user}
 
-      subject(:index_action) do
+      subject do
         get "/api/v1/games/#{@game.id}/aggregated_scores", headers: @headers
       end
 
       it "return 200" do
-        index_action
+        subject
         expect(response).to have_http_status(200)
       end
 
       it "正しくscoreを分類して、集計する" do
-        index_action
+        subject
         expect(json['counts'].length).to eq 1
       end
     end

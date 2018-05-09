@@ -41,17 +41,17 @@ RSpec.describe "Users", type: :request do
       }
     end
 
-    subject(:update_action) do
+    subject do
       put "/api/v1/users/#{@user.id}", params: params, as: :json, headers: @headers
     end
 
     it 'return 200' do
-      update_action
+      subject
       expect(response.status).to eq 200
     end
 
     it '更新されたユーザー情報を返す' do
-      update_action
+      subject
       expect(json['user']['name']).to eq(params[:name])
       expect(json['user']['sport_id']).to eq(params[:sport_id])
     end
