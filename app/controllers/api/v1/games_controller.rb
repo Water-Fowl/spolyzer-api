@@ -17,12 +17,14 @@ class Api::V1::GamesController < Api::V1::BaseController
     @right_unit = find_or_create_units(:right)
 
     create_scores
+    @game.update_outcome
+
   end
 
   private
 
   def create_game
-    @game = Game.create(name: params[:game][:name], sport_id: @sport.id)
+    @game = Game.create(name: game_params[:name], sport_id: @sport.id)
   end
 
   def find_or_create_units(side)
@@ -42,8 +44,14 @@ class Api::V1::GamesController < Api::V1::BaseController
 
   def create_scores
     @scores.each do |score|
+      if score[:is_net_miss]
+        unit_id = score[:side] == 1 ? @right_unit.id : @left_unit.id
+      else
+        unit_id = score[:side] == 1 ? @left_unit.id : @right_unit.id
+      end
+
       @score = Score.create(
-        unit_id: score[:side] == 1 ? @left_unit.id : @right_unit.id,
+        unit_id: unit_id,
         is_net_miss: score[:is_net_miss],
         shot_type_id: score[:shot_type],
         position_id: score[:dropped_at],
@@ -54,7 +62,6 @@ class Api::V1::GamesController < Api::V1::BaseController
   end
 
   def game_params
-    params.require(:users, :scores, :game)
+    params.require(:game).permit(:name)
   end
-
 end
