@@ -30,6 +30,24 @@ class Game < ApplicationRecord
     scores = {left: left_score_count, right: right_score_count}
   end
 
+  def update_outcome
+    score_count = self.score_count
+    right_game_unit = self.game_units.find_by(side: :right)
+    left_game_unit = self.game_units.find_by(side: :left)
+
+    if score_count[:left] > score_count[:right]
+      right_game_unit.update(outcome: :lose)
+      left_game_unit.update(outcome: :win)
+    elsif score_count[:left] < score_count[:right]
+      right_game_unit.update(outcome: :win)
+      left_game_unit.update(outcome: :lose)
+    else
+      right_game_unit.update(outcome: :draw)
+      left_game_unit.update(outcome: :draw)
+    end
+
+  end
+
   private
 
   def unit_order_by_score
@@ -40,8 +58,6 @@ class Game < ApplicationRecord
       end
   end
 
-
-
   scope :of_user, ->(user) {
     joins(:users)
       .where(users: { id: user.id })
@@ -49,15 +65,4 @@ class Game < ApplicationRecord
 
   # user vs opponent_usersの試合のうち、opponent_usersのUnitの人数をuser_countで指定して検索する
   # userのGameの中で、opponent_usersのUnitであり、userのUnitではない (対戦相手であるため) Unitを持ったGameを探す
-  scope :of_opponent_users, ->(user, opponent_users, user_count) {
-    joins(:units)
-      .where(units: { id: Unit
-      .of_users(opponent_users)
-      .joins(:users)
-      .where
-      .not(users: { id: user.id })
-      .where(user_count: user_count)
-      .pluck(:id) })
-      .of_user(user)
-  }
 end
