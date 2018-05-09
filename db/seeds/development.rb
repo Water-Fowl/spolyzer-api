@@ -133,8 +133,4 @@ ActiveRecord::Base.transaction do
       dropped_side: 0,
     )
   end
-
-  AnalysisResult.create(
-    user_id: 1
-  )
 end
