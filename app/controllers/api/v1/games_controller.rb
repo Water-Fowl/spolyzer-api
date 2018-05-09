@@ -17,8 +17,7 @@ class Api::V1::GamesController < Api::V1::BaseController
     @right_unit = find_or_create_units(:right)
 
     create_scores
-
-    create_outcome
+    @game.update_outcome
 
   end
 
@@ -64,32 +63,5 @@ class Api::V1::GamesController < Api::V1::BaseController
 
   def game_params
     params.require(:game).permit(:name)
-  end
-
-  def score_params
-    params.require(:scores).permit(
-      :is_net_miss,
-      :shot_type_id,
-      :position_id,
-      :dropped_side)
-  end
-
-  def create_outcome
-
-    score_count = @game.score_count
-    right_game_unit = @game.game_units.find_by(side: :right)
-    left_game_unit = @game.game_units.find_by(side: :left)
-
-    if score_count[:left] > score_count[:right]
-      right_game_unit.update(outcome: :lose)
-      left_game_unit.update(outcome: :win)
-    elsif score_count[:left] < score_count[:right]
-      right_game_unit.update(outcome: :win)
-      left_game_unit.update(outcome: :lose)
-    else
-      right_game_unit.update(outcome: :draw)
-      left_game_unit.update(outcome: :draw)
-    end
-
   end
 end
