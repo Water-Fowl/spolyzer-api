@@ -4,10 +4,16 @@ class Api::V1::ShotTypes::AggregatedScoresController < Api::V1::BaseController
   def index
     game_units = set_game_units
     set_opponent_users
+
     if @opponent_users.present?
-      opponent_game_units = set_opponent_game_units
+      opponent_game_units = GameUnit.get_by_opponent_users(
+        current_api_v1_user,
+        @opponent_users,
+        params[:game_user_count]
+      )
       game_ids = game_units.pluck(:game_id) & opponent_game_units.pluck(:game_id)
     end
+
     game_ids ||= game_units.pluck(:game_id)
 
     set_scores(game_ids)
@@ -17,11 +23,7 @@ class Api::V1::ShotTypes::AggregatedScoresController < Api::V1::BaseController
   private
 
   def set_game_units
-    game_units = GameUnit.where(unit_id: Unit
-      .joins(:users)
-      .where(users: {id: current_api_v1_user.id})
-      .where(user_count: params[:game_user_count])
-      .pluck(:id))
+    game_units = GameUnit.get_by_user(current_api_v1_user, params[:game_user_count])
 
     unless params[:outcome] == "all"
       game_units = game_units.where(outcome: params[:outcome])
@@ -33,16 +35,6 @@ class Api::V1::ShotTypes::AggregatedScoresController < Api::V1::BaseController
   def set_opponent_users
     opponent_users_ids = params[:opponent_users_ids].split(',').map(&:to_i)
     @opponent_users = User.find(opponent_users_ids)
-  end
-
-  def set_opponent_game_units
-      opponent_units = Unit
-        .joins(:users)
-        .where.not(users: {id: current_api_v1_user.id})
-        .of_users(@opponent_users)
-        .where(user_count: params[:game_user_count])
-
-      opponent_game_units = GameUnit.where(unit_id: opponent_units.pluck(:id))
   end
 
   def set_scores(game_ids)
