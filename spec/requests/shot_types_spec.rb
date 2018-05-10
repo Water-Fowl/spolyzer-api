@@ -9,6 +9,7 @@ RSpec.describe "ShotTypes", type: :request do
     left_unit.games << game
     right_unit.games << game
     @user = create(:user)
+    @shot_types = ShotType.where(sport_id: 1)
 
     @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
     auth_header = @user.create_new_auth_token
@@ -22,9 +23,16 @@ RSpec.describe "ShotTypes", type: :request do
         get "/api/v1/shot_types", params: params, as: :json, headers: @headers
       end
 
-      it "should return 200 status" do
+      it "ステータスコード200を返す" do
         subject
         expect(response).to have_http_status(200)
+      end
+
+      let(:params) { {sport_id: 1} }
+
+      it "shot_typesをjsonで渡す" do
+        subject
+        expect(json['shot_types'].pluck('id')).to eq @shot_types.pluck(:id)
       end
 
   end
