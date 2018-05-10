@@ -86,6 +86,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rails-erd'
   gem 'rubocop', require: false
+  gem 'travis'
 end
 
 group :development do
