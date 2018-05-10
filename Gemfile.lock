@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/tablexi/capistrano3-unicorn.git
+  revision: a989277909d1ff2fed424f8144ac97cccdf4fc00
+  branch: master
+  specs:
+    capistrano3-unicorn (0.2.1)
+      capistrano (~> 3.1, >= 3.1.0)
+
 GEM
   remote: http://rubygems.org/
   remote: https://rails-assets.org/
@@ -48,6 +56,9 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    addressable (2.4.0)
+    airbrussh (1.3.0)
+      sshkit (>= 1.6.1, != 1.7.0)
     arel (8.0.0)
     ast (2.4.0)
     autodoc (0.6.2)
@@ -66,12 +77,29 @@ GEM
       multi_xml (~> 0.5)
     aws-sdk-resources (2.0.6.pre)
       aws-sdk-core (= 2.0.6)
+    backports (3.11.3)
     bcrypt (3.1.11)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
     builder (3.2.3)
     byebug (9.1.0)
+    capistrano (3.9.1)
+      airbrussh (>= 1.0.0)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 1.9.0)
+    capistrano-bundler (1.3.0)
+      capistrano (~> 3.1)
+      sshkit (~> 1.2)
+    capistrano-dotenv-tasks (0.1.5)
+      capistrano (~> 3.0)
+    capistrano-rails (1.3.1)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
+    capistrano-rbenv (2.1.3)
+      capistrano (~> 3.1)
+      sshkit (~> 1.3)
     carrierwave (1.2.2)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
@@ -141,6 +169,8 @@ GEM
       html2haml
     erubi (1.7.0)
     erubis (2.7.0)
+    ethon (0.11.0)
+      ffi (>= 1.3.0)
     exception_notification (4.2.2)
       actionmailer (>= 4.0, < 6)
       activesupport (>= 4.0, < 6)
@@ -155,6 +185,10 @@ GEM
       i18n (>= 0.7)
     fancybox2-rails (0.2.7)
       railties (>= 3.1.0)
+    faraday (0.15.0)
+      multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.12.2)
+      faraday (>= 0.7.4, < 1.0)
     ffi (1.9.18)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
@@ -313,6 +347,13 @@ GEM
       railties (>= 3.2, < 5.2)
     formatador (0.2.5)
     get_process_mem (0.2.1)
+    gh (0.15.1)
+      addressable (~> 2.4.0)
+      backports
+      faraday (~> 0.8)
+      multi_json (~> 1.0)
+      net-http-persistent (~> 2.9)
+      net-http-pipeline
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     haml (5.0.4)
@@ -325,6 +366,7 @@ GEM
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
     hashie (3.5.6)
+    highline (1.7.10)
     html2haml (2.2.0)
       erubis (~> 2.7.0)
       haml (>= 4.0, < 6)
@@ -347,6 +389,8 @@ GEM
       railties (>= 3.2.16)
     json (2.1.0)
     kgio (2.11.0)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -364,7 +408,13 @@ GEM
     minitest (5.10.3)
     multi_json (1.12.2)
     multi_xml (0.6.0)
+    multipart-post (2.0.0)
     mysql2 (0.4.9)
+    net-http-persistent (2.9.4)
+    net-http-pipeline (1.0.1)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (4.2.0)
     netrc (0.11.0)
     nio4r (2.1.0)
     nokogiri (1.8.1)
@@ -385,6 +435,9 @@ GEM
       pry (~> 0.10)
     pry-rails (0.3.6)
       pry (>= 0.10.4)
+    pusher-client (0.6.2)
+      json
+      websocket (~> 1.0)
     rack (2.0.3)
     rack-test (0.7.0)
       rack (>= 1.0, < 3)
@@ -497,7 +550,11 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
     sexp_processor (4.10.0)
+    sitemap_generator (6.0.1)
+      builder (~> 3.0)
     slack-notifier (2.3.2)
+    slackistrano (3.8.2)
+      capistrano (>= 3.8.1)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -510,15 +567,29 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    sshkit (1.16.0)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
     temple (0.8.0)
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
     timecop (0.9.1)
+    travis (1.8.8)
+      backports
+      faraday (~> 0.9)
+      faraday_middleware (~> 0.9, >= 0.9.1)
+      gh (~> 0.13)
+      highline (~> 1.6)
+      launchy (~> 2.1)
+      pusher-client (~> 0.4)
+      typhoeus (~> 0.6, >= 0.6.8)
     trollop (2.1.2)
     turbolinks (5.1.0)
       turbolinks-source (~> 5.1)
     turbolinks-source (5.1.0)
+    typhoeus (0.8.0)
+      ethon (>= 0.8.0)
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
     uglifier (4.1.3)
@@ -535,6 +606,7 @@ GEM
       unicorn (>= 4, < 6)
     warden (1.2.7)
       rack (>= 1.0)
+    websocket (1.2.5)
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -550,6 +622,12 @@ DEPENDENCIES
   aws-sdk (= 2.0.6.pre)
   bootstrap-sass
   byebug
+  capistrano (= 3.9.1)
+  capistrano-bundler
+  capistrano-dotenv-tasks
+  capistrano-rails
+  capistrano-rbenv
+  capistrano3-unicorn!
   carrierwave
   coffee-rails (~> 4.2)
   config
@@ -557,6 +635,7 @@ DEPENDENCIES
   database_rewinder
   devise
   devise_token_auth
+  dotenv
   dotenv-rails
   erb2haml
   exception_notification
@@ -586,11 +665,14 @@ DEPENDENCIES
   rspec-request_describer
   rubocop
   sass-rails
+  sitemap_generator
   slack-notifier
+  slackistrano
   spring
   spring-watcher-listen (~> 2.0.0)
   sprockets-rails
   timecop
+  travis
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)

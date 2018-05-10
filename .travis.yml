@@ -6,6 +6,8 @@ cache: bundler
 before_script:
   - cp config/database.travis.yml config/database.yml
   - bundle exec rails db:setup
+  - openssl aes-256-cbc -K $encrypted_06a2140a1988_key -iv $encrypted_06a2140a1988_iv -in deploy_key.enc -out deploy_key -d
+
 jobs:
   include:
     - stage: test
@@ -20,4 +22,4 @@ stages:
   - name: production_deploy
     if: branch = master
   - name: staging_deploy
-    if: branch = /^development/*$/
+    if: branch = development/v1.1.0
