@@ -1,1 +1,1 @@
-wcd capistrano && bundle exec cap production deploy
+cd capistrano && bundle exec cap production deploy
