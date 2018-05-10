@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe "ShotTypes", type: :request do
 
   before(:each) do
-    @left_unit = create(:unit)
-    @right_unit = create(:unit)
-    @game = create(:game, :with_scores, units: [@left_unit, @right_unit])
-    @left_unit.games << @game
-    @right_unit.games << @game
+    left_unit = create(:unit)
+    right_unit = create(:unit)
+    game = create(:game, :with_scores, units: [left_unit, right_unit])
+    left_unit.games << game
+    right_unit.games << game
     @user = create(:user)
 
     @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }

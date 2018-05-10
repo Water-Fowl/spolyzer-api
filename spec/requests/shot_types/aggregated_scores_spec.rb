@@ -2,21 +2,22 @@ require 'rails_helper'
 
 RSpec.describe "shot_types/AggregatedScore", type: :request do
   before do
-    @unit = create(:unit)
-    @game = create(:game)
-    @unit.games << @game
+    unit = create(:unit)
+    game = create(:game)
+    unit.games << game
 
-    @opponent_unit = create(:unit)
-    @opponent_unit.games << @game
+    opponent_unit = create(:unit)
+    opponent_unit.games << game
 
     @user = create(:user)
-    @opponent_user = create(:user)
 
-    @unit.users << @user
-    @opponent_unit.users << @opponent_user
+    opponent_user = create(:user)
 
-    @score =  Score.create(game_id: @game.id, shot_type_id: 1, dropped_side: 1, unit_id: @unit.id, position_id: 1)
-    @game.scores << @score
+    unit.users << @user
+    opponent_unit.users << opponent_user
+
+    score =  Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1)
+    game.scores << score
     #TODO 共通処理として切り出す
     @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
     auth_header = @user.create_new_auth_token
