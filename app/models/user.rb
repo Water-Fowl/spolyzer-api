@@ -3,7 +3,7 @@
 class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
 
-  belongs_to :sport
+  belongs_to :sport, optional: true
   has_many :user_units
   has_many :units, through: :user_units
   has_many :games, through: :units
