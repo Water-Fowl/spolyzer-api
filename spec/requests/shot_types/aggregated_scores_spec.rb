@@ -25,7 +25,6 @@ RSpec.describe "shot_types/AggregatedScore", type: :request do
   end
 
   describe "GET /api/v1/shot_types/:shot_type_id/aggregated_scores #index" do
-    describe "index" do
       let(:params){{
           game_user_count: 2,
           shot_type_id: 1,
@@ -47,6 +46,5 @@ RSpec.describe "shot_types/AggregatedScore", type: :request do
         subject
         expect(json['counts'].length).to eq 2
       end
-    end
   end
 end
