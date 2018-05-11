@@ -35,7 +35,7 @@ RSpec.describe "games/AggregatedScore", type: :request do
         expect(response).to have_http_status(200)
       end
 
-      it "正しくscoreを分類して、集計する" do
+      it "scoreの集計を送る" do
         subject
         expect(json['counts'].length).to eq 1
       end
