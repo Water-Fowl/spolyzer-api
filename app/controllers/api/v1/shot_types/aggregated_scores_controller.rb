@@ -6,14 +6,16 @@ class Api::V1::ShotTypes::AggregatedScoresController < Api::V1::BaseController
     scores = ScoresFinder.call(score_params(game_units.pluck(:game_id)))
 
     @counts = {}
-    @counts[0] = AggregatedScoresByPositionDecorator.call(
+    @counts[0] = AggregatedScores::PositionDecorator.call(
       scores.where.not(unit_id: current_api_v1_user.units.pluck(:id))
     )
-    @counts[1] = AggregatedScoresByPositionDecorator.call(
+    @counts[1] = AggregatedScores::PositionDecorator.call(
       scores.where(unit_id: current_api_v1_user.units.pluck(:id))
     )
 
   end
+
+  private
 
   def score_params(game_ids)
     score_params = params.permit(:shot_type_id, :is_net_miss)
