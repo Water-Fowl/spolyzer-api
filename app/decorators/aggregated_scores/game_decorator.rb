@@ -1,4 +1,4 @@
-class AggregatedScoresByGameDecorator
+class AggregatedScores::GameDecorator
   include BaseDecorator
   attr_reader :scores
 
@@ -22,10 +22,8 @@ class AggregatedScoresByGameDecorator
         count[side][dropped_at][shot_type] ||= {}
         count[side][dropped_at][shot_type][miss_type] = value
       end
-    end
     else
       []
     end
   end
-
 end

@@ -1,4 +1,4 @@
-class AggregatedScoresByPositionDecorator
+class AggregatedScores::PositionDecorator
   include BaseDecorator
   attr_reader :scores
 
