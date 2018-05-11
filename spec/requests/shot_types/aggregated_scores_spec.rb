@@ -24,7 +24,7 @@ RSpec.describe "shot_types/AggregatedScore", type: :request do
     @headers.merge! auth_header
   end
 
-  describe "GET /api/v1/shot_types/:shot_type_id/aggregated_scores" do
+  describe "GET /api/v1/shot_types/:shot_type_id/aggregated_scores #index" do
     describe "index" do
       let(:params){{
           game_user_count: 2,
@@ -43,7 +43,7 @@ RSpec.describe "shot_types/AggregatedScore", type: :request do
         expect(response).to have_http_status(200)
       end
 
-      it "正しくscoreを分類して、集計する" do
+      it "shot_type毎の集計を送る" do
         subject
         expect(json['counts'].length).to eq 2
       end
