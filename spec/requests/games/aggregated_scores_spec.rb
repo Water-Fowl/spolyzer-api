@@ -8,7 +8,7 @@ RSpec.describe "games/AggregatedScore", type: :request do
     @user = create(:user)
     score =  Score.create(game_id: @game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1)
     @game.scores << score
-    @score =  Score.create(game_id: @game.id, shot_type_id: 2, dropped_side: 1, unit_id: unit.id, position_id: 2)
+    score =  Score.create(game_id: @game.id, shot_type_id: 2, dropped_side: 1, unit_id: unit.id, position_id: 2)
     @game.scores << score
 
     #TODO 共通処理として切り出す
@@ -17,8 +17,7 @@ RSpec.describe "games/AggregatedScore", type: :request do
     @headers.merge! auth_header
   end
 
-  describe "GET /api/v1/games/:game_id/aggregated_scores" do
-    describe "index" do
+  describe "GET /api/v1/games/:game_id/aggregated_scores　#index" do
       let(:params) do
         {
           game_id: @game.id
@@ -31,7 +30,7 @@ RSpec.describe "games/AggregatedScore", type: :request do
         get "/api/v1/games/#{@game.id}/aggregated_scores", headers: @headers
       end
 
-      it "return 200" do
+      it "ステータスコード200を返す" do
         subject
         expect(response).to have_http_status(200)
       end
@@ -40,6 +39,5 @@ RSpec.describe "games/AggregatedScore", type: :request do
         subject
         expect(json['counts'].length).to eq 1
       end
-    end
   end
 end
