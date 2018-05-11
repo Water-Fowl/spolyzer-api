@@ -16,7 +16,7 @@ RSpec.describe "ShotTypes", type: :request do
     @headers.merge! auth_header
   end
 
-  describe "GET /api/v1/shot_types" do
+  describe "GET /api/v1/shot_types #index" do
 
 
       subject do
@@ -30,7 +30,7 @@ RSpec.describe "ShotTypes", type: :request do
 
       let(:params) { {sport_id: 1} }
 
-      it "shot_typesをjsonで渡す" do
+      it "shot_typesを送る" do
         subject
         expect(json['shot_types'].pluck('id')).to eq @shot_types.pluck(:id)
       end
