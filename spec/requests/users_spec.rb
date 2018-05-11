@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
-  describe "GET /users/:user_id #show" do
+  describe "GET /api/v1/users/:user_id #show" do
     before do
       create(:sport)
       @user = create(:user)
@@ -16,13 +16,13 @@ RSpec.describe "Users", type: :request do
       get "/api/v1/users/#{@user.id}", headers: @headers
     end
 
-    it "return 200" do
+    it "ステータスコード200を返す" do
       show_action
       expect(response).to have_http_status(200)
     end
   end
 
-  describe 'PUT #update' do
+  describe 'PUT /api/v1/users/:user_id #update' do
     before do
       create(:sport, name_ja: 'テニス', name_en: 'tennis')
       @user = create(:user)
@@ -45,12 +45,12 @@ RSpec.describe "Users", type: :request do
       put "/api/v1/users/#{@user.id}", params: params, as: :json, headers: @headers
     end
 
-    it 'return 200' do
+    it 'ステータスコード200を返す' do
       subject
       expect(response.status).to eq 200
     end
 
-    it '更新されたユーザー情報を返す' do
+    it '更新されたユーザー情報を送る' do
       subject
       expect(json['user']['name']).to eq(params[:name])
       expect(json['user']['sport_id']).to eq(params[:sport_id])
