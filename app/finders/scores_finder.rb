@@ -18,7 +18,7 @@ class ScoresFinder
   end
 
   def by_net_miss(scores)
-    return scores unless @params[:is_net_miss]
+    return scores if @params[:is_net_miss].nil?
 
     scores.where(is_net_miss: @params[:is_net_miss])
   end

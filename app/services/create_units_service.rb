@@ -10,7 +10,7 @@ class CreateUnitsService
   def call
     left_unit = create_units(:left)
     right_unit = create_units(:right)
-    return left_unit, right_unit
+    [left_unit, right_unit]
   end
 
   private
@@ -33,7 +33,7 @@ class CreateUnitsService
 
   def find_or_create_with_users(side)
     users = set_users(side)
-    unit = Unit.joins(:users).where(users: {id: users.pluck(:id)}).first
+    unit = Unit.of_users(users).first
 
     if not unit
       unit = Unit.create(user_count: users.count)

@@ -18,8 +18,9 @@ class Api::V1::ShotTypes::AggregatedScoresController < Api::V1::BaseController
   private
 
   def score_params(game_ids)
-    score_params = params.permit(:shot_type_id, :is_net_miss)
+    score_params = params.permit(:shot_type_id)
     score_params[:game_ids] = game_ids
+    score_params[:is_net_miss] = false
     score_params
   end
 
