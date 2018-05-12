@@ -1,6 +1,7 @@
 # README
 
 ## 動作
+各自、mysqlを立ち上げてください
 
 ```
 git clone https://github.com/Water-Fowl/api.git
