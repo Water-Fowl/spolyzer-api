@@ -18,7 +18,7 @@ bundle exec rails s
 
 ### `api/v1`
 
-`games/:game_id/aggregated_scores`
+#### `games/:game_id/aggregated_scores`
 
 GET #index
 ある試合における`Score`の集計された値を返す
@@ -33,7 +33,7 @@ side(integer) : {
 }
 ```
 
-`shot_types/:shot_type_id/aggregated_scores`
+#### `shot_types/:shot_type_id/aggregated_scores`
 GET #index
 複合分析によって集計された値を返す。
 ```
@@ -43,7 +43,7 @@ side(integer) : {
   }
 }
 ```
-`user/search?name=hoge`
+#### `user/search?name=hoge`
 GET #index
 `User`の名前から、`User`のリソースを返す。
 `games`
@@ -54,18 +54,18 @@ POST #create
 `Game`と`Score`と`GameUnit`、必要であれば`Unit`と`UserUnit`を作成する。
 作成された`Game`の値を返す。
 
-`shot_types?sport_id=1`
+#### `shot_types?sport_id=1`
 GET #index
 `sport_id`に該当するSportsに紐づいたshot_typesを返す。
 
-`sports/:id`
+#### `sports/:id`
 GET #index
 `Sport`を全て返す。
 
 GET #show
 idに該当する`Sport`を返す。
 
-`users/:id`
+#### `users/:id`
 GET #show
 idに該当する`User`を返す。
 
