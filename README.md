@@ -20,7 +20,8 @@ bundle exec rails s
 
 #### `games/:game_id/aggregated_scores`
 
-GET #index
+*GET #index*
+
 ある試合における`Score`の集計された値を返す
 ```
 side(integer) : {
@@ -34,7 +35,8 @@ side(integer) : {
 ```
 
 #### `shot_types/:shot_type_id/aggregated_scores`
-GET #index
+*GET #index*
+
 複合分析によって集計された値を返す。
 ```
 side(integer) : {
@@ -44,31 +46,39 @@ side(integer) : {
 }
 ```
 #### `user/search?name=hoge`
-GET #index
+*GET #index*
+
 `User`の名前から、`User`のリソースを返す。
-`games`
-GET #index
+#### `games`
+*GET #index*
+
 ログインしている`User`に紐づく`Game`を全て返す。
 
-POST #create
+*POST #create*
+
 `Game`と`Score`と`GameUnit`、必要であれば`Unit`と`UserUnit`を作成する。
 作成された`Game`の値を返す。
 
 #### `shot_types?sport_id=1`
-GET #index
+*GET #index*
+
 `sport_id`に該当するSportsに紐づいたshot_typesを返す。
 
 #### `sports/:id`
-GET #index
+*GET #index*
+
 `Sport`を全て返す。
 
-GET #show
+*GET #show*
+
 idに該当する`Sport`を返す。
 
 #### `users/:id`
-GET #show
+*GET #show*
+
 idに該当する`User`を返す。
 
-PATCH #update
+*PATCH #update*
+
 ログインしている`User`の情報を更新する。
 更新された`User`を返す。
