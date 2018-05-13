@@ -13,11 +13,11 @@ Rails.application.routes.draw do
 
         resources :sports, only: [:index, :show]
 
-        resources :users  do
-          collection do
-            get :search
-          end
+        namespace :users do
+          resources :search, only: [:index]
         end
+
+        resources :users
 
         resources :games, only: [:index, :create]  do
           resources :aggregated_scores, only: [:index], module: 'games'
