@@ -5,19 +5,11 @@ class Api::V1::UsersController < Api::V1::BaseController
     @user = User.find(params[:id])
   end
 
-  def search
-    find_users_by_name
-  end
-
   def update
     current_api_v1_user.update(user_params)
   end
 
   private
-
-  def find_users_by_name
-    @users = User.where('name LIKE ?', "%#{params[:name]}%")
-  end
 
   def user_params
     user_params = params.permit(

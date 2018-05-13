@@ -13,7 +13,7 @@ class Unit < ApplicationRecord
       .where(users: { id: users[1].id })
   }
 
-  # opponent_usersをもつUnitを検索。opponent_usersが2つあった場合はダブルスとして検索。
+  # usersをもつUnitを検索。usersが2つあった場合はダブルスとして検索。
   def self.of_users(users)
     case users.length
     when 2
@@ -32,6 +32,7 @@ class Unit < ApplicationRecord
         unit.user_units.create(user_id: user[:id])
       end
     end
+
     unit
   end
 
