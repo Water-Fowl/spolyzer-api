@@ -33,7 +33,7 @@ class CreateUnitsService
 
   def find_or_create_with_users(side)
     users = set_users(side)
-    unit = Unit.of_users(users).first
+    unit = Unit.of_users(users).where(user_count: params[side][:count]).first
 
     if not unit
       unit = Unit.create(user_count: users.count)
