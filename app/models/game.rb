@@ -16,8 +16,8 @@ class Game < ApplicationRecord
   end
 
   def score_count
-    left_scores = self.units[0].scores.joins(:position).where(game_id: self.id)
-    right_scores = self.units[1].scores.joins(:position).where(game_id: self.id)
+    left_scores = self.units[0].scores.joins(:game).where(games: {id: self.id}).joins(:position)
+    right_scores = self.units[1].scores.joins(:game).where(games: {id: self.id}).joins(:position)
 
     left_score_count = left_scores.where(is_net_miss: false).count +
       right_scores.where(positions: {is_in: false}).count +
