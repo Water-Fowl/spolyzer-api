@@ -12,7 +12,6 @@ class Api::V1::ShotTypes::AggregatedScoresController < Api::V1::BaseController
     @counts[1] = AggregatedScores::PositionDecorator.call(
       scores.where(unit_id: current_api_v1_user.units.pluck(:id))
     )
-
   end
 
   private

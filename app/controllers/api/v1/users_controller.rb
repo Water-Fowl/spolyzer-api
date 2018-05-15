@@ -20,7 +20,6 @@ class Api::V1::UsersController < Api::V1::BaseController
     )
 
     user_params[:image] = parse_image_data(user_params[:image]) if user_params[:image]
-
     user_params
   end
 
