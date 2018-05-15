@@ -12,12 +12,6 @@ RSpec.describe "Score", :type => :model do
   end
   describe "scopes" do
 
-    describe "of_opponent_users_games" do
-      it "user vs opponent_users の試合におけるスコアの検索" do
-        expect(Score.of_opponent_users_games(Unit.first.users.first, Unit.second.users, 1).pluck(:id)).to eq @game.scores.pluck(:id)
-      end
-    end
-
     describe "of_user_games" do
       it "userが含まれている試合のscore検索" do
         expect(Score.of_user_games(Unit.first.users.first, 1).pluck(:id)).to eq Unit.first.users.first.games.first.scores.pluck(:id)
