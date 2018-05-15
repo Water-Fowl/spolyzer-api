@@ -1,1 +1,1 @@
-cd capistrano && bundle exec cap staging deploy
+pwd && bundle exec cap staging deploy
