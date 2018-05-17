@@ -26,25 +26,23 @@ RSpec.describe Unit, :type => :model do
   let(:user) { [Unit.find(3).users.first] }
   let(:new_user) { create(:user) }
 
-  describe "scopes" do
-    describe "of_doubles_users" do
-      it "指定した二人が含まれるunitを返す" do
-        expect(Unit.of_doubles_users(users).ids).to eq Unit.where(id: Unit.first.id).ids
-      end
-    end
-  end
-
 
     describe "self.of_users(users)" do
-      context 'opponent_usersが2つあった場合' do
-        it "opponent_usersをもつUnitを返す" do
-          expect(Unit.of_users(users).ids).to eq Unit.where(id: Unit.first.id).ids
+      context 'usersが2つあった場合' do
+        it "usersをもつUnitを返す" do
+          users_unit = Unit.of_users(users)
+          expected_unit = Unit.where(id: Unit.first.id)
+
+          expect(users_unit.ids).to eq expected.ids
         end
       end
 
-      context 'opponent_usersが１つの場合' do
-        it "opponent_usersをもつUnitを返す"  do
-          expect(Unit.of_users(user).ids).to eq Unit.where(id: Unit.find(3).id).ids
+      context 'usersが１つの場合' do
+        it "usersをもつUnitを返す"  do
+          users_unit = Unit.of_users(user)
+          expected_unit = Unit.where(id: Unit.find(3).id)
+
+          expect(users_unit.ids).to eq expected_unit.ids
         end
       end
     end
@@ -52,7 +50,10 @@ RSpec.describe Unit, :type => :model do
     describe 'self.find_or_create_with_users(users)' do
       context 'self.of_usersで返されるunitが存在する場合' do
         it 'unitを返す' do
-          expect(Unit.find_or_create_with_users(users).id).to eq unit.id
+          found_unit = Unit.find_or_create_with_users(users)
+          expected_unit = unit
+
+          expect(found_unit.id).to eq expected_unit.id
         end
       end
 
