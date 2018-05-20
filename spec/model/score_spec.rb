@@ -1,15 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe "Score", :type => :model do
-  before(:each) do
-    @unit = create(:unit)
-    @game = create(:game)
-    @unit.games << @game
-    @game.units << create(:unit)
-    @user = create(:user)
+
+  let(:unit) { create(:unit) }
+  let(:game) { create(:game) }
+  let(:user) { create(:user) }
+
+  before  do
+    unit.games << game
+    game.units << create(:unit)
     Unit.first.users << create(:user)
     Unit.second.users << create(:user)
   end
+
   describe "scopes" do
 
     describe "of_user_games" do
