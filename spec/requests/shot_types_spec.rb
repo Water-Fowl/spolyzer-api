@@ -3,14 +3,11 @@ require 'rails_helper'
 RSpec.describe "ShotTypes", type: :request do
 
   let(:user) { create(:user) }
+  let(:left_unit) { create(:unit) }
+  let(:right_unit) { create(:unit) }
+  let(:game) { create(:game, :with_scores, units: [left_unit, right_unit]) }
 
-  before(:each) do
-    left_unit = create(:unit)
-    right_unit = create(:unit)
-    game = create(:game, :with_scores, units: [left_unit, right_unit])
-    left_unit.games << game
-    right_unit.games << game
-
+  before do
     @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
     auth_header = user.create_new_auth_token
     @headers.merge! auth_header
