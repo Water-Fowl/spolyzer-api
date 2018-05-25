@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180508051244) do
+ActiveRecord::Schema.define(version: 20180518075819) do
 
   create_table "analysis_results", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", null: false
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20180508051244) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "record_user_id"
     t.index ["sport_id"], name: "index_games_on_sport_id"
   end
 
@@ -129,7 +130,7 @@ ActiveRecord::Schema.define(version: 20180508051244) do
     t.text "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "sport_id", null: false
+    t.integer "sport_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
