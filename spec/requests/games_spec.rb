@@ -3,32 +3,32 @@ require 'rails_helper'
 RSpec.describe "Games", type: :request do
 
   let(:user) { create(:user) }
+  let(:unit) { create(:unit) }
+  let(:game) { create(:game) }
+  let(:opponent_unit) { create(:unit) }
+  let(:opponent_user) { create(:user) }
+  let(:score) { Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1) } 
+
+
+  before do
+    unit.games << game
+    opponent_unit.games << game
+    opponent_user = create(:user)
+    unit.users << user
+    opponent_unit.users << opponent_user
+    game.scores << score
+
+    #TODO 共通処理として切り出す
+    @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
+    auth_header = user.create_new_auth_token
+    @headers.merge! auth_header
+  end
+
 
   describe "GET /api/v1/games #index" do
-    before do
-      unit = create(:unit)
-      game = create(:game)
-      unit.games << game
-
-      opponent_unit = create(:unit)
-      opponent_unit.games << game
-
-      opponent_user = create(:user)
-
-      unit.users << user
-      opponent_unit.users << opponent_user
-
-      score =  Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1)
-      game.scores << score
-
-      #TODO 共通処理として切り出す
-      @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
-      auth_header = user.create_new_auth_token
-      @headers.merge! auth_header
-    end
 
     let(:current_api_v1_user) { user }
-
+    
     subject do
       get "/api/v1/games", headers: @headers
     end
@@ -46,14 +46,6 @@ RSpec.describe "Games", type: :request do
 
   describe 'POST /api/v1/games #create' do
 
-    before do
-      create(:sport)
-      create(:user)
-
-      @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
-      auth_header = user.create_new_auth_token
-      @headers.merge! auth_header
-    end
     let(:params) do
       {
         units: {

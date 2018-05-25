@@ -4,14 +4,13 @@ RSpec.describe "games/AggregatedScore", type: :request do
 
   let(:game) { create(:game) }
   let(:user) { create(:user) }
+  let(:unit) { create(:unit) }
+  let(:score) { Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1) }
 
   before do
-    unit = create(:unit)
-    unit.games << game
-    score =  Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1)
+    unit.games << game 
     game.scores << score
-    score =  Score.create(game_id: game.id, shot_type_id: 2, dropped_side: 1, unit_id: unit.id, position_id: 2)
-    game.scores << score
+
     #TODO 共通処理として切り出す
     @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
     auth_header = user.create_new_auth_token
@@ -25,8 +24,6 @@ RSpec.describe "games/AggregatedScore", type: :request do
         }
       end
 
-      let(:current_api_v1_user){user}
-
       subject do
         get "/api/v1/games/#{game.id}/aggregated_scores", headers: @headers
       end
@@ -38,7 +35,7 @@ RSpec.describe "games/AggregatedScore", type: :request do
 
       it "scoreの集計を送る" do
         subject
-        expect(json['counts'].length).to eq 1
+        expect(json['counts']).not_to be_empty
       end
   end
 end

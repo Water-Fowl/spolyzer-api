@@ -3,17 +3,15 @@ require 'rails_helper'
 RSpec.describe "Users", type: :request do
 
   let(:user) { create(:user) }
+  let(:new_sport) { create(:sport, name_ja: 'テニス', name_en: 'tennis') }
+
+  before do
+    @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
+    auth_header = user.create_new_auth_token
+    @headers.merge! auth_header
+  end
 
   describe "GET /api/v1/users/:user_id #show" do
-
-    before do
-      create(:sport)
-
-      #TODO 共通処理として切り出す
-      @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
-      auth_header = user.create_new_auth_token
-      @headers.merge! auth_header
-    end
 
     subject do
       get "/api/v1/users/#{user.id}", headers: @headers
@@ -26,20 +24,13 @@ RSpec.describe "Users", type: :request do
   end
 
   describe 'PUT /api/v1/users/:user_id #update' do
-    before do
-      create(:sport, name_ja: 'テニス', name_en: 'tennis')
-
-      @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
-      auth_header = user.create_new_auth_token
-      @headers.merge! auth_header
-    end
 
     let(:params) do
       {
         name: 'changed_name',
         email: 'changed_email@test.com',
         image: user.image,
-        sport_id: 2
+        sport_id: new_sport.id
       }
     end
 
