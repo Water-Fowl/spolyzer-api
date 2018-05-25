@@ -1,9 +1,9 @@
 class CreateScoresService
   include BaseService
 
-  attr_reader :params, :game_id, :left_unit, :right_unit
+  attr_reader :params, :game_id, :left_unit, :right_unit, :current_api_v1_user
 
-  def initialize(params, game_id, left_unit, right_unit)
+  def initialize(params, game_id, left_unit, right_unit, current_api_v1_user)
     @params = params
     @game_id = game_id
     @left_unit = left_unit
