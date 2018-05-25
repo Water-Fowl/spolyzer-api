@@ -13,7 +13,6 @@ RSpec.describe "Games", type: :request do
   before do
     unit.games << game
     opponent_unit.games << game
-    opponent_user = create(:user)
     unit.users << user
     opponent_unit.users << opponent_user
     game.scores << score
