@@ -47,7 +47,15 @@ class GameUnitsFinder
   end
 
   def by_created_at(game_units)
-    game_units.where(created_at: [Time.parse(@params[:created_after])..Time.parse(@params[:created_before])])
+     if !@params[:created_after] && !@params[:created_before]
+      return game_units
+     elsif !@params[:created_after] && @params[:created_before]
+      game_units.where(created_at: [Time.now..Time.parse(@params[:created_before])])
+     elsif !@params[:created_before] && @params[:created_after]
+      game_units.where(created_at: [Time.parse(@params[:created_after])..GameUnit.first.created_at])
+     else
+      game_units.where(created_at: [Time.parse(@params[:created_after])..Time.parse(@params[:created_before])]) 
+     end
   end
 
 end
