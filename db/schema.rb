@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180518075819) do
+ActiveRecord::Schema.define(version: 20180508051244) do
 
   create_table "analysis_results", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", null: false
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20180518075819) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "record_user_id"
     t.index ["sport_id"], name: "index_games_on_sport_id"
   end
 

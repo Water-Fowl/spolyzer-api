@@ -15,8 +15,7 @@ class Api::V1::UsersController < Api::V1::BaseController
     user_params = params.permit(
       :name,
       :email,
-      :image,
-      :sport_id
+      :image
     )
 
     user_params[:image] = parse_image_data(user_params[:image]) if user_params[:image]
