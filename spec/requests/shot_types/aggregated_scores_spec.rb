@@ -43,7 +43,6 @@ RSpec.describe "shot_types/AggregatedScore", type: :request do
       end
 
       it "ステータスコード200を返す" do
-        subject
         is_expected.to eq 200
       end
 
