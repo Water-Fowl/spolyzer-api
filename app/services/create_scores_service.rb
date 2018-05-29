@@ -3,7 +3,7 @@ class CreateScoresService
 
   attr_reader :params, :game_id, :left_unit, :right_unit, :current_api_v1_user
 
-  def initialize(params, game_id, left_unit, right_unit, current_api_v1_user)
+  def initialize(params, game_id, left_unit, right_unit)
     @params = params
     @game_id = game_id
     @left_unit = left_unit
@@ -14,7 +14,7 @@ class CreateScoresService
     params.each do |score_params|
       Score.create(
         game_id: game_id,
-        unit_id: unit_id,
+        unit_id: score_params[:unit],
         is_net_miss: score_params[:is_net_miss],
         shot_type_id: score_params[:shot_type],
         position_id: score_params[:dropped_at],
