@@ -12,9 +12,10 @@ class CreateScoresService
 
   def call
     params.each do |score_params|
+    unit_id = score_params[:unit] == 0 ? left_unit.id : right_unit.id
       Score.create(
         game_id: game_id,
-        unit_id: score_params[:unit],
+        unit_id: unit_id,
         is_net_miss: score_params[:is_net_miss],
         shot_type_id: score_params[:shot_type],
         position_id: score_params[:dropped_at],
