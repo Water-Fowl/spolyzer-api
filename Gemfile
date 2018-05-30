@@ -13,6 +13,12 @@ gem 'rails', '~> 5.1.4'
 gem 'devise'
 gem 'devise_token_auth'
 gem 'omniauth'
+gem 'activeadmin'
+
+# Plus integrations with:
+gem 'cancan' # or cancancan
+gem 'draper'
+gem 'pundit'
 
 gem 'unicorn'
 gem 'unicorn-worker-killer'
