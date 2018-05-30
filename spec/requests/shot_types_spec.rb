@@ -1,25 +1,19 @@
 require 'rails_helper'
+require "./spec/support/shared_stuff.rb"
 
 RSpec.describe "ShotTypes", type: :request do
 
-  let(:user) { create(:user) }
+  include_context 'header'
+
   let(:left_unit) { create(:unit) }
   let(:right_unit) { create(:unit) }
   let(:game) { create(:game, :with_scores, units: [left_unit, right_unit]) }
-
-  before do
-    @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
-    auth_header = user.create_new_auth_token
-    @headers.merge! auth_header
-  end
-
   let(:shot_types) { ShotType.where(sport_id: 1) }
 
   describe "GET /api/v1/shot_types #index" do
 
-
       subject do
-        get "/api/v1/shot_types", params: params, as: :json, headers: @headers
+        get "/api/v1/shot_types", params: params, as: :json, headers: headers
       end
 
       it "ステータスコード200を返す" do
