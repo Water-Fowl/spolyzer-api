@@ -8,7 +8,6 @@ class User < ApplicationRecord
   has_many :units, through: :user_units
   has_many :games, through: :units
   has_many :scores, through: :units
-  has_many :analysis_results
 
   mount_uploader :image, PhotoUploader
 

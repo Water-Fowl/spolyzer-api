@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   namespace :api, format: 'json' do
     namespace :v1 do
         mount_devise_token_auth_for 'User', at: 'auth', controllers: {
@@ -32,7 +34,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/admin', to: 'admin/dashboard#index'
   get '/redirect/confirmation', to: 'redirect/confirmation#index'
   namespace :admin do
   end

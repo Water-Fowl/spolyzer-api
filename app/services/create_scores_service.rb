@@ -1,7 +1,7 @@
 class CreateScoresService
   include BaseService
 
-  attr_reader :params, :game_id, :left_unit, :right_unit
+  attr_reader :params, :game_id, :left_unit, :right_unit, :current_api_v1_user
 
   def initialize(params, game_id, left_unit, right_unit)
     @params = params
@@ -12,11 +12,7 @@ class CreateScoresService
 
   def call
     params.each do |score_params|
-      if score_params[:is_net_miss]
-        unit_id = score_params[:side] == 1 ? right_unit.id : left_unit.id
-      else
-        unit_id = score_params[:side] == 1 ? left_unit.id : right_unit.id
-      end
+    unit_id = score_params[:unit] == 0 ? left_unit.id : right_unit.id
       Score.create(
         game_id: game_id,
         unit_id: unit_id,
