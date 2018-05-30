@@ -1,20 +1,16 @@
 require 'rails_helper'
+require "./spec/support/shared_stuff.rb"
 
 RSpec.describe "Users", type: :request do
 
-  let(:user) { create(:user) }
-  let(:new_sport) { create(:sport, name_ja: 'テニス', name_en: 'tennis') }
+  include_context 'header'
 
-  before do
-    @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
-    auth_header = user.create_new_auth_token
-    @headers.merge! auth_header
-  end
+  let(:new_sport) { create(:sport, name_ja: 'テニス', name_en: 'tennis') }
 
   describe "GET /api/v1/users/:user_id #show" do
 
     subject do
-      get "/api/v1/users/#{user.id}", headers: @headers
+      get "/api/v1/users/#{user.id}", headers: headers
     end
 
     it "ステータスコード200を返す" do
@@ -35,7 +31,7 @@ RSpec.describe "Users", type: :request do
     end
 
     subject do
-      put "/api/v1/users/#{user.id}", params: params, as: :json, headers: @headers
+      put "/api/v1/users/#{user.id}", params: params, as: :json, headers: headers
     end
 
     it 'ステータスコード200を返す' do
