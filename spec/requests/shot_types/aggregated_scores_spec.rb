@@ -1,6 +1,9 @@
 require 'rails_helper'
+require "./spec/support/shared_stuff.rb"
 
 RSpec.describe "shot_types/AggregatedScore", type: :request do
+
+  include_context 'header'
 
   let(:user) { create(:user) }
   let(:opponent_user) { create(:user) }
@@ -16,11 +19,6 @@ RSpec.describe "shot_types/AggregatedScore", type: :request do
     opponent_unit.users << opponent_user
     game.scores << score
     unit.scores << score
-
-    #TODO 共通処理として切り出す
-    @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
-    auth_header = user.create_new_auth_token
-    @headers.merge! auth_header
   end
 
   describe "GET /api/v1/shot_types/:shot_type_id/aggregated_scores #index" do
@@ -41,7 +39,7 @@ RSpec.describe "shot_types/AggregatedScore", type: :request do
       let(:current_api_v1_user){user}
 
       subject do
-        get "/api/v1/shot_types/:shot_type_id/aggregated_scores",  params: params, as: :json,headers: @headers
+        get "/api/v1/shot_types/:shot_type_id/aggregated_scores",  params: params, as: :json,headers: headers
       end
 
       it "ステータスコード200を返す" do
