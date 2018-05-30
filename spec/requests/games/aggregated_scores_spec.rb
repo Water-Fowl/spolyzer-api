@@ -1,18 +1,15 @@
 require 'rails_helper'
+require "./spec/support/shared_stuff.rb"
 
 RSpec.describe "games/AggregatedScore", type: :request do
 
+  include_context 'header'
+
   let(:game) { create(:game) }
-  let(:user) { create(:user) }
   let(:unit) { create(:unit) }
 
   before do
     unit.games << game 
-
-    #TODO 共通処理として切り出す
-    @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
-    auth_header = user.create_new_auth_token
-    @headers.merge! auth_header
   end
 
   describe "GET /api/v1/games/:game_id/aggregated_scores　#index" do
@@ -28,14 +25,13 @@ RSpec.describe "games/AggregatedScore", type: :request do
       end
 
       subject do
-        get "/api/v1/games/#{game.id}/aggregated_scores", headers: @headers
+        get "/api/v1/games/#{game.id}/aggregated_scores", headers: headers
       end
 
       it "ステータスコード200を返す" do
         subject
         expect(response).to have_http_status(200)
       end
-
 
       context "全て同じscoreの場合" do
         let(:scores) { [Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1), Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1), Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1), Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1), Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1)]}
