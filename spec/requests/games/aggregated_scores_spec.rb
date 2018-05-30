@@ -51,10 +51,6 @@ RSpec.describe "games/AggregatedScore", type: :request do
       
         it "scoreの集計を送る" do
           subject
-
-          
-          binding.pry
-          
           expect(json['counts'].first.count).to eq 2 
         end
       end
