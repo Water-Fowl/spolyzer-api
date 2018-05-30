@@ -5,7 +5,6 @@ RSpec.describe "shot_types/AggregatedScore", type: :request do
 
   include_context 'header'
 
-  let(:user) { create(:user) }
   let(:opponent_user) { create(:user) }
   let(:unit) { create(:unit) }
   let(:game) { create(:game) }

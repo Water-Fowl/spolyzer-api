@@ -3,6 +3,7 @@ RSpec.configure do |rspec|
   end
   
   RSpec.shared_context "header", :shared_context => :metadata do
+    
     let!(:headers) { {'Content-Type' => 'application/json', 'Accept' => 'application/json'} }
     let!(:user) { create(:user) }
 
