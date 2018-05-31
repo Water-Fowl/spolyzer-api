@@ -3,12 +3,11 @@
 class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
 
-  belongs_to :sport
+  belongs_to :sport, optional: true
   has_many :user_units
   has_many :units, through: :user_units
   has_many :games, through: :units
   has_many :scores, through: :units
-  has_many :analysis_results
 
   mount_uploader :image, PhotoUploader
 

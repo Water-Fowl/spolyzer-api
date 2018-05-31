@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Game < ApplicationRecord
+  belongs_to :record_user, class_name: 'User', foreign_key: 'record_user_id'
   belongs_to :sport
   has_many :game_units
   has_many :units, through: :game_units
