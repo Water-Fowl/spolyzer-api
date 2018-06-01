@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Users", type: :request do
-  describe "GET /api/v1/users/:user_id #show" do
+RSpec.describe 'Users', type: :request do
+  describe 'GET /api/v1/users/:user_id #show' do
     before do
       create(:sport)
       @user = create(:user)
 
-      #TODO 共通処理として切り出す
+      # TODO: 共通処理として切り出す
       @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
       auth_header = @user.create_new_auth_token
       @headers.merge! auth_header
@@ -16,7 +18,7 @@ RSpec.describe "Users", type: :request do
       get "/api/v1/users/#{@user.id}", headers: @headers
     end
 
-    it "ステータスコード200を返す" do
+    it 'ステータスコード200を返す' do
       show_action
       expect(response).to have_http_status(200)
     end

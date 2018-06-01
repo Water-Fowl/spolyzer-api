@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "ShotTypes", type: :request do
-
+RSpec.describe 'ShotTypes', type: :request do
   before(:each) do
     left_unit = create(:unit)
     right_unit = create(:unit)
@@ -16,24 +17,21 @@ RSpec.describe "ShotTypes", type: :request do
     @headers.merge! auth_header
   end
 
-  describe "GET /api/v1/shot_types #index" do
+  describe 'GET /api/v1/shot_types #index' do
+    subject do
+      get '/api/v1/shot_types', params: params, as: :json, headers: @headers
+    end
 
+    it 'ステータスコード200を返す' do
+      subject
+      expect(response).to have_http_status(200)
+    end
 
-      subject do
-        get "/api/v1/shot_types", params: params, as: :json, headers: @headers
-      end
+    let(:params) { { sport_id: 1 } }
 
-      it "ステータスコード200を返す" do
-        subject
-        expect(response).to have_http_status(200)
-      end
-
-      let(:params) { {sport_id: 1} }
-
-      it "shot_typesを送る" do
-        subject
-        expect(json['shot_types'].pluck('id')).to eq @shot_types.pluck(:id)
-      end
-
+    it 'shot_typesを送る' do
+      subject
+      expect(json['shot_types'].pluck('id')).to eq @shot_types.pluck(:id)
+    end
   end
 end

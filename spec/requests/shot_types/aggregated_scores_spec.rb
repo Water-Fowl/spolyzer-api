@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "shot_types/AggregatedScore", type: :request do
+RSpec.describe 'shot_types/AggregatedScore', type: :request do
   before do
     unit = create(:unit)
     game = create(:game)
@@ -16,35 +18,37 @@ RSpec.describe "shot_types/AggregatedScore", type: :request do
     unit.users << @user
     opponent_unit.users << opponent_user
 
-    score =  Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1)
+    score = Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1)
     game.scores << score
-    #TODO 共通処理として切り出す
+    # TODO: 共通処理として切り出す
     @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
     auth_header = @user.create_new_auth_token
     @headers.merge! auth_header
   end
 
-  describe "GET /api/v1/shot_types/:shot_type_id/aggregated_scores #index" do
-      let(:params){{
-          game_user_count: 2,
-          shot_type_id: 1,
-          opponent_users_ids: "2"
-        }}
+  describe 'GET /api/v1/shot_types/:shot_type_id/aggregated_scores #index' do
+    let(:params) do
+      {
+        game_user_count: 2,
+        shot_type_id: 1,
+        opponent_users_ids: '2'
+      }
+    end
 
-      let(:current_api_v1_user){@user}
+    let(:current_api_v1_user) { @user }
 
-      subject do
-        get "/api/v1/shot_types/:shot_type_id/aggregated_scores",  params: params, as: :json,headers: @headers
-      end
+    subject do
+      get '/api/v1/shot_types/:shot_type_id/aggregated_scores', params: params, as: :json, headers: @headers
+    end
 
-      it "return 200" do
-        subject
-        expect(response).to have_http_status(200)
-      end
+    it 'return 200' do
+      subject
+      expect(response).to have_http_status(200)
+    end
 
-      it "shot_type毎の集計を送る" do
-        subject
-        expect(json['counts'].length).to eq 2
-      end
+    it 'shot_type毎の集計を送る' do
+      subject
+      expect(json['counts'].length).to eq 2
+    end
   end
 end

@@ -21,13 +21,4 @@ class User < ApplicationRecord
   validates :email,
             presence: true,
             uniqueness: true
-
-  def latest_result
-    analysis_results.order(created_at: :asc).try(:first)
-  end
-
-  # TODO: devise token auth でaccess_tokenのupdate
-  def generate_access_token!
-    raise NotImplementedError
-  end
 end

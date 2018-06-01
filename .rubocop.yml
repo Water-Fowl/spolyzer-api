@@ -1,6 +1,8 @@
 AllCops:
   Exclude:
     - 'db/**/*'
+    - 'bin/**/*'
+    - 'lib/**/*'
     - 'config/**/*'
     - 'script/**/*'
     - 'vendor/**/*'
@@ -13,4 +15,9 @@ Style/Documentation:
   Enabled: false
 Metrix/MethodLength:
   Max: 20
-
+Metrix/AbcSize:
+  Max: 20
+AccessorMethodName:
+  Enabled: false
+Lambda:
+  Enabled: false

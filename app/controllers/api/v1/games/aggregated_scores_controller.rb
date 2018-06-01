@@ -6,5 +6,4 @@ class Api::V1::Games::AggregatedScoresController < Api::V1::BaseController
     scores = game.scores
     @counts = AggregatedScores::GameDecorator.call(scores)
   end
-
 end
