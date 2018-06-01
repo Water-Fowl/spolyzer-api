@@ -5,7 +5,6 @@ RSpec.describe 'scoresfinder', :type => :finder do
   let(:unit) { create(:unit) }
   let(:other_unit) { create(:unit) }
   let(:game) { create(:game, :with_scores, units: [unit, other_unit]) } 
-  let(:scores) { create_list(:scores, 10, position: Position.first, shot_type: ShotType.first, game: game, unit: unit)}   
 
   describe '#call' do
     let!(:params) do
@@ -16,9 +15,8 @@ RSpec.describe 'scoresfinder', :type => :finder do
         }
     end
     
-    it 'shot_typeとis_net_missでscoreを絞り込む' do
-      expect(ScoresFinder.call(params)).not_to be_empty 
+    it 'return Score searched by shot_type and is_net_miss' do
+      expect(ScoresFinder.call(params).pluck(:id)).to eq game.scores.pluck(:id)
     end
   end    
-    
 end
