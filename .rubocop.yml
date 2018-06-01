@@ -1,5 +1,7 @@
 AllCops:
   Exclude:
+    - 'app/helpers/**/*'
+    - 'app/channels/**/*'
     - 'db/**/*'
     - 'bin/**/*'
     - 'lib/**/*'
