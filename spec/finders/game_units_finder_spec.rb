@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe 'GameUnitsFinder', :type => :finder do
   
-  let!(:game) { create(:game) }  
+  let(:game) { create(:game) }  
   let(:unit) { create(:unit) }  
   let(:opponent_unit) { create(:unit) }
   let(:current_user) { create(:user) }
@@ -13,7 +13,7 @@ RSpec.describe 'GameUnitsFinder', :type => :finder do
   let!(:opponent_user_unit) { UserUnit.create(unit_id: opponent_unit.id, user_id: opponent_user.id) }
 
   describe '#call' do
-    let!(:params) do
+    let(:params) do
         { 
             opponent_users_ids: opponent_user.id.to_s,
             game_user_count: 1,
@@ -24,7 +24,7 @@ RSpec.describe 'GameUnitsFinder', :type => :finder do
     end
 
     it '対戦相手、ダブルスシングルス、勝敗、登録された日時でGameUnitを絞り込む' do
-      expect(GameUnitsFinder.call(current_user, params)).not_to be_empty 
+      expect(GameUnitsFinder.call(current_user, params).pluck(:id)).to eq [game_unit.id] 
     end
   end  
   
