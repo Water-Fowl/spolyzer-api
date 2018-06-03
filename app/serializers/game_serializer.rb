@@ -1,5 +1,5 @@
 class GameSerializer < ActiveModel::Serializer
-  attributes :id, :sport_id, :name, :record_user_id, :score_count, :left_users, :right_users
+  attributes :id, :sport_id, :name, :record_user_id, :score_count, :left_users, :right_users, :created_at, :updated_at
 
   def score_count
     object.score_count
