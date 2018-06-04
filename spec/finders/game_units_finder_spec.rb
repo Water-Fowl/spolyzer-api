@@ -23,7 +23,7 @@ RSpec.describe 'GameUnitsFinder', :type => :finder do
         }
     end
     
-    it 'return GameUnit searched by opponent_user, doubles or singles, outcome, and date_time' do
+    it 'return GameUnit searched by params' do
       expect(GameUnitsFinder.call(current_user, params).pluck(:id)).to eq game_units.pluck(:id) 
     end
   end
