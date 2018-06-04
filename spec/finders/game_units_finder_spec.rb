@@ -24,7 +24,8 @@ RSpec.describe 'GameUnitsFinder', :type => :finder do
     end
     
     it 'return GameUnit searched by params' do
-      expect(GameUnitsFinder.call(current_user, params).pluck(:id)).to eq game_units.pluck(:id) 
+      searched_game_unit = GameUnitsFinder.call(current_user, params)
+      expect(searched_game_unit.pluck(:id)).to eq game_units.pluck(:id) 
     end
   end
 end
