@@ -5,13 +5,7 @@ class Api::V1::ShotTypes::AggregatedScoresController < Api::V1::BaseController
     game_units = GameUnitsFinder.call(current_api_v1_user, game_params)
     scores = ScoresFinder.call(score_params(game_units.pluck(:game_id)))
 
-    @counts = {}
-    @counts[0] = AggregatedScores::PositionDecorator.call(
-      scores.where.not(unit_id: current_api_v1_user.units.pluck(:id))
-    )
-    @counts[1] = AggregatedScores::PositionDecorator.call(
-      scores.where(unit_id: current_api_v1_user.units.pluck(:id))
-    )
+    render json: scores, each_serializer: ScoreSerializer
   end
 
   private

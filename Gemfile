@@ -10,6 +10,8 @@ end
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 gem 'rails', '~> 5.1.4'
 
+gem 'active_model_serializers'
+
 gem 'devise'
 gem 'devise_token_auth'
 gem 'omniauth'

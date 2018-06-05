@@ -3,7 +3,8 @@
 class Api::V1::GamesController < Api::V1::BaseController
 
   def index
-    @games = current_api_v1_user.games
+    games = current_api_v1_user.games
+    render json: games, each_serializer: GameSerializer
   end
 
   def create
@@ -18,6 +19,7 @@ class Api::V1::GamesController < Api::V1::BaseController
     CreateScoresService.call(scores_params, @game.id, left_unit, right_unit)
 
     @game.update_outcome
+    render json: @game
 
   end
 
