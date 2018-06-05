@@ -1,35 +1,30 @@
 require 'rails_helper'
+require "./spec/support/shared_stuff.rb"
 
 RSpec.describe "Games", type: :request do
+  
+  include_context 'header'
+
+  let(:unit) { create(:unit) }
+  let(:game) { create(:game) }
+  let(:opponent_unit) { create(:unit) }
+  let(:opponent_user) { create(:user) }
+  let(:score) { Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1) } 
+
+  before do
+    unit.games << game
+    opponent_unit.games << game
+    unit.users << user
+    opponent_unit.users << opponent_user
+    game.scores << score
+  end
 
   describe "GET /api/v1/games #index" do
-    before do
-      unit = create(:unit)
-      game = create(:game)
-      unit.games << game
 
-      opponent_unit = create(:unit)
-      opponent_unit.games << game
-
-      @user = create(:user)
-      opponent_user = create(:user)
-
-      unit.users << @user
-      opponent_unit.users << opponent_user
-
-      score =  Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1)
-      game.scores << score
-
-      #TODO 共通処理として切り出す
-      @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
-      auth_header = @user.create_new_auth_token
-      @headers.merge! auth_header
-    end
-
-    let(:current_api_v1_user) { @user }
-
+    let(:current_api_v1_user) { user }
+    
     subject do
-      get "/api/v1/games", headers: @headers
+      get "/api/v1/games", headers: headers
     end
 
     it "ステータスコード200を返す" do
@@ -44,15 +39,7 @@ RSpec.describe "Games", type: :request do
   end
 
   describe 'POST /api/v1/games #create' do
-    before do
-      create(:sport)
-      @user = create(:user)
-      create(:user)
 
-      @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
-      auth_header = @user.create_new_auth_token
-      @headers.merge! auth_header
-    end
     let(:params) do
       {
         units: {
@@ -73,7 +60,7 @@ RSpec.describe "Games", type: :request do
     end
 
     subject do
-      post "/api/v1/games", params: params, as: :json, headers: @headers
+      post "/api/v1/games", params: params, as: :json, headers: headers
     end
 
     it 'ステータスコード200を返す' do

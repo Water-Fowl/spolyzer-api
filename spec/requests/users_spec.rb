@@ -1,48 +1,37 @@
 require 'rails_helper'
+require "./spec/support/shared_stuff.rb"
 
 RSpec.describe "Users", type: :request do
+
+  include_context 'header'
+
+  let(:new_sport) { create(:sport, name_ja: 'テニス', name_en: 'tennis') }
+
   describe "GET /api/v1/users/:user_id #show" do
-    before do
-      create(:sport)
-      @user = create(:user)
 
-      #TODO 共通処理として切り出す
-      @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
-      auth_header = @user.create_new_auth_token
-      @headers.merge! auth_header
-    end
-
-    subject(:show_action) do
-      get "/api/v1/users/#{@user.id}", headers: @headers
+    subject do
+      get "/api/v1/users/#{user.id}", headers: headers
     end
 
     it "ステータスコード200を返す" do
-      show_action
+      subject
       expect(response).to have_http_status(200)
     end
   end
 
   describe 'PUT /api/v1/users/:user_id #update' do
-    before do
-      create(:sport, name_ja: 'テニス', name_en: 'tennis')
-      @user = create(:user)
-
-      @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
-      auth_header = @user.create_new_auth_token
-      @headers.merge! auth_header
-    end
 
     let(:params) do
       {
         name: 'changed_name',
         email: 'changed_email@test.com',
-        image: @user.image,
-        sport_id: 2
+        image: user.image,
+        sport_id: new_sport.id
       }
     end
 
     subject do
-      put "/api/v1/users/#{@user.id}", params: params, as: :json, headers: @headers
+      put "/api/v1/users/#{user.id}", params: params, as: :json, headers: headers
     end
 
     it 'ステータスコード200を返す' do
