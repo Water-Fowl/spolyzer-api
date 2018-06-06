@@ -24,8 +24,6 @@ RSpec.describe "games/AggregatedScore", type: :request do
         get "/api/v1/games/#{game.id}/aggregated_scores", headers: headers
       end
 
-      let(:scores) { Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1) }
-
       it "ステータスコード200を返す" do
         subject
         expect(response).to have_http_status(200)
