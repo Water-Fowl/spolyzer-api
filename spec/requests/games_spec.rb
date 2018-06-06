@@ -34,7 +34,7 @@ RSpec.describe "Games", type: :request do
 
     it "現在のユーザから取れるgameの情報を送る" do
       subject
-      expect(json['games'].length).to eq 1
+      expect(json.length).to eq 1
     end
   end
 
