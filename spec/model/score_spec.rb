@@ -4,7 +4,7 @@ RSpec.describe "Score", :type => :model do
 
   let(:unit) { create(:unit) }
   let(:opponent_unit) { create(:unit) }
-  let(:game) { create(:game) }
+  let(:game) { create(:game, record_user_id: user.id) }
   let(:user) { create(:user) }
   let(:opponent_user) { create(:user) }
   let(:score) { Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1, is_net_miss: false) }
