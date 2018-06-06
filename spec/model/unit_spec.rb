@@ -11,12 +11,10 @@ RSpec.describe Unit, type: :model do
   let(:opponent_users) { [create(:user), create(:user)] }
   let(:new_user) { create(:user) }
 
-    @game = create(:game)
-    Unit.find(3).games << @game
-    Unit.find(3).users << create(:user)
-    @user = [Unit.find(3).users.first]
-
-    @new_user = create(:user)
+  before do
+    unit.users << users
+    opponent_unit.users << opponent_users
+    single_unit.users << user
   end
 
   describe 'self.of_users(users)' do
