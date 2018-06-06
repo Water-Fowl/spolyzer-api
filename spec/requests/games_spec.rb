@@ -10,7 +10,15 @@ RSpec.describe 'Games', type: :request do
   let(:game) { create(:game) }
   let(:opponent_unit) { create(:unit) }
   let(:opponent_user) { create(:user) }
-  let(:score) { Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1) }
+  let(:score) do
+    Score.create(
+      game_id: game.id,
+      shot_type_id: 1,
+      dropped_side: 1,
+      unit_id: unit.id,
+      position_id: 1
+    )
+  end
 
   before do
     unit.games << game
