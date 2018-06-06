@@ -24,7 +24,11 @@ class Api::V1::GamesController < Api::V1::BaseController
   private
 
   def create_game
-    @game = Game.create(name: game_params[:name], sport_id: @sport.id, record_user_id: current_api_v1_user.id)
+    @game = Game.create(
+      name: game_params[:name],
+      sport_id: @sport.id,
+      record_user_id: current_api_v1_user.id
+    )
   end
 
   def game_params

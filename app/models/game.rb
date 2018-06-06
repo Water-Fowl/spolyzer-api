@@ -63,6 +63,26 @@ class Game < ApplicationRecord
       .where(users: { id: user.id })
   }
 
-  # user vs opponent_usersの試合のうち、opponent_usersのUnitの人数をuser_countで指定して検索する
-  # userのGameの中で、opponent_usersのUnitであり、userのUnitではない (対戦相手であるため) Unitを持ったGameを探す
+  private
+
+  def scores_of_units(units)
+    units.scores
+         .joins(:game)
+         .where(games: { id: id })
+         .joins(:position)
+  end
+
+  def scores_count_order_by_side(left_scores, right_scores)
+    left_score_count = left_scores.where(positions: { is_in: true })
+                                  .where(is_net_miss: false).count +
+                       right_scores.where(positions: { is_in: false }).count +
+                       right_scores.where(is_net_miss: true).count
+
+    right_score_count = right_scores.where(positions: { is_in: true })
+                                    .where(is_net_miss: false).count +
+                        left_scores.where(positions: { is_in: false }).count +
+                        left_scores.where(is_net_miss: true).count
+
+    { left: left_score_count, right: right_score_count }
+  end
 end

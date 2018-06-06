@@ -10,7 +10,7 @@ class ScoresFinder
     scores = Score.where(game_id: @params[:game_ids])
 
     scores = by_shot_type(scores)
-    scores = by_net_miss(scores)
+    by_net_miss(scores)
   end
 
   def by_shot_type(scores)

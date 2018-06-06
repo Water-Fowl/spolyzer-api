@@ -13,7 +13,7 @@ class GameUnit < ApplicationRecord
                      .where(users: { id: @opponent_users.pluck(:id) })
                      .where(user_count: game_user_count)
 
-    opponent_game_units = GameUnit.where(unit_id: opponent_units.pluck(:id))
+    GameUnit.where(unit_id: opponent_units.pluck(:id))
   end
 
   def self.get_by_user(current_user, game_user_count)
@@ -22,6 +22,6 @@ class GameUnit < ApplicationRecord
                     .where(users: { id: current_user.id })
                     .where(user_count: game_user_count)
 
-    game_units = GameUnit.where(unit_id: current_units.pluck(:id))
+    GameUnit.where(unit_id: current_units.pluck(:id))
   end
 end

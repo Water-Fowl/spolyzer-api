@@ -13,7 +13,7 @@ class Unit < ApplicationRecord
       .where(users: { id: users[1].id })
   }
 
-  # usersをもつUnitを検索。usersが2つあった場合はダブルスとして検索。
+  # get unit by users. if users.length is 2, it returns doubles unit.
   def self.of_users(users)
     case users.length
     when 2

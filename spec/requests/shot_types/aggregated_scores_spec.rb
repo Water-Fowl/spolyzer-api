@@ -21,12 +21,17 @@ RSpec.describe 'shot_types/AggregatedScore', type: :request do
     )
   end
 
-  before do
-    opponent_unit.games << game
-    unit.users << user
+    opponent_user = create(:user)
+
+    unit.users << @user
     opponent_unit.users << opponent_user
+
+    score = Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1)
     game.scores << score
-    unit.scores << score
+    # TODO: 共通処理として切り出す
+    @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
+    auth_header = @user.create_new_auth_token
+    @headers.merge! auth_header
   end
 
   describe 'GET /api/v1/shot_types/:shot_type_id/aggregated_scores #index' do

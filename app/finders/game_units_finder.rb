@@ -17,7 +17,8 @@ class GameUnitsFinder
     game_units = by_opponent_users(game_units)
     game_units = by_game_user_count(game_units)
     game_units = by_outcome(game_units)
-    game_units = by_created_at(game_units)
+
+    by_created_at(game_units)
   end
 
   private
@@ -49,6 +50,8 @@ class GameUnitsFinder
   end
 
   def by_created_at(game_units)
-    game_units.where(created_at: [Time.parse(@params[:created_after])..Time.parse(@params[:created_before])])
+    game_units.where(
+      created_at: [Time.parse(@params[:created_after])..Time.parse(@params[:created_before])]
+    )
   end
 end
