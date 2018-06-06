@@ -47,7 +47,7 @@ RSpec.describe "shot_types/AggregatedScore", type: :request do
 
       it "shot_type毎の集計を送る" do
         subject        
-        expect(json['counts']).not_to be_empty
+        expect(json.pluck(:id)).not_to be_empty
       end
   end
 end
