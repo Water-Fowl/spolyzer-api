@@ -8,8 +8,27 @@ RSpec.describe 'Score', type: :model do
   let(:game) { create(:game) }
   let(:user) { create(:user) }
   let(:opponent_user) { create(:user) }
-  let(:score) { Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1, is_net_miss: false) }
-  let(:opponent_unit_score) { Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: opponent_unit.id, position_id: 1, is_net_miss: false) }
+  let(:score) do
+    Score.create(
+      game_id: game.id,
+      shot_type_id: 1,
+      dropped_side: 1,
+      unit_id: unit.id,
+      position_id: 1,
+      is_net_miss: false
+    )
+  end
+
+  let(:opponent_unit_score) do
+    Score.create(
+      game_id: game.id,
+      shot_type_id: 1,
+      dropped_side: 1,
+      unit_id: opponent_unit.id,
+      position_id: 1,
+      is_net_miss: false
+    )
+  end
 
   before do
     unit.games << game
