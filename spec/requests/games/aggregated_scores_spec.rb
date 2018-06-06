@@ -34,7 +34,45 @@ RSpec.describe 'games/AggregatedScore', type: :request do
     end
 
     context '全て同じscoreの場合' do
-      let(:scores) { [Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1), Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1), Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1), Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1), Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1)] }
+      let(:scores) do
+        [
+          Score.create(
+            game_id: game.id,
+            shot_type_id: 1,
+            dropped_side: 1,
+            unit_id: unit.id,
+            position_id: 1
+          ),
+          Score.create(
+            game_id: game.id,
+            shot_type_id: 1,
+            dropped_side: 1,
+            unit_id: unit.id,
+            position_id: 1
+          ),
+          Score.create(
+            game_id: game.id,
+            shot_type_id: 1,
+            dropped_side: 1,
+            unit_id: unit.id,
+            position_id: 1
+          ),
+          Score.create(
+            game_id: game.id,
+            shot_type_id: 1,
+            dropped_side: 1,
+            unit_id: unit.id,
+            position_id: 1
+          ),
+          Score.create(
+            game_id: game.id,
+            shot_type_id: 1,
+            dropped_side: 1,
+            unit_id: unit.id,
+            position_id: 1
+          )
+        ]
+      end
 
       it 'scoreの集計を送る' do
         subject
@@ -43,7 +81,45 @@ RSpec.describe 'games/AggregatedScore', type: :request do
     end
 
     context 'drppped_side: 0が２つ、1が３つの場合' do
-      let(:scores) { [Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 0, unit_id: unit.id, position_id: 1), Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1), Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1), Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 0, unit_id: unit.id, position_id: 1), Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1)] }
+      let(:scores) do
+        [
+          Score.create(
+            game_id: game.id,
+            shot_type_id: 1,
+            dropped_side: 0,
+            unit_id: unit.id,
+            position_id: 1
+          ),
+          Score.create(
+            game_id: game.id,
+            shot_type_id: 1,
+            dropped_side: 0,
+            unit_id: unit.id,
+            position_id: 1
+          ),
+          Score.create(
+            game_id: game.id,
+            shot_type_id: 1,
+            dropped_side: 1,
+            unit_id: unit.id,
+            position_id: 1
+          ),
+          Score.create(
+            game_id: game.id,
+            shot_type_id: 1,
+            dropped_side: 1,
+            unit_id: unit.id,
+            position_id: 1
+          ),
+          Score.create(
+            game_id: game.id,
+            shot_type_id: 1,
+            dropped_side: 1,
+            unit_id: unit.id,
+            position_id: 1
+          )
+        ]
+      end
 
       it 'scoreの集計を送る' do
         subject
@@ -52,7 +128,45 @@ RSpec.describe 'games/AggregatedScore', type: :request do
     end
 
     context 'shot_type_idが全て異なる場合' do
-      let(:scores) { [Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1), Score.create(game_id: game.id, shot_type_id: 2, dropped_side: 1, unit_id: unit.id, position_id: 1), Score.create(game_id: game.id, shot_type_id: 3, dropped_side: 1, unit_id: unit.id, position_id: 1), Score.create(game_id: game.id, shot_type_id: 4, dropped_side: 1, unit_id: unit.id, position_id: 1), Score.create(game_id: game.id, shot_type_id: 5, dropped_side: 1, unit_id: unit.id, position_id: 1)] }
+      let(:scores) do
+        [
+          Score.create(
+            game_id: game.id,
+            shot_type_id: 1,
+            dropped_side: 1,
+            unit_id: unit.id,
+            position_id: 1
+          ),
+          Score.create(
+            game_id: game.id,
+            shot_type_id: 2,
+            dropped_side: 1,
+            unit_id: unit.id,
+            position_id: 1
+          ),
+          Score.create(
+            game_id: game.id,
+            shot_type_id: 3,
+            dropped_side: 1,
+            unit_id: unit.id,
+            position_id: 1
+          ),
+          Score.create(
+            game_id: game.id,
+            shot_type_id: 4,
+            dropped_side: 1,
+            unit_id: unit.id,
+            position_id: 1
+          ),
+          Score.create(
+            game_id: game.id,
+            shot_type_id: 5,
+            dropped_side: 1,
+            unit_id: unit.id,
+            position_id: 1
+          )
+        ]
+      end
 
       it 'scoreの集計を送る' do
         subject
