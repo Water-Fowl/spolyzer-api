@@ -11,7 +11,9 @@ RSpec.describe 'shot_types/AggregatedScore', type: :request do
   let(:game) { create(:game) }
   let!(:game_unit) { GameUnit.create(unit_id: unit.id, game_id: game.id, side: 0, outcome: 2) }
   let(:opponent_unit) { create(:unit) }
-  let(:score) { Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1) }
+  let(:score) do
+    Score.create(game_id: game.id, shot_type_id: 1, dropped_side: 1, unit_id: unit.id, position_id: 1)
+  end
 
   before do
     opponent_unit.games << game
@@ -30,7 +32,6 @@ RSpec.describe 'shot_types/AggregatedScore', type: :request do
         created_after: game_unit.created_at.to_s,
         created_before: game_unit.created_at.to_s,
         game_ids: [1],
-        shot_type_id: 1,
         is_net_miss: true,
         outcome: 2
       }
