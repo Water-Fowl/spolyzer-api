@@ -1,5 +1,5 @@
 require 'rails_helper'
-require "./spec/support/shared_stuff.rb"
+require './spec/support/shared_stuff.rb'
 
 RSpec.describe "Users", type: :request do
 
