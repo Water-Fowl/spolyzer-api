@@ -41,8 +41,8 @@ RSpec.describe "Users", type: :request do
 
     it '更新されたユーザー情報を送る' do
       subject
-      expect(json['user']['name']).to eq(params[:name])
-      expect(json['user']['sport_id']).to eq(params[:sport_id])
+      expect(json['name']).to eq(params[:name])
+      expect(json['sport_id']).to eq(params[:sport_id])
     end
   end
 end
