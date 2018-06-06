@@ -25,7 +25,7 @@ RSpec.describe "ShotTypes", type: :request do
 
       it "shot_typesを送る" do
         subject
-        expect(json['shot_types'].pluck('id')).to eq shot_types.pluck(:id)
+        expect(json.pluck('id')).to eq shot_types.pluck(:id)
       end
 
   end
