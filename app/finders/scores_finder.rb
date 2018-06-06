@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ScoresFinder
   include BaseFinder
   def initialize(params)
@@ -22,5 +24,4 @@ class ScoresFinder
 
     scores.where(is_net_miss: @params[:is_net_miss])
   end
-
 end

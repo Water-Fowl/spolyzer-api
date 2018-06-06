@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GameSerializer < ActiveModel::Serializer
   attributes :id, :sport_id, :name, :record_user_id, :score_count, :left_users, :right_users, :created_at, :updated_at
 
@@ -12,5 +14,4 @@ class GameSerializer < ActiveModel::Serializer
   def right_users
     object.units[1].users
   end
-
 end

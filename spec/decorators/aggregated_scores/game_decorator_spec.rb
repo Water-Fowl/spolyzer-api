@@ -1,15 +1,14 @@
-require "rails_helper"
+# frozen_string_literal: true
 
-RSpec.describe 'GameDecorator', :type => :decorator do
+require 'rails_helper'
 
+RSpec.describe 'GameDecorator', type: :decorator do
   describe '#call' do
     before do
-
     end
-    context "scoresが存在する場合" do
-
-      let(:game) { create(:game).extend GameDecorator}
-      let(:scores) { Score.create(game_id: 1, shot_type_id: 1, dropped_side: 1, unit_id: 1, position_id: 1, is_net_miss: false)  }
+    context 'scoresが存在する場合' do
+      let(:game) { create(:game).extend GameDecorator }
+      let(:scores) { Score.create(game_id: 1, shot_type_id: 1, dropped_side: 1, unit_id: 1, position_id: 1, is_net_miss: false) }
 
       before do
         game.scores = scores
@@ -20,8 +19,7 @@ RSpec.describe 'GameDecorator', :type => :decorator do
       end
     end
 
-    context "scoresが存在しない場合" do
-
+    context 'scoresが存在しない場合' do
       let(:game) { create(:game).extend GameDecorator }
 
       it '空の配列を返す' do
