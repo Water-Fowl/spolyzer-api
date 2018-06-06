@@ -43,9 +43,9 @@ RSpec.describe "Games", type: :request do
     let(:params) do
       {
         units: {
-          left: {users: [{id: 1}], count: 1},
-          right: {users: [{id: 2}], count: 1},
-          ids: [1, 2]
+          left: {users: [{id: create(:user).id}], count: 1},
+          right: {users: [{id: create(:user).id}], count: 1},
+          ids: [3, 4]
         },
         scores: [
           {unit: 0, dropped_at: 1, shot_type: 1, miss_type: 0, side: 0},
