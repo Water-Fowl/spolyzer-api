@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AggregatedScores::PositionDecorator
   include BaseDecorator
   attr_reader :scores
@@ -18,5 +20,4 @@ class AggregatedScores::PositionDecorator
       []
     end
   end
-
 end

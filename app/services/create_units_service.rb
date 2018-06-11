@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateUnitsService
   include BaseService
   attr_reader :params
@@ -35,7 +37,7 @@ class CreateUnitsService
     users = set_users(side)
     unit = Unit.of_users(users).where(user_count: params[side][:count]).first
 
-    if not unit
+    unless unit
       unit = Unit.create(user_count: users.count)
       users.each do |user|
         unit.user_units.create(user_id: user[:id])
@@ -44,5 +46,4 @@ class CreateUnitsService
 
     unit
   end
-
 end
