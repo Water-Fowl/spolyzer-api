@@ -17,24 +17,24 @@ class Game < ApplicationRecord
   end
 
   def score_count
-    left_scores = self.units[0].scores.joins(:game).where(games: {id: self.id}).joins(:position)
-    right_scores = self.units[1].scores.joins(:game).where(games: {id: self.id}).joins(:position)
+    left_scores = units[0].scores.joins(:game).where(games: { id: id }).joins(:position)
+    right_scores = units[1].scores.joins(:game).where(games: { id: id }).joins(:position)
 
-    left_score_count = left_scores.where(positions: {is_in: true}).where(is_net_miss: false).count +
-      right_scores.where(positions: {is_in: false}).count +
-      right_scores.where(is_net_miss: true).count
+    left_score_count = left_scores.where(positions: { is_in: true }).where(is_net_miss: false).count +
+                       right_scores.where(positions: { is_in: false }).count +
+                       right_scores.where(is_net_miss: true).count
 
-    right_score_count = right_scores.where(positions: {is_in: true}).where(is_net_miss: false).count +
-      left_scores.where(positions: {is_in: false}).count +
-      left_scores.where(is_net_miss: true).count
+    right_score_count = right_scores.where(positions: { is_in: true }).where(is_net_miss: false).count +
+                        left_scores.where(positions: { is_in: false }).count +
+                        left_scores.where(is_net_miss: true).count
 
-    scores = {left: left_score_count, right: right_score_count}
+    scores = { left: left_score_count, right: right_score_count }
   end
 
   def update_outcome
     score_count = self.score_count
-    right_game_unit = self.game_units.find_by(side: :right)
-    left_game_unit = self.game_units.find_by(side: :left)
+    right_game_unit = game_units.find_by(side: :right)
+    left_game_unit = game_units.find_by(side: :left)
 
     if score_count[:left] > score_count[:right]
       right_game_unit.update(outcome: :lose)
@@ -46,14 +46,13 @@ class Game < ApplicationRecord
       right_game_unit.update(outcome: :draw)
       left_game_unit.update(outcome: :draw)
     end
-
   end
 
   private
 
   def unit_order_by_score
-    @order ||= self
-      .units
+    @order ||=
+      units
       .sort do |user|
         user.scores.where(game_id: id).count
       end
@@ -64,6 +63,26 @@ class Game < ApplicationRecord
       .where(users: { id: user.id })
   }
 
-  # user vs opponent_usersの試合のうち、opponent_usersのUnitの人数をuser_countで指定して検索する
-  # userのGameの中で、opponent_usersのUnitであり、userのUnitではない (対戦相手であるため) Unitを持ったGameを探す
+  private
+
+  def scores_of_units(units)
+    units.scores
+         .joins(:game)
+         .where(games: { id: id })
+         .joins(:position)
+  end
+
+  def scores_count_order_by_side(left_scores, right_scores)
+    left_score_count = left_scores.where(positions: { is_in: true })
+                                  .where(is_net_miss: false).count +
+                       right_scores.where(positions: { is_in: false }).count +
+                       right_scores.where(is_net_miss: true).count
+
+    right_score_count = right_scores.where(positions: { is_in: true })
+                                    .where(is_net_miss: false).count +
+                        left_scores.where(positions: { is_in: false }).count +
+                        left_scores.where(is_net_miss: true).count
+
+    { left: left_score_count, right: right_score_count }
+  end
 end

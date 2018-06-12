@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Api::V1::UsersController < Api::V1::BaseController
-
   def index
     render json: current_api_v1_user
   end
