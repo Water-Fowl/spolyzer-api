@@ -38,9 +38,10 @@ RSpec.describe 'Score', type: :model do
     game.scores << [score, opponent_unit_score]
   end
 
-  describe 'scopes' do
-    describe 'of_user_games' do
-      it 'userが含まれている試合のscoreを返す' do
+  describe "scopes" do
+
+    describe "of_user_games" do
+      it "userが含まれている試合のscoreを返す" do
         expect(Score.of_user_games(user, 1).pluck(:id)).to eq game.scores.pluck(:id)
       end
     end
