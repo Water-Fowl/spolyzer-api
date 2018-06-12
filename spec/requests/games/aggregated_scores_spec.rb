@@ -6,7 +6,7 @@ require './spec/support/shared_stuff.rb'
 RSpec.describe 'games/AggregatedScore', type: :request do
   include_context 'header'
 
-  let(:game) { create(:game) }
+  let(:game) { create(:game, record_user_id: user.id) }
   let(:unit) { create(:unit) }
 
   before do

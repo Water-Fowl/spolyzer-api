@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Score', type: :model do
   let(:unit) { create(:unit) }
   let(:opponent_unit) { create(:unit) }
-  let(:game) { create(:game) }
+  let(:game) { create(:game, record_user_id: user.id) }
   let(:user) { create(:user) }
   let(:opponent_user) { create(:user) }
   let(:score) do

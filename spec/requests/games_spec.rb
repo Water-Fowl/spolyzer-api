@@ -7,7 +7,7 @@ RSpec.describe 'Games', type: :request do
   include_context 'header'
 
   let(:unit) { create(:unit) }
-  let(:game) { create(:game) }
+  let(:game) { create(:game, record_user_id: user.id) }
   let(:opponent_unit) { create(:unit) }
   let(:opponent_user) { create(:user) }
   let(:score) do
@@ -42,7 +42,7 @@ RSpec.describe 'Games', type: :request do
 
     it '現在のユーザから取れるgameの情報を送る' do
       subject
-      expect(json['games'].length).to eq 1
+      expect(json.length).to eq 1
     end
   end
 
@@ -50,9 +50,9 @@ RSpec.describe 'Games', type: :request do
     let(:params) do
       {
         units: {
-          left: { users: [{ id: 1 }], count: 1 },
-          right: { users: [{ id: 2 }], count: 1 },
-          ids: [1, 2]
+          left: {users: [{id: create(:user).id}], count: 1},
+          right: {users: [{id: create(:user).id}], count: 1},
+          ids: [3, 4]
         },
         scores: [
           { unit: 0, dropped_at: 1, shot_type: 1, miss_type: 0, side: 0 },

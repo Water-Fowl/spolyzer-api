@@ -8,10 +8,13 @@ RSpec.describe 'ShotTypes', type: :request do
 
   let(:left_unit) { create(:unit) }
   let(:right_unit) { create(:unit) }
-  let(:game) { create(:game, :with_scores, units: [left_unit, right_unit]) }
+  let(:game) { create(:game, :with_scores, units: [left_unit, right_unit], record_user_id: user.id) }
   let(:shot_types) { ShotType.where(sport_id: 1) }
 
   describe 'GET /api/v1/shot_types #index' do
+    
+    let(:params) { { sport_id: 1 } }
+
     subject do
       get '/api/v1/shot_types', params: params, as: :json, headers: headers
     end
@@ -21,11 +24,9 @@ RSpec.describe 'ShotTypes', type: :request do
       expect(response).to have_http_status(200)
     end
 
-    let(:params) { { sport_id: 1 } }
-
-    it 'shot_typesを送る' do
-      subject
-      expect(json['shot_types'].pluck('id')).to eq shot_types.pluck(:id)
+    it "shot_typesを送る" do
+        subject
+        expect(json.pluck('id')).to eq shot_types.pluck(:id)
     end
   end
 end
