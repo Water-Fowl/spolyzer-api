@@ -13,7 +13,7 @@ class Unit < ApplicationRecord
       .where(users: { id: users[1].id })
   }
 
-  # usersをもつUnitを検索。usersが2つあった場合はダブルスとして検索。
+  # get unit by users. if users.length is 2, it returns doubles unit.
   def self.of_users(users)
     case users.length
     when 2
@@ -24,9 +24,9 @@ class Unit < ApplicationRecord
   end
 
   def self.find_or_create_with_users(users)
-    unit = self.of_users(users).first
+    unit = of_users(users).first
 
-    if not unit
+    unless unit
       unit = Unit.create(user_count: users.count)
       users.each do |user|
         unit.user_units.create(user_id: user[:id])
@@ -35,5 +35,4 @@ class Unit < ApplicationRecord
 
     unit
   end
-
 end

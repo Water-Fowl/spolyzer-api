@@ -1,7 +1,8 @@
-require "rails_helper"
+# frozen_string_literal: true
 
-RSpec.describe 'GameDecorator', :type => :decorator do
+require 'rails_helper'
 
+RSpec.describe 'GameDecorator', type: :decorator do
   describe '#call' do
     context "scoresが存在する場合" do
 
@@ -15,13 +16,8 @@ RSpec.describe 'GameDecorator', :type => :decorator do
       end
     end
 
-    context "scoresが存在しない場合" do
 
       let(:scores) { [] }
 
-      it '空の配列を返す' do
-        expect(AggregatedScores::GameDecorator.call(scores)).to be_empty
-      end
-    end
   end
 end
