@@ -67,7 +67,8 @@ ActiveRecord::Base.transaction do
   2.times do
     Game.create(
       sport_id: sport.id,
-      name: 'test'
+      name: 'test',
+      record_user_id: 1
     )
   end
 

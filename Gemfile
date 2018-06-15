@@ -10,9 +10,17 @@ end
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 gem 'rails', '~> 5.1.4'
 
+gem 'active_model_serializers'
+
+gem 'activeadmin'
 gem 'devise'
 gem 'devise_token_auth'
 gem 'omniauth'
+
+# Plus integrations with:
+gem 'cancan' # or cancancan
+gem 'draper'
+gem 'pundit'
 
 gem 'unicorn'
 gem 'unicorn-worker-killer'
@@ -68,18 +76,18 @@ gem 'sass-rails'
 gem 'sprockets-rails'
 
 group :test do
-  gem 'rspec-rails'
-  gem 'rails-controller-testing'
-  gem 'factory_bot_rails'
-  gem 'database_rewinder'
-  gem 'database_cleaner'
-  gem 'rspec-request_describer'
   gem 'autodoc'
+  gem 'database_cleaner'
   gem 'database_rewinder'
+  gem 'database_rewinder'
+  gem 'factory_bot_rails'
   gem 'faker'
+  gem 'rails-controller-testing'
   gem 'redcarpet'
   gem 'rspec-json_matcher'
   gem 'rspec-rails'
+  gem 'rspec-rails'
+  gem 'rspec-request_describer'
   gem 'rspec-request_describer'
   gem 'timecop'
 end

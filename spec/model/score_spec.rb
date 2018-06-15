@@ -1,35 +1,61 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Score", :type => :model do
-  before(:each) do
-    @unit = create(:unit)
-    @game = create(:game)
-    @unit.games << @game
-    @game.units << create(:unit)
-    @user = create(:user)
-    Unit.first.users << create(:user)
-    Unit.second.users << create(:user)
+RSpec.describe 'Score', type: :model do
+  let(:unit) { create(:unit) }
+  let(:opponent_unit) { create(:unit) }
+  let(:game) { create(:game, record_user_id: user.id) }
+  let(:user) { create(:user) }
+  let(:opponent_user) { create(:user) }
+  let(:score) do
+    Score.create(
+      game_id: game.id,
+      shot_type_id: 1,
+      dropped_side: 1,
+      unit_id: unit.id,
+      position_id: 1,
+      is_net_miss: false
+    )
   end
+
+  let(:opponent_unit_score) do
+    Score.create(
+      game_id: game.id,
+      shot_type_id: 1,
+      dropped_side: 1,
+      unit_id: opponent_unit.id,
+      position_id: 1,
+      is_net_miss: false
+    )
+  end
+
+  before do
+    unit.games << game
+    game.units << opponent_unit
+    unit.users << user
+    opponent_unit.users << opponent_user
+    game.scores << [score, opponent_unit_score]
+  end
+
   describe "scopes" do
 
     describe "of_user_games" do
       it "userが含まれている試合のscoreを返す" do
-        expect(Score.of_user_games(Unit.first.users.first, 1).pluck(:id)).to eq Unit.first.users.first.games.first.scores.pluck(:id)
+        expect(Score.of_user_games(user, 1).pluck(:id)).to eq game.scores.pluck(:id)
       end
     end
 
-    describe "of_user_units" do
-      it "userが含まれているunitのscoreを返す" do
-        expect(Score.of_user_units(Unit.first.users.first).pluck(:id)).to eq Unit.first.scores.pluck(:id)
+    describe 'of_user_units' do
+      it 'userが含まれているunitのscoreを返す' do
+        expect(Score.of_user_units(user).pluck(:id)).to eq unit.scores.pluck(:id)
       end
     end
 
-    describe "of_not_user_units" do
-      it "userが含まれていないunitを返す" do
-        expect(Score.of_not_user_units(Unit.first.users.first).pluck(:id)).to eq Unit.second.scores.pluck(:id)
+    describe 'of_not_user_units' do
+      it 'userが含まれていないunitのscoreを返す' do
+        expect(Score.of_not_user_units(user).pluck(:id)).to eq opponent_unit.scores.pluck(:id)
       end
     end
-
   end
-
 end

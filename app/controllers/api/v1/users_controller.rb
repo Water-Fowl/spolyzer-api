@@ -1,12 +1,18 @@
 # frozen_string_literal: true
 
 class Api::V1::UsersController < Api::V1::BaseController
+  def index
+    render json: current_api_v1_user
+  end
+
   def show
-    @user = User.find(params[:id])
+    user = User.find(params[:id])
+    render json: user
   end
 
   def update
     current_api_v1_user.update(user_params)
+    render json: current_api_v1_user
   end
 
   private
