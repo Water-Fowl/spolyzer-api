@@ -6,6 +6,7 @@
 # Travis CI keys
 deploy_key
 deploy_key.pub
+tag
 
 # Ignore bundler config.
 /.bundle
