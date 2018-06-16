@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ScoresFinder
   include BaseFinder
   def initialize(params)
@@ -8,7 +10,7 @@ class ScoresFinder
     scores = Score.where(game_id: @params[:game_ids])
 
     scores = by_shot_type(scores)
-    scores = by_net_miss(scores)
+    by_net_miss(scores)
   end
 
   def by_shot_type(scores)
@@ -22,5 +24,4 @@ class ScoresFinder
 
     scores.where(is_net_miss: @params[:is_net_miss])
   end
-
 end

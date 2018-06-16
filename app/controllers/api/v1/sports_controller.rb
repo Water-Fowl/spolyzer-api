@@ -12,5 +12,4 @@ class Api::V1::SportsController < Api::V1::BaseController
     sport = Sport.find(params[:id])
     render json: sport
   end
-
 end

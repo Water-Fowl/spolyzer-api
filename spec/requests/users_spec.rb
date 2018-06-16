@@ -1,48 +1,36 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
+require './spec/support/shared_stuff.rb'
 
-RSpec.describe "Users", type: :request do
-  describe "GET /api/v1/users/:user_id #show" do
-    before do
-      create(:sport)
-      @user = create(:user)
+RSpec.describe 'Users', type: :request do
+  include_context 'header'
 
-      #TODO 共通処理として切り出す
-      @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
-      auth_header = @user.create_new_auth_token
-      @headers.merge! auth_header
+  let(:new_sport) { create(:sport, name_ja: 'テニス', name_en: 'tennis') }
+
+  describe 'GET /api/v1/users/:user_id #show' do
+    subject do
+      get "/api/v1/users/#{user.id}", headers: headers
     end
 
-    subject(:show_action) do
-      get "/api/v1/users/#{@user.id}", headers: @headers
-    end
-
-    it "ステータスコード200を返す" do
-      show_action
+    it 'ステータスコード200を返す' do
+      subject
       expect(response).to have_http_status(200)
     end
   end
 
   describe 'PUT /api/v1/users/:user_id #update' do
-    before do
-      create(:sport, name_ja: 'テニス', name_en: 'tennis')
-      @user = create(:user)
-
-      @headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
-      auth_header = @user.create_new_auth_token
-      @headers.merge! auth_header
-    end
-
     let(:params) do
       {
         name: 'changed_name',
         email: 'changed_email@test.com',
-        image: @user.image,
-        sport_id: 2
+        image: user.image,
+        sport_id: new_sport.id
       }
     end
 
     subject do
-      put "/api/v1/users/#{@user.id}", params: params, as: :json, headers: @headers
+      put "/api/v1/users/#{user.id}", params: params, as: :json, headers: headers
     end
 
     it 'ステータスコード200を返す' do
@@ -52,8 +40,8 @@ RSpec.describe "Users", type: :request do
 
     it '更新されたユーザー情報を送る' do
       subject
-      expect(json['user']['name']).to eq(params[:name])
-      expect(json['user']['sport_id']).to eq(params[:sport_id])
+      expect(json['name']).to eq(params[:name])
+      expect(json['sport_id']).to eq(params[:sport_id])
     end
   end
 end

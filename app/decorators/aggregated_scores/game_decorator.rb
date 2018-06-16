@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AggregatedScores::GameDecorator
   include BaseDecorator
   attr_reader :scores

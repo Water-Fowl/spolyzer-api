@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateScoresService
   include BaseService
 
@@ -12,16 +14,16 @@ class CreateScoresService
 
   def call
     params.each do |score_params|
-    unit_id = score_params[:unit] == 0 ? left_unit.id : right_unit.id
+      unit_id = score_params[:unit] == 0 ? left_unit.id : right_unit.id
       Score.create(
         game_id: game_id,
         unit_id: unit_id,
+        n_sets: score_params[:n_sets],
         is_net_miss: score_params[:is_net_miss],
         shot_type_id: score_params[:shot_type],
         position_id: score_params[:dropped_at],
-        dropped_side: score_params[:side],
+        dropped_side: score_params[:side]
       )
     end
   end
-
 end

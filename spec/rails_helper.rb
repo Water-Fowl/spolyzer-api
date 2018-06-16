@@ -10,7 +10,15 @@ ActiveRecord::Migration.maintain_test_schema!
 
 # for auto documentation
 Autodoc.configuration.toc_html = true
-Autodoc.configuration.suppressed_response_header = ['Cache-Control', 'Content-Length', 'X-Request-Id', 'X-Runtime', 'X-XSS-Protection', 'ETag', 'Content-Type', 'X-Content-Type-Options', 'X-Frame-Options']
+Autodoc.configuration.suppressed_response_header = ['Cache-Control',
+                                                    'Content-Length',
+                                                    'X-Request-Id',
+                                                    'X-Runtime',
+                                                    'X-XSS-Protection',
+                                                    'ETag',
+                                                    'Content-Type',
+                                                    'X-Content-Type-Options',
+                                                    'X-Frame-Options']
 Autodoc.configuration.suppressed_request_header = %w[Accept Content-Length Content-Type Host]
 
 RSpec.configure do |config|
